@@ -1,0 +1,127 @@
+﻿<section class="forms" ng-init="Init()">
+    <div class="container-fluid">
+        <header>
+            <h1 class="h3 display">Forms</h1>
+        </header>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h2 class="h5 display">Informasi</h2>
+                    </div>
+                    <div class="card-block">
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">Kode Materi</label>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 form-control-label">{{Materi.KodeMateri}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">Materi</label>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 form-control-label">{{Materi.Judul}}</label>
+                                </div>
+                            </div>
+                            <div class="line"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">Kode Materi</label>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 form-control-label">{{Item.KodeSubMateri}}</label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">Judul Sub Materi</label>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 form-control-label">{{Item.JudulSubMateri}}</label>
+                                </div>
+                            </div>
+
+                            
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h2 class="h5 display">Penjelasan</h2>
+                    </div>
+                    <div class="card-block">
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                
+                                <div class="col-sm-12">
+                                    <textarea ng-model="Item.Penjelasan" style="height:300px" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Simpan" class="btn btn-primary">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h2 class="h5 display display">Gambar</h2>
+                    </div>
+                    <div class="card-block">
+                        <p>Lorem ipsum dolor sit amet consectetur.</p>
+                        <form>
+                            <div class="col-md-12 well" style="height:250px" file-canvas>
+                                <img style="height:150px;width:100%" src="data:image/gif;base64,{{Item.DataGambar}}" />
+                              
+                                <input style="visibility:hidden" type="file" file-model="myFile" />
+                            </div>
+                            <button class="btn btn-primary" ng-click="UploadFoto(myFile)">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h2 class="h5 display display">Materi Suara</h2>
+                    </div>
+                    <div class="card-block">
+                        <p>Lorem ipsum dolor sit amet consectetur.</p>
+                        <form>
+                            <div class="col-md-12 well" style="height:250px" file-canvas>
+                                <audio controls src="data:audio/mp3;base64,{{Item.DataSound}}" type="audio/mpeg"></audio>
+                                <input style="visibility:hidden" type="file" file-model="soundFile" accept="audio/*;capture=microphone" />
+                            </div>
+                            <button class="btn btn-primary" ng-click="UploadSound(soundFile)">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h2 class="h5 display">Materi Animasi</h2>
+                    </div>
+                    <div class="card-block">
+                        <p>Lorem ipsum dolor sit amet consectetur.</p>
+                        <form>
+                            <div class="col-md-12 well" style="height:250px" file-canvas>
+                                <video width="320" height="240" controls src="data:video/mp4;base64,{{Item.DataAnimasi}}"></video>
+                                <input style="visibility:hidden" type="file" file-model="videoFile" accept="*.mp4" />
+                            </div>
+                            <button class="btn btn-primary" ng-click="UploadVideo(videoFile)">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</section>

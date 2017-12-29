@@ -1,0 +1,80 @@
+﻿<div class="col-lg-12" ng-init="Init()">
+    <div class="card">
+        <div class="card-header d-flex align-items-center">
+            <a data-target="#addMateri" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
+            <h2 class="h5 display">DAFTAR MATERI</h2>
+        </div>
+        <div class="card-block">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kode Materi</th>
+                        <th>Judul Materi</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in Items">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{item.KodeMateri}}</td>
+                        <td>{{item.Judul}}</td>
+                        <td><a href="#!submateri/{{item.Id}}" class="pull-right">Action</a></td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div class="modal fade" id="addMateri" role="dialog" aria-labelledby="addMateri" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form ng-submit="AddNewItem(model)">
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                ×
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                Tambah Materi
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card">
+                                <div class="card-block">
+
+                                    <div class="form-group">
+                                        <label>Kode Materi</label>
+                                        <input type="text" required placeholder="Kode Materi" ng-model="model.KodeMateri" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Materi</label>
+                                        <textarea required placeholder="Materi" ng-model="model.Judul" class="form-control"></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Keluar
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Simpan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

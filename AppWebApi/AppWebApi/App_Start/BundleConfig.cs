@@ -20,12 +20,30 @@ namespace AppWebApi
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/js/bootstrap.min.js",
+                      "~/Scripts/respond.js",
+                     "~/Scripts/angular.js",
+                     "~/Scripts/angular-route.js",
+                      "~/ClientViews/app.js",
+                       "~/ClientViews/controller.js",
+
+                      "~/js/tether.min.js",
+                      "~/js/jquery.cookie.js",
+                      "~/js/grasp_mobile_progress_circle-1.0.0.min.js",
+                      "~/js/jquery.nicescroll.min.js",
+                      "~/js/jquery.validate.min.js",
+                      "~/js/charts-home.js",
+                       "~/js/front.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                     "~/css/bootstrap.min.css",
+                       "~/css/grasp_mobile_progress_circle-1.0.0.min.css",
+                        "~/css/custom.css",
+                         "~/css/style.red.css",
+                         "~/css/font-awesome.css"
+
+
+                      ));
         }
     }
 }

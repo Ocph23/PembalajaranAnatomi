@@ -1,0 +1,89 @@
+﻿<div class="col-lg-12" ng-init="Init()">
+    <div class="card">
+        <div class="card-header d-flex align-items-center">
+            <a data-target="#addSubMateri" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
+            <h2 class="h5 display">DAFTAR SUB MATERI</h2>
+        </div>
+        <div class="card-block">
+            <div class="row">
+                <div class="col-10">
+                    <div class="col-md-6">
+                        <label>Kode : {{Materi.KodeMateri}} </label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Materi : {{Materi.Judul}}</label>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kode</th>
+                        <th>Sub Materi</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in Items">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{item.KodeSubMateri}}</td>
+                        <td>{{item.JudulSubMateri}}</td>
+                        <td><a class="btn pull-right" href="#!detail/{{Materi.Id}}/{{item.Id}}" >Detail</a></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="modal fade" id="addSubMateri" role="dialog" aria-labelledby="addMateri" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form ng-submit="AddSubMateri(model)">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Tambah Sub Materi
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-block">
+
+                                <div class="form-group">
+                                    <label>Kode Materi</label>
+                                    <input type="text" placeholder="Kode Materi" ng-model="model.KodeSubMateri" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Materi</label>
+                                    <textarea placeholder="Materi" ng-model="model.JudulSubMateri" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
