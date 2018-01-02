@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -39,10 +41,10 @@ namespace AppWebApi.Controllers
             using (var db = new OcphDbContext())
             {
                 string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                var result= db.SubMateri.Where(O => O.Id == id).FirstOrDefault();
-                if(result!=null && !string.IsNullOrEmpty(result.Gambar))
+                var result = db.SubMateri.Where(O => O.Id == id).FirstOrDefault();
+                if (result != null && !string.IsNullOrEmpty(result.Gambar))
                 {
-                    var fi = new FileInfo(uploadPath+result.Gambar);
+                    var fi = new FileInfo(uploadPath + result.Gambar);
                     var s = fi.OpenRead();
                     using (MemoryStream ms = new MemoryStream())
                     {
@@ -83,6 +85,10 @@ namespace AppWebApi.Controllers
         }
 
 
+
+
+
+
         [Route("api/{Id}/image")]
         [HttpPost]
         public async Task<HttpResponseMessage> Post(int Id)
@@ -92,29 +98,29 @@ namespace AppWebApi.Controllers
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable,
                 "This request is not properly formatted"));
             else
-            using (var db = new OcphDbContext())
-            {
-                var trans = db.Connection.BeginTransaction();
-                try
+                using (var db = new OcphDbContext())
                 {
-                    var provider = new MultipartFormDataStreamProvider(uploadPath);
-                    await Request.Content.ReadAsMultipartAsync(provider);
-                    var sub = new Models.submateri();
-                    FileInfo fi = null;
-                    foreach (var file in provider.FileData)
+                    var trans = db.Connection.BeginTransaction();
+                    try
                     {
-                        fi = new FileInfo(file.LocalFileName);
-                        sub.Gambar = fi.Name;
-                        var s = fi.OpenRead();
-                        using (MemoryStream ms = new MemoryStream())
+                        var provider = new MultipartFormDataStreamProvider(uploadPath);
+                        await Request.Content.ReadAsMultipartAsync(provider);
+                        var sub = new Models.submateri();
+                        FileInfo fi = null;
+                        foreach (var file in provider.FileData)
                         {
-                            s.CopyTo(ms);
-                            sub.DataGambar = ms.ToArray();
+                            fi = new FileInfo(file.LocalFileName);
+                            sub.Gambar = fi.Name;
+                            var s = fi.OpenRead();
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                s.CopyTo(ms);
+                                sub.DataGambar = ms.ToArray();
+                            }
+                            s.Close();
                         }
-                        s.Close();
-                    }
 
-                    var isUpdated = db.SubMateri.Update(O => new { O.Gambar }, sub, O => O.Id == Id);
+                        var isUpdated = db.SubMateri.Update(O => new { O.Gambar }, sub, O => O.Id == Id);
                         if (isUpdated)
                         {
                             trans.Commit();
@@ -123,13 +129,13 @@ namespace AppWebApi.Controllers
                         else
                             throw new SystemException("Gambar Gagal Disimpan");
 
+                    }
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    trans.Rollback();
-                    return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);
-                }
-            }
         }
 
         [Route("api/{Id}/sound")]
@@ -212,7 +218,7 @@ namespace AppWebApi.Controllers
                             s.Close();
                         }
 
-                        var isUpdated = db.SubMateri.Update(O => new { O.Animasi}, sub, O => O.Id == Id);
+                        var isUpdated = db.SubMateri.Update(O => new { O.Animasi }, sub, O => O.Id == Id);
                         if (isUpdated)
                         {
                             trans.Commit();
@@ -314,6 +320,167 @@ namespace AppWebApi.Controllers
             catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);
+            }
+        }
+
+
+        [Route("api/media/{Id}/sound")]
+        public HttpResponseMessage GetMedia(int id)
+        {
+            using (var db = new OcphDbContext())
+            {
+                string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads/");
+                var result = db.SubMateri.Where(O => O.Id == id).FirstOrDefault();
+
+                if (result != null && !string.IsNullOrEmpty(result.Sound))
+                {
+                    var fi = new FileInfo(uploadPath + result.Sound);
+                    var s = fi.OpenRead();
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        s.CopyTo(ms);
+                        result.DataSound = ms.ToArray();
+                    }
+                    s.Close();
+
+                    var respon = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new ByteArrayContent(result.DataSound)
+                    };
+
+
+                    respon.Content.Headers.ContentDisposition =
+                        new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                        {
+                            FileName = result.Sound + ".mp3"
+                        };
+
+                    respon.Content.Headers.ContentType =
+                        new MediaTypeHeaderValue("application/mp3");
+
+                    return respon;
+
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Media Not Found");
+                }
+
+
+            }
+        }
+
+        public HttpResponseMessage GetMediaVideo(string fileName)
+        {
+            try
+            {
+                using (var db = new OcphDbContext())
+                {
+                    string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads/");
+
+                    var fi = new FileInfo(uploadPath + fileName);
+                    var respon = new HttpResponseMessage(HttpStatusCode.OK);
+                    var s = fi.OpenRead();
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        s.CopyTo(ms);
+                        respon.Content = new ByteArrayContent(ms.ToArray());
+                        respon.Content.Headers.ContentDisposition =
+                       new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                       {
+                           FileName = fileName
+                       };
+
+                        respon.Content.Headers.ContentType =
+                            new MediaTypeHeaderValue("video/mp4");
+
+
+
+                    }
+                    s.Close();
+                    return respon;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                return Request.CreateErrorResponse(HttpStatusCode.NotImplemented, ex.Message);
+            }
+          
+
+        }
+
+
+        [Route("api/media/{Id}/video1")]
+        public IHttpActionResult GetLiveVideo(int id)
+        {
+            using (var db = new OcphDbContext())
+            {
+                string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads/");
+                var result = db.SubMateri.Where(O => O.Id == id).FirstOrDefault();
+
+                return new VideoFileActionResult(uploadPath+result.Animasi);
+
+            }
+           
+        }
+
+    }
+
+
+    public class VideoFileActionResult : IHttpActionResult
+    {
+        private const long BufferLength = 65536;
+        public VideoFileActionResult(string videoFilePath)
+        {
+            this.Filepath = videoFilePath;
+        }
+
+        public string Filepath { get; private set; }
+
+       
+        Task<HttpResponseMessage> IHttpActionResult.ExecuteAsync(CancellationToken cancellationToken)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            FileInfo fileInfo = new FileInfo(this.Filepath);
+            long totalLength = fileInfo.Length;
+            response.Content = new PushStreamContent((outputStream, httpContent, transportContext) =>
+            {
+                OnStreamConnected(outputStream, httpContent, transportContext);
+            });
+
+            response.Content.Headers.ContentLength = totalLength;
+            return Task.FromResult(response);
+        }
+
+        private async void OnStreamConnected(Stream outputStream, HttpContent content, TransportContext context)
+        {
+            try
+            {
+                var buffer = new byte[BufferLength];
+
+                using (var nypdVideo = File.Open(this.Filepath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    var videoLength = (int)nypdVideo.Length;
+                    var videoBytesRead = 1;
+
+                    while (videoLength > 0 && videoBytesRead > 0)
+                    {
+                        videoBytesRead = nypdVideo.Read(buffer, 0, Math.Min(videoLength, buffer.Length));
+                        await outputStream.WriteAsync(buffer, 0, videoBytesRead);
+                        videoLength -= videoBytesRead;
+                    }
+                }
+            }
+            catch (HttpException ex)
+            {
+                return;
+            }
+            finally
+            {
+                // Close output stream as we are done
+                outputStream.Close();
             }
         }
     }

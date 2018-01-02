@@ -1,53 +1,31 @@
 ﻿using System;
 
 using Xamarin.Forms;
+using Plugin.MediaManager.Forms;
+using Plugin.MediaManager;
 
 namespace Mobile
 {
     public class MainPage : TabbedPage
     {
+        private NavigationPage materiPage;
+        private NavigationPage tentangPage;
+
         public MainPage()
         {
-            Page itemsPage, aboutPage = null;
+         
+            Title = "Aplikasi Pembelajaran";
+            materiPage = new NavigationPage(new Views.MateriView()) { Title = "Materi" };
+            tentangPage = new NavigationPage(new AboutPage() ){ Title = "Tentang" };
 
-            switch (Device.RuntimePlatform)
-            {
-                case Device.iOS:
-                    itemsPage = new NavigationPage(new ItemsPage())
-                    {
-                        Title = "Browse"
-                    };
-
-                    aboutPage = new NavigationPage(new AboutPage())
-                    {
-                        Title = "About"
-                    };
-                    itemsPage.Icon = "tab_feed.png";
-                    aboutPage.Icon = "tab_about.png";
-                    break;
-                default:
-                    itemsPage = new ItemsPage()
-                    {
-                        Title = "Browse"
-                    };
-
-                    aboutPage = new AboutPage()
-                    {
-                        Title = "About"
-                    };
-                    break;
-            }
-
-            Children.Add(itemsPage);
-            Children.Add(aboutPage);
-
-            Title = Children[0].Title;
+            this.Children.Add(materiPage);
+            this.Children.Add(tentangPage);
         }
 
-        protected override void OnCurrentPageChanged()
-        {
-            base.OnCurrentPageChanged();
-            Title = CurrentPage?.Title ?? string.Empty;
-        }
+
+
+
+        
+
     }
 }

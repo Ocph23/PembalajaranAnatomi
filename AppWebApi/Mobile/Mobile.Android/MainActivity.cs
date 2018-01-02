@@ -1,24 +1,74 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Plugin.MediaManager.Forms.Android;
+using Xamarin.Forms;
+using Plugin.DownloadManager;
+using Plugin.DownloadManager.Abstractions;
+using System.IO;
+using System.Linq;
+using Plugin.MediaManager;
+using Plugin.MediaManager.ExoPlayer;
 
 namespace Mobile.Droid
 {
+    using Plugin.MediaManager.MediaSession;
     [Activity(Label = "Mobile.Android", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+
+        private NotificationClickedBroadcastReceiver _receiverNotificationClicked;
+        private const bool ShouldUseExoPlayer = false;
+        protected override void OnResume()
+        {
+            base.OnResume();
+            _receiverNotificationClicked = new NotificationClickedBroadcastReceiver();
+            RegisterReceiver(
+                _receiverNotificationClicked,
+                new IntentFilter(DownloadManager.ActionNotificationClicked)
+            );
+        }
+
+      
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+
+            UnregisterReceiver(_receiverNotificationClicked);
+        }
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+           
             base.OnCreate(bundle);
+
+            ((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager = new MediaSessionManager(Application.ApplicationContext, typeof(ExoPlayerAudioService), new MediaManagerImplementation());
+            var exoPlayer = new ExoPlayerAudioImplementation(((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager);
+            CrossMediaManager.Current.AudioPlayer = exoPlayer;
+
+
+            VideoViewRenderer.Init();
+            CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file => {
+            #if __IOS__
+                        string fileName = (new NSUrl(file.Url, false)).LastPathComponent;
+                        return Path.Combine(Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments), fileName);
+            #elif __ANDROID__
+                            string fileName = file.Url.Split('=').Last();
+                            var res= Path.Combine(ApplicationContext.GetExternalFilesDir(Android.OS.Environment.DirectoryDownloads).AbsolutePath, fileName);
+                             return res;
+            #else
+                        string fileName = '';
+                        return Path.Combine(Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments), fileName);
+            #endif
+            });
+
+
+
+            (CrossDownloadManager.Current as DownloadManagerImplementation).IsVisibleInDownloadsUi = true;
+
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 

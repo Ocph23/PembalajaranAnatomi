@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
+             x:Class="Mobile.Views.VideoView">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <forms:VideoView x:Name="player"
+                   AspectMode="AspectFill"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"/>
+
+            <Label BackgroundColor="#88000000" TextColor="White" 
+			VerticalOptions="StartAndExpand"
+			x:Name="StatusLabel" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"></Label>
+
+            <StackLayout VerticalOptions="End" HorizontalOptions="FillAndExpand">
+                <ProgressBar x:Name="progress" HeightRequest="10"></ProgressBar>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10" VerticalOptions="End">
+                    <Button  x:Name="play" Text="play"  HorizontalOptions="Center"/>
+                    <Button  x:Name="pause" Text="pause" HorizontalOptions="Center"/>
+                    <Button  x:Name="stop" Text="stop" HorizontalOptions="Center"/>
+                    <Button  x:Name="download"   Text="download"  HorizontalOptions="Center"/>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -11,11 +11,16 @@ namespace Mobile
         public App()
         {
             InitializeComponent();
+            MessagingCenter.Subscribe<Helpers.MessagingCenterAlert>(this, "message", async (message) =>
+            {
+                await Current.MainPage.DisplayAlert(message.Title, message.Message, message.Cancel);
 
-            if (Device.RuntimePlatform == Device.iOS)
-                MainPage = new MainPage();
-            else
-                MainPage = new NavigationPage(new MainPage());
+            });
+           
+
+
+            MainPage = new MainPage();
+            MainPage.BackgroundImage = "HumanAnatomy.jpg";
         }
     }
 }

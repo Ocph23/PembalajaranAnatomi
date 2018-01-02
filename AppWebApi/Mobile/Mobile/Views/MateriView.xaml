@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:Mobile"
+             BackgroundImage="HumanAnatomy.jpg" BackgroundColor="GreenYellow"
+             Title="Materi"
+             x:Class="Mobile.Views.MateriView">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#B5BD89">
+            <ListView x:Name="ItemsListView" 
+                ItemsSource="{Binding Materis}"
+                VerticalOptions="FillAndExpand"
+                 HasUnevenRows="true"
+                 RefreshCommand="{Binding LoadItemsCommand}"
+                 IsPullToRefreshEnabled="true"
+                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                 CachingStrategy="RecycleElement" SelectedItem="{Binding SelectedItem}" 
+                 ItemSelected="ItemsListView_ItemSelectedAsync">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Judul}"  LineBreakMode="WordWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="18" />
+                                <Label Text="{Binding KodeMateri,StringFormat='Kode Materi : {0}'}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

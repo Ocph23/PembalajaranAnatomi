@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Views.MainMenu">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Command="{Binding ShowMaterisCommand }" Text="Materi"></Button>
+            <Button Command="{Binding ShowAboutCommand}"  Text="Tentang"></Button>
+            <Button Command="{Binding CloseCommand}" Text="Keluar"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

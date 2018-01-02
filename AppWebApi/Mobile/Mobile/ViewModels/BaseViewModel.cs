@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mobile.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,7 +10,8 @@ namespace Mobile
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<materi> MateriDataStore => DependencyService.Get<IDataStore<materi>>();
+        public IDataStore<submateri> SubMateriDataStore => DependencyService.Get<IDataStore<submateri>>();
 
         bool isBusy = false;
         public bool IsBusy

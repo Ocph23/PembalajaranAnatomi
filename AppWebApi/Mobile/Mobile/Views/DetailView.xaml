@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
+              BackgroundImage="HumanAnatomy.jpg"
+             
+             x:Class="Mobile.Views.DetailView">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#B5BD89">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="50*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0">
+                <forms:VideoView x:Name="player"
+                   AspectMode="AspectFill"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"/>
+                <Label Text="Judul" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+            <StackLayout Grid.Row="1">
+                <Image HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+            <ScrollView Grid.Row="2" Margin="10">
+                <Label Text="isi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi
+                       yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                        isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali
+                       isi yang banyak sekaliisi yang banyak sekaliisi yang banyak sekali AKHIR
+                       " HorizontalOptions="Start"  VerticalOptions="CenterAndExpand"/>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Row="3">
+               
+                <Button Text="Audio" Clicked="Button_Clicked"></Button>
+                <Button Text="Video" x:Name="video" Clicked="video_Clicked"></Button>
+                <Button Text="Kuis"></Button>
+                
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
