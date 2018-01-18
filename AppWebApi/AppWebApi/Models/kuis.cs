@@ -79,9 +79,26 @@ using DAL;
                       _jawaban=value; 
                      OnPropertyChange("Jawaban");
                      }
-          } 
+          }
 
-          [DbColumn("SubMateriId")] 
+
+        private string userAnswer;
+
+        public string UserAnswer
+        {
+            get { return userAnswer; }
+            set { userAnswer = value; OnPropertyChange("UserAnswer"); }
+        }
+
+        private bool isTrueAnswer;
+
+        public bool IsTrueAnswer
+        {
+            get { return isTrueAnswer; }
+            set { isTrueAnswer = value; OnPropertyChange("IsTrueAnswer"); }
+        }
+
+        [DbColumn("SubMateriId")] 
           public int SubMateriId 
           { 
                get{return _submateriid;} 

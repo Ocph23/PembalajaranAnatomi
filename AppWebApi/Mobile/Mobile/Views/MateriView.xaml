@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:local="clr-namespace:Mobile"
-             BackgroundImage="HumanAnatomy.jpg" BackgroundColor="GreenYellow"
+             BackgroundImage="HumanAnatomy.jpg"
              Title="Materi"
              x:Class="Mobile.Views.MateriView">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="#B5BD89">
+        <StackLayout>
             <ListView x:Name="ItemsListView" 
                 ItemsSource="{Binding Materis}"
                 VerticalOptions="FillAndExpand"

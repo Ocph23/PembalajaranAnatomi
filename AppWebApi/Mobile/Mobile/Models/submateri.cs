@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mobile.Models;
 
 namespace Mobile.Models
 {
@@ -83,6 +84,7 @@ namespace Mobile.Models
         public byte[] DataGambar { get; internal set; }
         public byte[] DataSound { get; internal set; }
         public byte[] DataAnimasi { get; internal set; }
+        public List<topik> Topiks { get;  set; }
 
         private int _id;
         private string _kodesubmateri;

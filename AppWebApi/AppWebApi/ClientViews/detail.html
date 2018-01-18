@@ -44,8 +44,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
@@ -86,7 +84,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
@@ -104,24 +101,146 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h2 class="h5 display">Materi Animasi</h2>
                     </div>
+                    <div class="row card-block">
+                        <div class="col-lg-8">
+                            <p>Lorem ipsum dolor sit amet consectetur.</p>
+                            <form>
+                                <div class="col-md-12 well" style="height:250px" file-canvas>
+                                    <video width="320" height="240" controls src="data:video/mp4;base64,{{Item.DataAnimasi}}"></video>
+                                    <input style="visibility:hidden" type="file" file-model="videoFile" accept="*.mp4" />
+                                </div>
+                                <button class="btn btn-primary" ng-click="UploadVideo(videoFile)">Upload</button>
+                            </form>
+                        </div>
+                        <div class="col-lg-4">
+                            <p>Topik Dalam Video</p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Topik</th>
+                                        <th>Posisi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in Item.Topiks">
+                                        <td>{{item.Judul}}</td>
+                                        <td style="margin-top:10px">{{item.PosisiMulai}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                         
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <a data-target="#addMateri" ng-click="CreateNewSoal()" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
+                        <h2 class="h5 display">SOAL</h2>
+                    </div>
                     <div class="card-block">
-                        <p>Lorem ipsum dolor sit amet consectetur.</p>
-                        <form>
-                            <div class="col-md-12 well" style="height:250px" file-canvas>
-                                <video width="320" height="240" controls src="data:video/mp4;base64,{{Item.DataAnimasi}}"></video>
-                                <input style="visibility:hidden" type="file" file-model="videoFile" accept="*.mp4" />
+                        <div class="panel-group" id="panel-753119" ng-repeat="item in Soals">
+                            <div class="panel panel-default card">
+                                <div class="panel-heading card-header d-flex align-items-center">
+                                    <a class="panel-title" data-toggle="collapse" data-parent="#panel-753119" data-target="#{{item.Id}}">{{item.Value}}</a>
+                                </div>
+                                <div id="{{item.Id}}" class="card-block panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr ng-repeat="data in item.Choices">
+                                                    <td style="width:80%">{{data.Value}}</td>
+                                                    <td style="margin-top:10px;width:20%"><input disabled ng-model="data.IsTrueAnswer" type="checkbox" class="form-control" /></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="btn btn-primary" ng-click="UploadVideo(videoFile)">Upload</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-          
+
+
         </div>
+
+
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <div class="modal fade" id="addMateri" role="dialog" aria-labelledby="addMateri" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form ng-submit="SaveNewSoal(NewSoal)">
+                                <div class="modal-header">
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        ×
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Tambah Soal
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="form-group">
+                                                <label>Soal</label>
+                                                <textarea type="text" required placeholder="Soal" ng-model="NewSoal.Value" class="form-control"></textarea>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-block">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Pilihan</th>
+                                                                <th>Benar</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="item in NewSoal.Choices">
+                                                                <td><textarea type="text" ng-model="item.Value" class="form-control" required></textarea></td>
+                                                                <td style="margin-top:10px"><input ng-click="ChangeSelectAnswer(NewSoal.Choices,item)" ng-model="item.IsTrueAnswer" type="checkbox" class="form-control" /></td>
+                                                            </tr>
+                                                          
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        Keluar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        Simpan
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
     </div>
 </section>

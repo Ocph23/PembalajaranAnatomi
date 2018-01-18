@@ -1,28 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:forms="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
-             x:Class="Mobile.Views.VideoView">
+          xmlns:forms="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
+               xmlns:xamarians="clr-namespace:Xamarians.MediaPlayer;assembly=Xamarians.MediaPlayer"
+            xmlns:dltag="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.TagEntryView"
+    x:Class="Mobile.Views.VideoView">
     <ContentPage.Content>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <forms:VideoView x:Name="player"
-                   AspectMode="AspectFill"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"></RowDefinition>
+                <RowDefinition Height="20*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <forms:VideoView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                     AspectMode="None" />
 
-            <Label BackgroundColor="#88000000" TextColor="White" 
-			VerticalOptions="StartAndExpand"
-			x:Name="StatusLabel" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"></Label>
-
-            <StackLayout VerticalOptions="End" HorizontalOptions="FillAndExpand">
-                <ProgressBar x:Name="progress" HeightRequest="10"></ProgressBar>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10" VerticalOptions="End">
-                    <Button  x:Name="play" Text="play"  HorizontalOptions="Center"/>
-                    <Button  x:Name="pause" Text="pause" HorizontalOptions="Center"/>
-                    <Button  x:Name="stop" Text="stop" HorizontalOptions="Center"/>
-                    <Button  x:Name="download"   Text="download"  HorizontalOptions="Center"/>
+                <StackLayout VerticalOptions="End" HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Position, StringFormat='{}{0:hh\\:mm\\:ss}/'}"/>
+                        <Label Text="{Binding Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}"/>
+                    </StackLayout>
+                    <ProgressBar  x:Name="progress"   HeightRequest="10"></ProgressBar>
+                    <StackLayout HeightRequest="50" Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" VerticalOptions="End">
+                        <Image  x:Name="sound" Source="soundOn.png"/>
+                        <Image  x:Name="play" Source="play.png"/>
+                        <Image  x:Name="pause" Source="pause.png"/>
+                        <Image  x:Name="stop" Source="stop.png"/>
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
+            </Grid>
+            <ScrollView Grid.Row="1">
+                <dltag:TagEntryView TagItems="{Binding Items}" TagTappedCommand="{Binding RemoveTagCommand}">
+                    <dltag:TagEntryView.TagItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="#2196F3" OutlineColor="Transparent" Padding="10" HasShadow="false">
+                                <Label Text="{Binding Name}"/>
+                            </Frame>
+                        </DataTemplate>
+                    </dltag:TagEntryView.TagItemTemplate>
+                </dltag:TagEntryView>
+            </ScrollView>
         </Grid>
+       
     </ContentPage.Content>
 </ContentPage>

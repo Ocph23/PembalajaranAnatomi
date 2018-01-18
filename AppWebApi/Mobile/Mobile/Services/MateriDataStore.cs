@@ -1,6 +1,5 @@
 ﻿using Mobile.Helpers;
 using Mobile.Models;
-using Mobile.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(Mobile.MateriDataStore))]
-namespace Mobile
+
+[assembly: Dependency(typeof(Mobile.Services.MateriDataStore))]
+namespace Mobile.Services
 {
     public class MateriDataStore : IDataStore<materi>
     {

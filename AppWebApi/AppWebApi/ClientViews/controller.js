@@ -23,6 +23,12 @@
                 $scope.Materi = data;
                 SubMateriService.source($routeParams.id).then(function (response) {
                     $scope.Items = response;
+
+
+
+
+
+
                 });
             })
         }
@@ -40,14 +46,25 @@
        
     })
 
-    .controller("DetailController", function ($scope, MateriService, SubMateriService, $routeParams, $location) {
+    .controller("DetailController", function ($scope, MateriService, SubMateriService, $routeParams, $location,$http) {
         $scope.Item = {};
         $scope.Materi = {};
+        $scope.Soals = [];
         $scope.Init = function () {
             MateriService.GetItem($routeParams.materi).then(function (data) {
                 $scope.Materi = data;
                 SubMateriService.GetItem($routeParams.submateri).then(function (response) {
                     $scope.Item = response;
+                    $http({
+                        method: 'Get',
+                        url: "/api/"+ response.Id+"/soal"
+                    }).then(function (response) {
+                        $scope.Soals = response.data;
+                        model = {};
+                    }, function (error) {
+                        alert(error.Message);
+                        // deferred.reject(error);
+                    });
                 });
             })
         }
@@ -151,6 +168,50 @@
             } else {
                 alert("Anda Belum Memilih File Foto");
             }
+        }
+
+
+        $scope.CreateNewSoal = function ()
+        {
+            $scope.NewSoal = {};
+            $scope.NewSoal.Value = "";
+            $scope.NewSoal.Choices = [];
+            for (var i = 0; i < 4;i++)
+            {
+                var Option = { "Value": "", "IsTrueAnswer": false };
+                $scope.NewSoal.Choices.push(Option);
+            }
+        }
+
+        $scope.ChangeSelectAnswer = function (Choices, item)
+        {
+            if (item.IsTrueAnswer == true)
+            {
+                angular.forEach(Choices, function (value, key) {
+
+                    if (value != item) 
+                        value.IsTrueAnswer = false;
+
+                })
+            }
+         
+        }
+
+
+        $scope.SaveNewSoal = function (model)
+        {
+            model.SubMateriId = $scope.Item.Id;
+            $http({
+                method: 'POST',
+                url: "/api/soal",
+                data: model
+            }).then(function (response) {
+                $scope.Soals.push(response.data);
+                model = {};
+            }, function (error) {
+                alert(error.Message);
+                // deferred.reject(error);
+            });
         }
 
 

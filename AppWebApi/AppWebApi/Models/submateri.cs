@@ -94,6 +94,7 @@ using DAL;
         public byte[] DataGambar { get; internal set; }
         public byte[] DataSound { get; internal set; }
         public byte[] DataAnimasi { get; internal set; }
+        public List<topik> Topiks { get; internal set; }
 
         private int  _id;
            private string  _kodesubmateri;

@@ -204,10 +204,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\MateriController.cs" />
+    <Compile Include="Controllers\SoalController.cs" />
     <Compile Include="Controllers\SubMateriController.cs" />
+    <Compile Include="Controllers\TopikController.cs" />
     <Compile Include="Models\kuis.cs" />
     <Compile Include="Models\materi.cs" />
+    <Compile Include="Models\Option.cs" />
+    <Compile Include="Models\Soal.cs" />
     <Compile Include="Models\submateri.cs" />
+    <Compile Include="Models\topik.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

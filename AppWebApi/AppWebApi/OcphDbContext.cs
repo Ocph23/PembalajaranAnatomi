@@ -22,8 +22,11 @@ namespace AppWebApi
             this.ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         }
 
-      public IRepository<materi> Materi { get { return new Repository<materi>(this); } }
+         public IRepository<materi> Materi { get { return new Repository<materi>(this); } }
         public IRepository<submateri> SubMateri { get { return new Repository<submateri>(this); } }
+        public IRepository<Soal> Soals { get { return new Repository<Soal>(this); } }
+        public IRepository<Option> Options{ get { return new Repository<Option>(this); } }
+        public IRepository<topik> Topics { get { return new Repository<topik>(this); } }
 
         public IDbConnection Connection
         {

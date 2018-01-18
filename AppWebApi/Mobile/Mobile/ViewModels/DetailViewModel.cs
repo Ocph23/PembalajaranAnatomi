@@ -2,14 +2,16 @@
 using Mobile.Models;
 using Xamarin.Forms;
 using Mobile.Helpers;
+using Plugin.MediaManager;
+using Plugin.MediaManager.Abstractions;
 
 namespace Mobile.ViewModels
 {
     internal class DetailViewModel:BaseViewModel
     {
         private INavigation navigation;
-        private materi item;
         private submateri subitem;
+       
 
         public Command LoadItemsCommand { get; private set; }
 
@@ -25,14 +27,14 @@ namespace Mobile.ViewModels
 
         public DetailViewModel(INavigation navigation,materi item, submateri subitem)
         {
+           
             this.navigation = navigation;
-            this.item = item;
-            this.subitem = subitem;
+            this.Item= subitem;
             LoadItemsCommand = new Command((x) => ExecuteLoadItemsCommand(x));
             ExecuteLoadItemsCommand(null);
+          
         }
 
-        
 
         private void ExecuteLoadItemsCommand(object x)
         {

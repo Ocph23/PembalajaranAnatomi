@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Mobile.Services;
 
 using Xamarin.Forms;
 
@@ -12,6 +13,7 @@ namespace Mobile
     {
         public IDataStore<materi> MateriDataStore => DependencyService.Get<IDataStore<materi>>();
         public IDataStore<submateri> SubMateriDataStore => DependencyService.Get<IDataStore<submateri>>();
+        public IDataStore<soal> SoalDataStore => DependencyService.Get<IDataStore<soal>>();
 
         bool isBusy = false;
         public bool IsBusy

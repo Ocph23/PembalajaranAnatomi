@@ -31,7 +31,12 @@ namespace AppWebApi.Controllers
         {
             using (var db = new OcphDbContext())
             {
-                return db.SubMateri.Where(O => O.MateriId == materiId);
+               var result = db.SubMateri.Where(O => O.MateriId == materiId);
+                foreach(var item in result)
+                {
+                    item.Topiks = db.Topics.Where(O => O.SubMateriId == item.Id).ToList();
+                }
+                return result.ToList();
             }
         }
 
@@ -42,6 +47,7 @@ namespace AppWebApi.Controllers
             {
                 string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads/");
                 var result = db.SubMateri.Where(O => O.Id == id).FirstOrDefault();
+                result.Topiks = db.Topics.Where(O => O.SubMateriId == result.Id).ToList();
                 if (result != null && !string.IsNullOrEmpty(result.Gambar))
                 {
                     var fi = new FileInfo(uploadPath + result.Gambar);
@@ -391,8 +397,7 @@ namespace AppWebApi.Controllers
                            FileName = fileName
                        };
 
-                        respon.Content.Headers.ContentType =
-                            new MediaTypeHeaderValue("video/mp4");
+                      //  respon.Content.Headers.ContentType = new MediaTypeHeaderValue("video/mp4");
 
 
 

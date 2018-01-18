@@ -7,28 +7,25 @@
 
 <h2>@ViewBag.Title.</h2>
 <div class="row">
-    <div class="col-md-5">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+    <div class="page login-page">
+      <div class="container">
+        <div class="form-outer text-center d-flex align-items-center">
+          <div class="form-inner" style="width:100%">
+            <div class="logo text-uppercase"><span>Aplikasi</span><strong class="text-primary">Pembelajaran</strong></div>
+              <br />
+         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+              <div class="form-group">
+                  @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "User Name" })
+                  @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+              </div>
+              
+              <div class="form-group">
+                  @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                  @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+              </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
@@ -37,17 +34,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-             
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>
-            }
-        </section>
+              
+              <input type="submit" id="login" value="Login" class="btn btn-primary"/>
+
+              <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+           }
+              <a href="#" class="forgot-pass">Forgot Password?</a><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>
+          </div>
+          <div class="copyrights text-center">
+            <p><a href="" class="external"></a></p>
+            <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+          </div>
+        </div>
+      </div>
     </div>
 </div>
 

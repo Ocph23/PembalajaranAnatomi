@@ -9,17 +9,23 @@ using Plugin.DownloadManager.Abstractions;
 using System.IO;
 using System.Linq;
 using Plugin.MediaManager;
-using Plugin.MediaManager.ExoPlayer;
+using DLToolkit.Forms.Controls.Helpers.TagEntryView;
 
 namespace Mobile.Droid
 {
     using Plugin.MediaManager.MediaSession;
+    using Plugin.MediaManager.Abstractions.Enums;
+    using Plugin.MediaManager.Abstractions;
+    using DLToolkit.Forms.Controls;
+
     [Activity(Label = "Mobile.Android", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
 
         private NotificationClickedBroadcastReceiver _receiverNotificationClicked;
-        private const bool ShouldUseExoPlayer = false;
+        
+
+
         protected override void OnResume()
         {
             base.OnResume();
@@ -44,13 +50,7 @@ namespace Mobile.Droid
             ToolbarResource = Resource.Layout.Toolbar;
            
             base.OnCreate(bundle);
-
-            ((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager = new MediaSessionManager(Application.ApplicationContext, typeof(ExoPlayerAudioService), new MediaManagerImplementation());
-            var exoPlayer = new ExoPlayerAudioImplementation(((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager);
-            CrossMediaManager.Current.AudioPlayer = exoPlayer;
-
-
-            VideoViewRenderer.Init();
+            
             CrossDownloadManager.Current.PathNameForDownloadedFile = new System.Func<IDownloadFile, string>(file => {
             #if __IOS__
                         string fileName = (new NSUrl(file.Url, false)).LastPathComponent;
@@ -66,12 +66,13 @@ namespace Mobile.Droid
             });
 
 
-
             (CrossDownloadManager.Current as DownloadManagerImplementation).IsVisibleInDownloadsUi = true;
 
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-
+           
+            VideoViewRenderer.Init();
+            TagEntryRenderer.Init();
             LoadApplication(new App());
         }
 

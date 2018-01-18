@@ -26,9 +26,10 @@ namespace Mobile
                 );
         }
 
-        public void InitializeDownload()
+        public void InitializeDownload(string fileName)
         {
-          
+            var downloadManager = CrossDownloadManager.Current;
+            File = downloadManager.CreateDownloadFile(Helpers.Main.Server+"api/submateri?fileName="+fileName);
         }
 
         public void StartDownloading(bool mobileNetworkAllowed)

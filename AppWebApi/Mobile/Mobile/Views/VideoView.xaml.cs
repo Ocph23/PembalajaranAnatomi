@@ -14,6 +14,9 @@ using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
 using Xamarin.Forms.Internals;
 using Mobile.Services;
+using Mobile.ViewModels;
+using Plugin.MediaManager.Abstractions;
+using System.Collections.ObjectModel;
 
 namespace Mobile.Views
 {
@@ -21,217 +24,174 @@ namespace Mobile.Views
     public partial class VideoView : ContentPage
     {
         private submateri subitem;
+        private MediaPlayerViewModel vm;
         private Downloader foo;
 
         public VideoView(submateri subitem)
         {
             InitializeComponent();
+
+            var playTap =  new TapGestureRecognizer();
+            playTap.Tapped += PlayTap_Tapped;
+            play.GestureRecognizers.Add(playTap);
+
+            var pauseTap = new TapGestureRecognizer();
+            pauseTap.Tapped += pause_Clicked;
+            pause.GestureRecognizers.Add(pauseTap);
+
+            var stopTap = new TapGestureRecognizer();
+            stopTap.Tapped += stop_Clicked;
+            stop.GestureRecognizers.Add(stopTap);
+
+            var soundTap = new TapGestureRecognizer();
+            soundTap.Tapped += sound_Clicked;
+            sound.GestureRecognizers.Add(soundTap);
+
             this.subitem = subitem;
-            var filePath = subitem.Animasi;
-            if (DependencyService.Get<IFileService>().FileExists(filePath))
+            this.vm = new ViewModels.MediaPlayerViewModel(subitem);
+            BindingContext = vm;
+            vm.MediaPlayer.VolumeManager.VolumeChanged += VolumeManager_VolumeChanged;
+            vm.MediaPlayer.PlayingChanged += MediaPlayer_PlayingChanged;
+            var muted = DependencyService.Get<IVolumeManager>().Mute;
+            if (muted)
             {
-                PlayAsync(filePath);
+                sound.Source = "soundoff";
             }
             else
             {
-                foo = new Downloader();
-                foo.File = CrossDownloadManager.Current.CreateDownloadFile(
-                  Helpers.Main.Server + "api/submateri?fileName=" + subitem.Animasi);
+                sound.Source = "soundOn";
+            }
 
-                download.Clicked += delegate {
-                    // If already downloading, abort it.
-                    if (foo.IsDownloading())
-                    {
-                        foo.AbortDownloading();
-                        download.Text = "Download aborted.";
-                        return;
-                    }
+            if ( DependencyService.Get<IFileService>().FileExists(subitem.Animasi))
+            {
+                DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);
 
-                    download.Text = "Start downloading ...";
-
-                    foo.InitializeDownload();
-
-                    foo.File.PropertyChanged += (sender, e) => {
-                        System.Diagnostics.Debug.WriteLine("[Property changed] " + e.PropertyName + " -> " + sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null).ToString());
-
-                        // Update UI text-fields
-                        var downloadFile = ((IDownloadFile)sender);
-                        switch (e.PropertyName)
-                        {
-                            case nameof(IDownloadFile.Status):
-                                break;
-                            case nameof(IDownloadFile.StatusDetails):
-                                break;
-                            case nameof(IDownloadFile.TotalBytesExpected):
-                                break;
-                            case nameof(IDownloadFile.TotalBytesWritten):
-                                break;
-                        }
-
-                        // Update UI if download-status changed.
-                        if (e.PropertyName == "Status")
-                        {
-                            switch (((IDownloadFile)sender).Status)
-                            {
-                                case DownloadFileStatus.COMPLETED:
-                                    player.Source = "/storage/emulated/0/Android/data/com.Ocph23.Anatomi/files/Download/BodyPart_7411803f-f921-444f-8964-aec79e907d93.mp4";
-                                    break;
-                                case DownloadFileStatus.FAILED:
-                                case DownloadFileStatus.CANCELED:
-                                    download.Text = "Downloading finished.";
-                                    player.Source = "/storage/emulated/0/Android/data/com.Ocph23.Anatomi/files/Download/BodyPart_7411803f-f921-444f-8964-aec79e907d93.mp4";
-                                    // Get the path this file was saved to. When you didn't set a custom path, this will be some temporary directory.
-
-                                    break;
-                            }
-                        }
-
-                        // Update UI while donwloading.
-                        if (e.PropertyName == "TotalBytesWritten" || e.PropertyName == "TotalBytesExpected")
-                        {
-                            var bytesExpected = ((IDownloadFile)sender).TotalBytesExpected;
-                            var bytesWritten = ((IDownloadFile)sender).TotalBytesWritten;
-
-                            if (bytesExpected > 0)
-                            {
-                                var percentage = Math.Round(bytesWritten / bytesExpected * 100);
-                                download.Text = "Downloading (" + percentage + "%)";
-                            }
-                        }
-                    };
-
-                    foo.StartDownloading(true);
-                };
+            }
+            else
+            {
+                Download(subitem);
             }
 
         }
 
-        private  void PlayAsync(string filePath)
+        private async void PlayTap_Tapped(object sender, EventArgs e)
         {
-            DependencyService.Get<IFileService>().PlayMedia(filePath);
-
+            vm.Position = new TimeSpan(0, 0, 0);
+            await vm.MediaPlayer.Play();
+            await vm.MediaPlayer.VideoPlayer.Seek(vm.Position);
         }
 
-        private void OnPauseClicked(object sender, EventArgs e)
+        private void VolumeManager_VolumeChanged(object sender, VolumeChangedEventArgs e)
         {
-            CrossMediaManager.Current.Pause();
-            pause.IsEnabled = false;
+          
         }
 
-        private void OnStopClicked(object sender, EventArgs e)
+        private void Download(submateri subitem)
         {
-            CrossMediaManager.Current.Stop();
-            pause.IsEnabled = false;
-            stop.IsEnabled = false;
+           
+            foo = new Downloader();
+            foo.InitializeDownload(subitem.Animasi);
+
+            foo.File.PropertyChanged += (sender, e) =>
+            {
+                System.Diagnostics.Debug.WriteLine("[Property changed] " + e.PropertyName + " -> " + sender.GetType().GetProperty(e.PropertyName).GetValue(sender, null).ToString());
+
+                // Update UI text-fields
+                var downloadFile = ((IDownloadFile)sender);
+                switch (e.PropertyName)
+                {
+                    case nameof(IDownloadFile.Status):
+                        break;
+                    case nameof(IDownloadFile.StatusDetails):
+                        break;
+                    case nameof(IDownloadFile.TotalBytesExpected):
+                        break;
+                    case nameof(IDownloadFile.TotalBytesWritten):
+                        break;
+                }
+
+                // Update UI if download-status changed.
+                if (e.PropertyName == "Status")
+                {
+                    switch (((IDownloadFile)sender).Status)
+                    {
+                        case DownloadFileStatus.COMPLETED:
+                            DependencyService.Get<IFileService>().PlayMedia(subitem.Animasi);
+                            break;
+                        case DownloadFileStatus.FAILED:
+                        case DownloadFileStatus.CANCELED:
+
+                            // Get the path this file was saved to. When you didn't set a custom path, this will be some temporary directory.
+                            // var nativeDownloadManager = (Plugin.DownloadManager)ApplicationContext.GetSystemService(DownloadService);
+                            // System.Diagnostics.Debug.WriteLine(nativeDownloadManager.GetUriForDownloadedFile(((DownloadFileImplementation)sender).Id));
+
+                            break;
+                    }
+                }
+
+                // Update UI while donwloading.
+                if (e.PropertyName == "TotalBytesWritten" || e.PropertyName == "TotalBytesExpected")
+                {
+                    var bytesExpected = ((IDownloadFile)sender).TotalBytesExpected;
+                    var bytesWritten = ((IDownloadFile)sender).TotalBytesWritten;
+
+                    if (bytesExpected > 0)
+                    {
+                        var percentage = Math.Round(bytesWritten / bytesExpected * 100);
+                        progress.Progress = percentage;
+                    }
+                }
+            };
+
+            foo.StartDownloading(true);
         }
 
-        private async void OnPlayClicked(object sender, EventArgs e)
-        {
-            await CrossMediaManager.Current.VideoPlayer.Play();
-            pause.IsEnabled = true;
-            stop.IsEnabled = true;
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            CrossMediaManager.Current.Stop();
-            CrossMediaManager.Current.StatusChanged += CurrentOnStatusChanged;
-            CrossMediaManager.Current.PlayingChanged += OnPlayingChanged;
-          //  player.Source = "http://192.168.1.8/api/submateri?fileName=BodyPart_7411803f-f921-444f-8964-aec79e907d93.mp4";
-            play.Clicked += OnPlayClicked;
-            stop.Clicked += OnStopClicked;
-            pause.Clicked += OnPauseClicked;
-            player.AspectMode = VideoAspectMode.AspectFit;
-        }
-
-        private void OnPlayingChanged(object sender, PlayingChangedEventArgs e)
+        private void MediaPlayer_PlayingChanged(object sender, PlayingChangedEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
                 progress.Progress = e.Progress;
             });
+
         }
 
-        protected override void OnDisappearing()
+        private async void play_Clicked(object sender, EventArgs e)
         {
-            base.OnDisappearing();
-            CrossMediaManager.Current.Stop();
-            play.Clicked -= OnPlayClicked;
-            stop.Clicked -= OnStopClicked;
-            pause.Clicked -= OnPauseClicked;
-            CrossMediaManager.Current.StatusChanged -= CurrentOnStatusChanged;
-            CrossMediaManager.Current.PlayingChanged -= OnPlayingChanged;
+            vm.Position = new TimeSpan(0, 0, 0);
+            await vm.MediaPlayer.Play();
+            await vm.MediaPlayer.VideoPlayer.Seek(vm.Position);
         }
 
-        private void CurrentOnStatusChanged(object sender, StatusChangedEventArgs statusChangedEventArgs)
+        private async void pause_Clicked(object sender, EventArgs e)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            var a = vm.PlaybackController;
+            await a.PlayPause();
+        }
+
+        private async void stop_Clicked(object sender, EventArgs e)
+        {
+
+            var a = vm.PlaybackController;
+            await a.Stop();
+
+
+        }
+
+        private void sound_Clicked(object sender, EventArgs e)
+        {
+
+            var muted = DependencyService.Get<IVolumeManager>().Mute;
+            if (muted)
             {
-                var status = statusChangedEventArgs.Status;
-                switch (status)
-                {
-                    case MediaPlayerStatus.Stopped:
-                        pause.IsEnabled = false;
-                        stop.IsEnabled = false;
-                        StatusLabel.Text = "Stopped";
-                        await StatusLabel.FadeTo(1);
-                        break;
-                    case MediaPlayerStatus.Paused:
-                        pause.IsEnabled = true;
-                        stop.IsEnabled = true;
-                        StatusLabel.Text = "Paused";
-                        await StatusLabel.FadeTo(1);
-                        break;
-                    case MediaPlayerStatus.Playing:
-                        pause.IsEnabled = true;
-                        stop.IsEnabled = true;
-                        await StatusLabel.FadeTo(0);
-                        break;
-                    case MediaPlayerStatus.Loading:
-                        pause.IsEnabled = false;
-                        stop.IsEnabled = false;
-                        StatusLabel.Text = "Loading";
-                        await StatusLabel.FadeTo(1);
-                        break;
-                    case MediaPlayerStatus.Buffering:
-                        pause.IsEnabled = false;
-                        stop.IsEnabled = true;
-                        StatusLabel.Text = "Buffering";
-                        await StatusLabel.FadeTo(1);
-                        break;
-                    case MediaPlayerStatus.Failed:
-                        pause.IsEnabled = false;
-                        stop.IsEnabled = false;
-                        StatusLabel.Text = "Failed";
-                        await StatusLabel.FadeTo(1);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            });
-        }
-
-
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-
+                DependencyService.Get<IVolumeManager>().Mute = false;
+                sound.Source = "soundOn";
             }
-            catch (Exception ex)
+            else
             {
-
-                MessagingCenter.Send(new MessagingCenterAlert
-                {
-                    Title = "Error",
-                    Message = ex.Message,
-                    Cancel = "OK"
-                }, "message");
-
+                DependencyService.Get<IVolumeManager>().Mute = true;
+                sound.Source = "soundoff";
             }
-
+              
         }
     }
 }
