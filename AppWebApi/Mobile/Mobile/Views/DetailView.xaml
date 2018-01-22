@@ -2,12 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
-              BackgroundImage="HumanAnatomy.jpg"
+               xmlns:dltag="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.TagEntryView"
+             xmlns:local="clr-namespace:Mobile;assembly=Mobile"
+              BackgroundImage="HumanAnatomy.jpg" Title="Detail"
              x:Class="Mobile.Views.DetailView">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="90*"></RowDefinition>
+                <RowDefinition Height="70*"></RowDefinition>
+                <RowDefinition  Height="20*"></RowDefinition>
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
             <ScrollView Grid.Row="0" Margin="10">
@@ -19,12 +22,28 @@
                     <StackLayout Grid.Row="0">
                         <Image x:Name="gambar" Aspect="AspectFit"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                     </StackLayout>
-                    <Label Grid.Row="1" TextColor="White" Text="{Binding Item.Penjelasan}" HorizontalOptions="Start"  VerticalOptions="Start"/>
+                    <StackLayout Grid.Row="1">
+                        <local:TransparentWebView x:Name="browser" BackgroundColor="Transparent" WidthRequest="1000" HeightRequest="100000" />
+                    </StackLayout>
+                    
                 </Grid>
             </ScrollView>
-            <StackLayout Grid.Row="1" x:Name="menuPanel" Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="Video" x:Name="video" Clicked="video_Clicked"></Button>
-                <Button Text="Kuis" x:Name="kuis" Clicked="kuis_Clicked"></Button>
+            <ScrollView Grid.Row="1">
+                <StackLayout Margin="10,0" VerticalOptions="End">
+                    <dltag:TagEntryView  TagItems="{Binding Items}" x:Name="tag" TagTapped="tag_TagTapped" VerticalOptions="End">
+                        <dltag:TagEntryView.TagItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="#2196F3" OutlineColor="Transparent" Padding="10" HasShadow="false">
+                                    <Label TextColor="White" Text="{Binding Name}"/>
+                                </Frame>
+                            </DataTemplate>
+                        </dltag:TagEntryView.TagItemTemplate>
+                    </dltag:TagEntryView>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Grid.Row="2" x:Name="menuPanel" Orientation="Horizontal" HorizontalOptions="Center">
+                <Button TextColor="White" BackgroundColor="Transparent"  Text="Video" x:Name="video" Clicked="video_Clicked"></Button>
+                <Button TextColor="White" BackgroundColor="Transparent"  Text="Kuis" x:Name="kuis" Clicked="kuis_Clicked"></Button>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

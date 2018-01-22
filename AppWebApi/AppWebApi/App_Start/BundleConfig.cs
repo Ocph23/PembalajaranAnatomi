@@ -33,17 +33,21 @@ namespace AppWebApi
                       "~/js/jquery.nicescroll.min.js",
                       "~/js/jquery.validate.min.js",
                       "~/js/charts-home.js",
-                       "~/js/front.js"));
+                      "~/js/front.js",
+                       "~/ckeditor/ckeditor.js" ,
+   "~/js/bootstrap-datepicker.js" 
+
+                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                     "~/css/bootstrap.min.css",
-                       "~/css/grasp_mobile_progress_circle-1.0.0.min.css",
-                        "~/css/custom.css",
-                         "~/css/style.red.css",
-                         "~/css/font-awesome.css"
+                   "~/css/bootstrap.min.css",
+                     "~/css/grasp_mobile_progress_circle-1.0.0.min.css",
+                      "~/css/custom.css",
+                       "~/css/style.red.css",
+                       "~/css/font-awesome.css"
 
 
-                      ));
+                    ));
         }
     }
 }

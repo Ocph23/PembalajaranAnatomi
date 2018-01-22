@@ -5,6 +5,9 @@
              BackgroundImage="HumanAnatomy.jpg"
              Title="Materi"
              x:Class="Mobile.Views.MateriView">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="keluar" Activated="keluar_Activated"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="ItemsListView" 
@@ -20,8 +23,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10">
-                                <Label Text="{Binding Judul}"  LineBreakMode="WordWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="18" />
-                                <Label Text="{Binding KodeMateri,StringFormat='Kode Materi : {0}'}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                                <Label TextColor="White" Text="{Binding Judul}"  LineBreakMode="WordWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

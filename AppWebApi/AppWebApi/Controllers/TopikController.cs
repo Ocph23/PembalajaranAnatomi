@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -27,18 +28,42 @@ namespace AppWebApi.Controllers
         }
 
         // POST: api/Topik
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]topik value)
         {
+            using (var db = new OcphDbContext())
+            {
+                value.Id = db.Topics.InsertAndGetLastID(value);
+                if(value.Id>0)
+                return Request.CreateResponse(HttpStatusCode.OK, value);
+                else
+                    return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable,"Data Tidak Tersimpan");
+            }
         }
 
         // PUT: api/Topik/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put(int id, [FromBody]topik value)
         {
+            using (var db = new OcphDbContext())
+            {
+                var isUpdated = db.Topics.Update(O=> new { O.Judul,O.PosisiMulai,O.PosisiAkhir},value,O=>O.Id==id);
+                if (isUpdated)
+                    return Request.CreateResponse(HttpStatusCode.OK, value);
+                else
+                    return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Data Tidak Tersimpan");
+            }
         }
 
         // DELETE: api/Topik/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            using (var db = new OcphDbContext())
+            {
+                var isUpdated = db.Topics.Delete( O => O.Id == id);
+                if (isUpdated)
+                    return Request.CreateResponse(HttpStatusCode.OK, "Data Berhasil Dihapus");
+                else
+                    return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Data Tidak Terhapus");
+            }
         }
     }
 }

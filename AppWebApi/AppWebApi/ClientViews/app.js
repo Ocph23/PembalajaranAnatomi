@@ -1,5 +1,5 @@
 ﻿angular.module("app", ["ngRoute", "app.controller"])
-
+  
     .directive('fileModel', ['$parse', function ($parse) {
         return {
             restrict: 'A',
@@ -48,6 +48,7 @@
     }])
 
     .config(function ($routeProvider) {
+        
         $routeProvider
             .when("/", {
                 templateUrl: "../ClientViews/main.html",
@@ -65,6 +66,11 @@
             .when("/detail/:materi/:submateri", {
                 templateUrl: "../ClientViews/detail.html",
                 controller: "DetailController"
+            })
+
+            .when("/soal/:submateri", {
+                templateUrl: "../ClientViews/soal.html",
+                controller: "SoalController"
             })
 
 
@@ -155,7 +161,7 @@
             deferred = $q.defer();
             $http({
                 method: 'PUT',
-                url:"/api/materi?Id=item.Id",
+                url:"/api/materi?Id="+item.Id,
                 data: item
             }).then(function (response) {
                 var data = response.data;
@@ -230,7 +236,7 @@
             if (!isInstance) {
                 $http({
                     method: 'GET',
-                    url: "/api/submateri?id=" + id,
+                    url: "/api/submateri/" + id,
                 }).then(function (response) {
                     // With the data succesfully returned, we can resolve promise and we can access it in controller
 
@@ -275,7 +281,7 @@
             deferred = $q.defer();
             $http({
                 method: 'PUT',
-                url: "/api/submateri?Id=item.Id",
+                url: "/api/submateri?Id="+item.Id,
                 data: item
             }).then(function (response) {
                 var data = response.data;

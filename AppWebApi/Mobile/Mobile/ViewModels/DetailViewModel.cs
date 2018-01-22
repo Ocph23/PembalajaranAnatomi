@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Mobile.Helpers;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions;
+using System.Collections.ObjectModel;
 
 namespace Mobile.ViewModels
 {
@@ -25,6 +26,9 @@ namespace Mobile.ViewModels
             }
         }
 
+        public Command RemoveTagCommand { get; }
+        public ObservableCollection<TagItem> Items { get; }
+
         public DetailViewModel(INavigation navigation,materi item, submateri subitem)
         {
            
@@ -32,9 +36,24 @@ namespace Mobile.ViewModels
             this.Item= subitem;
             LoadItemsCommand = new Command((x) => ExecuteLoadItemsCommand(x));
             ExecuteLoadItemsCommand(null);
-          
+
+            RemoveTagCommand = new Command((arg) => RemoveTag(arg));
+            var tags = new ObservableCollection<TagItem>();
+            foreach (var data in subitem.Topiks)
+            {
+                tags.Add(new TagItem { Name = data.Judul, PositionStart = data.PosisiMulai,PositionStop=data.PosisiAkhir });
+            }
+            Items = tags;
+
         }
 
+        private async void RemoveTag(object arg)
+        {
+            var tagItem = (TagItem)arg;
+            if (tagItem == null)
+                return;
+            await navigation.PushAsync(new Views.VideoView(Item,tagItem));
+        }
 
         private void ExecuteLoadItemsCommand(object x)
         {

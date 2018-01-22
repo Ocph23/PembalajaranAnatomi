@@ -3,43 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
           xmlns:forms="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
                xmlns:xamarians="clr-namespace:Xamarians.MediaPlayer;assembly=Xamarians.MediaPlayer"
-            xmlns:dltag="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.TagEntryView"
     x:Class="Mobile.Views.VideoView">
     <ContentPage.Content>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80*"></RowDefinition>
-                <RowDefinition Height="20*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <forms:VideoView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                     AspectMode="None" />
+            <forms:VideoView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                     AspectMode="AspectFill"  />
 
-                <StackLayout VerticalOptions="End" HorizontalOptions="FillAndExpand">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Position, StringFormat='{}{0:hh\\:mm\\:ss}/'}"/>
-                        <Label Text="{Binding Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}"/>
-                    </StackLayout>
-                    <ProgressBar  x:Name="progress"   HeightRequest="10"></ProgressBar>
-                    <StackLayout HeightRequest="50" Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" VerticalOptions="End">
-                        <Image  x:Name="sound" Source="soundOn.png"/>
-                        <Image  x:Name="play" Source="play.png"/>
-                        <Image  x:Name="pause" Source="pause.png"/>
-                        <Image  x:Name="stop" Source="stop.png"/>
-                    </StackLayout>
+            <StackLayout VerticalOptions="End" HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding Position, StringFormat='{}{0:hh\\:mm\\:ss}/'}"/>
+                    <Label Text="{Binding Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}"/>
                 </StackLayout>
-            </Grid>
-            <ScrollView Grid.Row="1">
-                <dltag:TagEntryView TagItems="{Binding Items}" TagTappedCommand="{Binding RemoveTagCommand}">
-                    <dltag:TagEntryView.TagItemTemplate>
-                        <DataTemplate>
-                            <Frame BackgroundColor="#2196F3" OutlineColor="Transparent" Padding="10" HasShadow="false">
-                                <Label Text="{Binding Name}"/>
-                            </Frame>
-                        </DataTemplate>
-                    </dltag:TagEntryView.TagItemTemplate>
-                </dltag:TagEntryView>
-            </ScrollView>
+                <ProgressBar  x:Name="progress"   HeightRequest="10"></ProgressBar>
+                <StackLayout HeightRequest="50" Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" VerticalOptions="End">
+                    <Image  x:Name="sound" Source="soundOn.png"/>
+                    <Image  x:Name="play" Source="play.png"/>
+                    <Image  x:Name="pause" Source="pause.png"/>
+                    <Image  x:Name="stop" Source="stop.png"/>
+                </StackLayout>
+            </StackLayout>
         </Grid>
        
     </ContentPage.Content>

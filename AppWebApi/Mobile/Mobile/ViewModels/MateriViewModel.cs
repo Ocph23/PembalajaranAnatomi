@@ -31,12 +31,7 @@ namespace Mobile.ViewModels
             Materis = new ObservableCollection<Models.materi>();
             LoadItemsCommand = new Command((x) => ExecuteLoadItemsCommand(x));
             ExecuteLoadItemsCommand(null);
-            /*
-            Materis.Add(new materi { Id = 1, KodeMateri = "SP", Judul = "Sistem Pencernaan" });
-            Materis.Add(new materi { Id = 2, KodeMateri = "SF", Judul = "Sistem Pernafasan" });
-            Materis.Add(new materi { Id = 3, KodeMateri = "AD", Judul = "Aliran Darah" });
-            Materis.Add(new materi { Id = 4, KodeMateri = "SK", Judul = "Sistem Kepala" });
-            */
+          
         }
 
         private async void ExecuteLoadItemsCommand(object x)

@@ -1,4 +1,6 @@
-﻿<section class="forms" ng-init="Init()">
+﻿<link href="../jquery-timepicker-master/jquery.timepicker.css" rel="stylesheet" />
+<script src="../jquery-timepicker-master/jquery.timepicker.js"></script>
+<section class="forms" ng-init="Init()">
     <div class="container-fluid">
         <header>
             <h1 class="h3 display">Forms</h1>
@@ -10,7 +12,7 @@
                         <h2 class="h5 display">Informasi</h2>
                     </div>
                     <div class="card-block">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" ng-click="UpdateSubMateri(Item)">
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">Kode Materi</label>
                                 <div class="col-sm-10">
@@ -24,20 +26,26 @@
                                 </div>
                             </div>
                             <div class="line"></div>
-
+                           
                             <div class="form-group row">
-                                <label class="col-sm-2 form-control-label">Kode Materi</label>
+                                <label class="col-sm-2 form-control-label">Kode Sub Materi</label>
                                 <div class="col-sm-10">
-                                    <label class="col-sm-2 form-control-label">{{Item.KodeSubMateri}}</label>
+                                    <input type="text" ng-model="Item.KodeSubMateri" class="col-sm-4 form-control-label" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">Judul Sub Materi</label>
                                 <div class="col-sm-10">
-                                    <label class="col-sm-2 form-control-label">{{Item.JudulSubMateri}}</label>
+                                    <input type="text" ng-model="Item.JudulSubMateri" class="col-sm-10 form-control-label" />
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label class="col-sm-2 form-control-label"></label>
+                                <div class="col-sm-10">
+                                    <input type="submit" value="Simpan" class="btn btn-primary">
+                                </div>
+                                
+                            </div>
                             
 
                         </form>
@@ -50,18 +58,17 @@
                         <h2 class="h5 display">Penjelasan</h2>
                     </div>
                     <div class="card-block">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" ng-submit="SavePenjelasan(Item)">
                             <div class="form-group row">
-                                
                                 <div class="col-sm-12">
-                                    <textarea ng-model="Item.Penjelasan" style="height:300px" class="form-control"></textarea>
+                                    <textarea  id="editor1" ng-model="Item.Penjelasan"></textarea>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <input type="submit" value="Simpan" class="btn btn-primary">
                             </div>
-
+                          
                         </form>
                     </div>
                 </div>
@@ -72,7 +79,7 @@
                         <h2 class="h5 display display">Gambar</h2>
                     </div>
                     <div class="card-block">
-                        <p>Lorem ipsum dolor sit amet consectetur.</p>
+                        <p>Tambha Gambar</p>
                         <form>
                             <div class="col-md-12 well" style="height:250px" file-canvas>
                                 <img style="height:150px;width:100%" src="data:image/gif;base64,{{Item.DataGambar}}" />
@@ -84,30 +91,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header d-flex align-items-center">
-                        <h2 class="h5 display display">Materi Suara</h2>
-                    </div>
-                    <div class="card-block">
-                        <p>Lorem ipsum dolor sit amet consectetur.</p>
-                        <form>
-                            <div class="col-md-12 well" style="height:250px" file-canvas>
-                                <audio controls src="data:audio/mp3;base64,{{Item.DataSound}}" type="audio/mpeg"></audio>
-                                <input style="visibility:hidden" type="file" file-model="soundFile" accept="audio/*;capture=microphone" />
-                            </div>
-                            <button class="btn btn-primary" ng-click="UploadSound(soundFile)">Upload</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h2 class="h5 display">Materi Animasi</h2>
                     </div>
                     <div class="row card-block">
-                        <div class="col-lg-8">
+                        <div class="col-lg-6">
                             <p>Lorem ipsum dolor sit amet consectetur.</p>
                             <form>
                                 <div class="col-md-12 well" style="height:250px" file-canvas>
@@ -117,19 +107,25 @@
                                 <button class="btn btn-primary" ng-click="UploadVideo(videoFile)">Upload</button>
                             </form>
                         </div>
-                        <div class="col-lg-4">
-                            <p>Topik Dalam Video</p>
+                        <div class="col-lg-6">
+                            <a data-target="#addTopik" ng-click="CreateNewSoal()" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
+
+                            Topik Dalam Video
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>Topik</th>
-                                        <th>Posisi</th>
+                                        <th>Mulai</th>
+                                        <th>Selesai</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="item in Item.Topiks">
                                         <td>{{item.Judul}}</td>
                                         <td style="margin-top:10px">{{item.PosisiMulai}}</td>
+                                        <td style="margin-top:10px">{{item.PosisiAkhir}}</td>
+                                        <td><a data-target="#addTopik" ng-click="EditTopik(item)" role="button" data-toggle="modal" class="btn"><i class="fa fa-pencil"></i></a></td>
                                     </tr>
 
                                 </tbody>
@@ -140,85 +136,41 @@
                 </div>
             </div>
 
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header d-flex align-items-center">
-                        <a data-target="#addMateri" ng-click="CreateNewSoal()" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
-                        <h2 class="h5 display">SOAL</h2>
-                    </div>
-                    <div class="card-block">
-                        <div class="panel-group" id="panel-753119" ng-repeat="item in Soals">
-                            <div class="panel panel-default card">
-                                <div class="panel-heading card-header d-flex align-items-center">
-                                    <a class="panel-title" data-toggle="collapse" data-parent="#panel-753119" data-target="#{{item.Id}}">{{item.Value}}</a>
-                                </div>
-                                <div id="{{item.Id}}" class="card-block panel-collapse collapse in">
-                                    <div class="panel-body">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr ng-repeat="data in item.Choices">
-                                                    <td style="width:80%">{{data.Value}}</td>
-                                                    <td style="margin-top:10px;width:20%"><input disabled ng-model="data.IsTrueAnswer" type="checkbox" class="form-control" /></td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+         
 
         </div>
 
 
+        
+
         <div class="container-fluid">
             <div class="col-md-12">
-                <div class="modal fade" id="addMateri" role="dialog" aria-labelledby="addMateri" aria-hidden="true">
+                <div class="modal fade" id="addTopik" role="dialog" aria-labelledby="addMateri" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form ng-submit="SaveNewSoal(NewSoal)">
+                            <form ng-submit="SaveNewTopik(Topik)">
                                 <div class="modal-header">
 
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                         ×
                                     </button>
                                     <h4 class="modal-title" id="myModalLabel">
-                                        Tambah Soal
+                                        Tambah Topik
                                     </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="card">
-                                        <div class="card-block">
-                                            <div class="form-group">
-                                                <label>Soal</label>
-                                                <textarea type="text" required placeholder="Soal" ng-model="NewSoal.Value" class="form-control"></textarea>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-block">
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Pilihan</th>
-                                                                <th>Benar</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="item in NewSoal.Choices">
-                                                                <td><textarea type="text" ng-model="item.Value" class="form-control" required></textarea></td>
-                                                                <td style="margin-top:10px"><input ng-click="ChangeSelectAnswer(NewSoal.Choices,item)" ng-model="item.IsTrueAnswer" type="checkbox" class="form-control" /></td>
-                                                            </tr>
-                                                          
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                    <table class="table">
+                                        <thead>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" ng-model="Topik.Judul" class="form-control" required /></td>
+                                                <td style="margin-top:10px"><input ng-model="Topik.PosisiMulai" value="00:00:00" id="posisiMulai" type="text" class="form-control" required /></td>
+                                                <td style="margin-top:10px"><input ng-model="Topik.PosisiAkhir" value="00:00:00" id="posisiAkhir" type="text" class="form-control" required /></td>
+                                            </tr>
 
-                                        </div>
-                                    </div>
+                                        </tbody>
+                                    </table>
 
                                 </div>
                                 <div class="modal-footer">
@@ -232,6 +184,10 @@
                             </form>
                         </div>
 
+                        <script>
+                            $('#posisiAkhir').timepicker({ 'timeFormat': 'H:i:s' });
+                            $('#posisiMulai').timepicker({ 'timeFormat': 'H:i:s' });
+                        </script>
                     </div>
 
                 </div>
@@ -240,7 +196,16 @@
         </div>
 
 
-
-
     </div>
 </section>
+
+
+<script type="text/javascript">
+                            CKEDITOR.replace("editor1");
+                            CKEDITOR.editorConfig = function (config) {
+                                // Define changes to default configuration here. For example:
+                                // config.language = 'fr';
+                                // config.uiColor = '#AADC6E';
+                            };
+
+</script>

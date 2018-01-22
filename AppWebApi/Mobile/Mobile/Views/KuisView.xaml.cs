@@ -15,11 +15,11 @@ namespace Mobile.Views
         private submateri subitem;
 
       
-        public KuisView(submateri subitem)
+        public KuisView(submateri subitem,string nama)
         {
             InitializeComponent();
             this.subitem = subitem;
-            this.BindingContext = new ViewModels.KuisViewModel(subitem,Navigation);
+            this.BindingContext = new ViewModels.KuisViewModel(subitem,Navigation,nama);
         }
 
         private void ItemsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

@@ -17,11 +17,12 @@ namespace Mobile.Models
 
         private TimeSpan position;
 
-        public TimeSpan Position
+        public TimeSpan PositionStart
         {
             get { return position; }
             set { SetProperty(ref position, value); }
         }
 
+        public TimeSpan PositionStop { get; internal set; }
     }
 }

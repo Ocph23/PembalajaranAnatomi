@@ -9,6 +9,14 @@ namespace Mobile
         public AboutPage()
         {
             InitializeComponent();
+            var serverTap = new TapGestureRecognizer();
+            serverTap.Tapped += serverTapAction;
+            logo.GestureRecognizers.Add(serverTap);
+        }
+
+        private async void serverTapAction(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync( new Views.ServerView());
         }
     }
 }

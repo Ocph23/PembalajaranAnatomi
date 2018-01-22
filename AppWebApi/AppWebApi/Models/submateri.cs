@@ -10,8 +10,8 @@ using DAL;
      [TableName("submateri")] 
      public class submateri:BaseNotifyProperty  
    {
-          [PrimaryKey("Id")] 
-          [DbColumn("Id")] 
+          [PrimaryKey("IdSubMateri")] 
+          [DbColumn("IdSubMateri")] 
           public int Id 
           { 
                get{return _id;} 
@@ -51,15 +51,7 @@ using DAL;
                      }
           } 
 
-          [DbColumn("Sound")] 
-          public string Sound 
-          { 
-               get{return _sound;} 
-               set{ 
-                      _sound=value; 
-                     OnPropertyChange("Sound");
-                     }
-          } 
+         
 
           [DbColumn("Animasi")] 
           public string Animasi 
@@ -81,7 +73,7 @@ using DAL;
                      }
           } 
 
-          [DbColumn("MateriId")] 
+          [DbColumn("IdMateri")] 
           public int MateriId
         { 
                get{return _materiId;} 

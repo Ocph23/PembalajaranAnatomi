@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mobile.Models
 {
-    public class soal
+    public class soal:NotifyBase
     {
         public int Id
         {
@@ -34,7 +34,21 @@ namespace Mobile.Models
                 _submateriid = value;
             }
         }
+
+
+        private Option option;
+
+        public Option OptionSelected
+        {
+            get { return option; }
+            set { SetProperty(ref option, value); }
+        }
+
+
+
         public List<Option> Choices { get; set; }
+        public int Number { get; internal set; }
+
         private int _id;
         private string _value;
         private int _submateriid;

@@ -31,7 +31,7 @@ namespace Mobile.Views
             var subitem = e.SelectedItem as Models.submateri;
             if (subitem == null)
                 return;
-            await Navigation.PushModalAsync(new Views.DetailView(item,subitem));
+            await Navigation.PushAsync(new Views.DetailView(item,subitem));
 
             // Manually deselect item
             ItemsListView.SelectedItem = null;

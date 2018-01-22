@@ -1,0 +1,1957 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Consolas;}{\f2\fnil\fcharset0 Consolas;}}
+{\colortbl ;\red255\green0\blue0;\red0\green0\blue0;\red255\green255\blue0;\red0\green0\blue255;\red163\green21\blue21;\red128\green0\blue0;\red0\green100\blue0;\red0\green128\blue0;\red128\green0\blue128;\red0\green77\blue187;\red247\green150\blue70;\red43\green145\blue175;}
+{\*\generator Riched20 10.0.16299}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\cf1\b\f0\fs22\lang9 Web & Web Service\par
+Login : \par
+View : \par
+\cf2\highlight3\b0\f1\fs19 @\cf4\highlight0 using\cf2  AppWebApi.Models\par
+\highlight3 @model \highlight0 LoginViewModel\par
+\highlight3 @\{\highlight0\par
+    ViewBag.Title = \cf5 "Log in"\cf2 ;\par
+   \highlight3\}\highlight0\par
+\par
+\cf4 <\cf6 h2\cf4 >\cf2\highlight3 @\highlight0 ViewBag.Title.\cf4 </\cf6 h2\cf4 >\cf2\par
+\cf4 <\cf6 div\cf2  \cf1 class\cf4 ="row">\cf2\par
+\par
+    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="page login-page">\cf2\par
+      \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="container">\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-outer text-center d-flex align-items-center">\cf2\par
+          \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-inner"\cf2  \cf1 style\cf4 ="\cf1 width\cf2 :\cf4 100%">\cf2\par
+            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="logo text-uppercase"><\cf6 span\cf4 >\cf2 Aplikasi\cf4 </\cf6 span\cf4 ><\cf6 strong\cf2  \cf1 class\cf4 ="text-primary">\cf2 Pembelajaran\cf4 </\cf6 strong\cf4 ></\cf6 div\cf4 >\cf2\par
+              \cf4 <\cf6 br\cf2  \cf4 />\cf2\par
+         \highlight3 @\cf4\highlight0 using\cf2  (Html.BeginForm(\cf5 "Login"\cf2 , \cf5 "Account"\cf2 , \cf4 new\cf2  \{ ReturnUrl = ViewBag.ReturnUrl \}, FormMethod.Post, \cf4 new\cf2  \{ @class = \cf5 "form-horizontal"\cf2 , role = \cf5 "form"\cf2  \}))\par
+            \{\par
+                \highlight3 @\highlight0 Html.AntiForgeryToken()\par
+              \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                  \highlight3 @\highlight0 Html.TextBoxFor(m => m.Email, \cf4 new\cf2  \{ @class = \cf5 "form-control"\cf2 , placeholder = \cf5 "User Name"\cf2  \})\par
+                  \highlight3 @\highlight0 Html.ValidationMessageFor(m => m.Email, \cf5 ""\cf2 , \cf4 new\cf2  \{ @class = \cf5 "text-danger"\cf2  \})\par
+              \cf4 </\cf6 div\cf4 >\cf2\par
+              \par
+              \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                  \highlight3 @\highlight0 Html.PasswordFor(m => m.Password, \cf4 new\cf2  \{ @class = \cf5 "form-control"\cf2 , placeholder = \cf5 "Password"\cf2  \})\par
+                  \highlight3 @\highlight0 Html.ValidationMessageFor(m => m.Password, \cf5 ""\cf2 , \cf4 new\cf2  \{ @class = \cf5 "text-danger"\cf2  \})\par
+              \cf4 </\cf6 div\cf4 >\cf2\par
+                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-md-offset-2 col-md-10">\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="checkbox">\cf2\par
+                            \highlight3 @\highlight0 Html.CheckBoxFor(m => m.RememberMe)\par
+                            \highlight3 @\highlight0 Html.LabelFor(m => m.RememberMe)\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+                    \cf4 </\cf6 div\cf4 >\cf2\par
+                \cf4 </\cf6 div\cf4 >\cf2\par
+              \par
+              \cf4 <\cf6 input\cf2  \cf1 type\cf4 ="submit"\cf2  \cf1 id\cf4 ="login"\cf2  \cf1 value\cf4 ="Login"\cf2  \cf1 class\cf4 ="btn btn-primary"/>\cf2\par
+\par
+              \cf7 <!-- This should be submit button but I replaced it with <a> for demo purposes-->\cf2\par
+           \}\par
+              \cf4 <\cf6 a\cf2  \cf1 href\cf4 ="#"\cf2  \cf1 class\cf4 ="forgot-pass">\cf2 Forgot Password?\cf4 </\cf6 a\cf4 ><\cf6 small\cf4 >\cf2 Do not have an account? \cf4 </\cf6 small\cf4 ><\cf6 a\cf2  \cf1 href\cf4 ="register.html"\cf2  \cf1 class\cf4 ="signup">\cf2 Signup\cf4 </\cf6 a\cf4 >\cf2\par
+          \cf4 </\cf6 div\cf4 >\cf2\par
+          \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="copyrights text-center">\cf2\par
+            \cf4 <\cf6 p\cf4 ><\cf6 a\cf2  \cf1 href\cf4 =""\cf2  \cf1 class\cf4 ="external"></\cf6 a\cf4 ></\cf6 p\cf4 >\cf2\par
+            \cf7 <!-- Please do not remove the backlink to us unless you support further theme's development at {{\field{\*\fldinst{HYPERLINK https://bootstrapious.com/donate }}{\fldrslt{https://bootstrapious.com/donate\ul0\cf0}}}}\f1\fs19 . It is part of the license conditions. Thank you for understanding :)-->\cf2\par
+          \cf4 </\cf6 div\cf4 >\cf2\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+      \cf4 </\cf6 div\cf4 >\cf2\par
+    \cf4 </\cf6 div\cf4 >\cf2\par
+\cf4 </\cf6 div\cf4 >\cf2\par
+\par
+\highlight3 @section Scripts \{\highlight0\par
+    \highlight3 @\highlight0 Scripts.Render(\cf5 "~/bundles/jqueryval"\cf2 )\par
+\highlight3\}\cf1\highlight0\b\f0\fs22\par
+\par
+Action\par
+\par
+\cf2\b0\f1\fs19   \cf4 public\cf2  \cf4 async\cf2  Task<ActionResult> Login(LoginViewModel model, \cf4 string\cf2  returnUrl)\par
+        \{\par
+
+\pard\li720\sa200\sl276\slmult1             \cf4 if\cf2  (!ModelState.IsValid)\par
+
+\pard\sa200\sl276\slmult1             \{\par
+                \cf4 return\cf2  View(model);\par
+            \}\par
+\par
+            \cf8 // This doesn't count login failures towards account lockout\cf2\par
+            \cf8 // To enable password failures to trigger account lockout, change to shouldLockout: true\cf2\par
+            \cf4 var\cf2  result = \cf4 await\cf2  SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: \cf4 false\cf2 );\par
+            \cf4 switch\cf2  (result)\par
+            \{\par
+                \cf4 case\cf2  SignInStatus.Success:\par
+                    \cf4 return\cf2  RedirectToLocal(returnUrl);\par
+                \cf4 case\cf2  SignInStatus.LockedOut:\par
+                    \cf4 return\cf2  View(\cf5 "Lockout"\cf2 );\par
+                \cf4 case\cf2  SignInStatus.RequiresVerification:\par
+                    \cf4 return\cf2  RedirectToAction(\cf5 "SendCode"\cf2 , \cf4 new\cf2  \{ ReturnUrl = returnUrl, RememberMe = model.RememberMe \});\par
+                \cf4 case\cf2  SignInStatus.Failure:\par
+                \cf4 default\cf2 :\par
+                    ModelState.AddModelError(\cf5 ""\cf2 , \cf5 "Invalid login attempt."\cf2 );\par
+                    \cf4 return\cf2  View(model);\par
+            \}\par
+        \}\par
+\cf0\f0\fs22\par
+\par
+\par
+\cf1\par
+kelolah Materi :\par
+Menampilkan Materi : \par
+\tab View :\par
+\cf4\f1\fs19 <\cf6 div\cf2  \cf1 class\cf4 ="col-lg-12"\cf2  \cf1 ng-init\cf4 ="\cf9 Init\cf2 ()\cf4 ">\cf2\par
+    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card">\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-header d-flex align-items-center">\cf2\par
+            \cf4 <\cf6 a\cf2  \cf1 data-target\cf4 ="#addMateri"\cf2  \cf1 role\cf4 ="button"\cf2  \cf1 data-toggle\cf4 ="modal"\cf2  \cf1 style\cf4 ="\cf1 color\cf2 :\cf4 green"\cf2  \cf1 class\cf4 ="btn"><\cf6 i\cf2  \cf1 class\cf4 ="fa fa-plus-circle fa-2x"></\cf6 i\cf4 ></\cf6 a\cf4 >\cf2\par
+            \cf4 <\cf6 h2\cf2  \cf1 class\cf4 ="h5 display">\cf2 DAFTAR MATERI\cf4 </\cf6 h2\cf4 >\cf2\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-block">\cf2\par
+            \cf4 <\cf6 table\cf2  \cf1 class\cf4 ="table table-striped">\cf2\par
+                \cf4 <\cf6 thead\cf4 >\cf2\par
+                    \cf4 <\cf6 tr\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf4 >\cf2 #\cf4 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf4 >\cf2 Kode Materi\cf4 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf4 >\cf2 Judul Materi\cf4 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf2  \cf1 style\cf4 ="\cf1 width\cf2 :\cf4 10%\cf2 ; \cf1 align-content\cf2 :\cf4 center"\cf2  \cf1 colspan\cf4 ="2">\cf2 Action\cf4 </\cf6 th\cf4 >\cf2\par
+                    \cf4 </\cf6 tr\cf4 >\cf2\par
+                \cf4 </\cf6 thead\cf4 >\cf2\par
+                \cf4 <\cf6 tbody\cf4 >\cf2\par
+                    \cf4 <\cf6 tr\cf2  \cf1 ng-repeat\cf4 ="\cf9 item\cf4  \cf7\b in\cf4\b0  \cf9 Items\cf4 ">\cf2\par
+                        \cf4 <\cf6 th\cf2  \cf1 scope\cf4 ="row">\cf2\b\{\{\cf9\b0 $index+1\cf2\b\}\}\cf4\b0 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 td\cf4 >\cf2\b\{\{\cf9\b0 item.KodeMateri\cf2\b\}\}\cf4\b0 </\cf6 td\cf4 >\cf2\par
+                        \cf4 <\cf6 td\cf4 >\cf2\b\{\{\cf9\b0 item.Judul\cf2\b\}\}\cf4\b0 </\cf6 td\cf4 >\cf2\par
+                        \cf4 <\cf6 td\cf4 ><\cf6 a\cf2  \cf1 data-target\cf4 ="#addMateri"\cf2  \cf1 role\cf4 ="button"\cf2  \cf1 data-toggle\cf4 ="modal"\cf2  \cf1 ng-click\cf4 ="\cf9 SelectedItem\cf2 (\cf9 item\cf2 )\cf4 "\cf2  \cf4 >\cf2 Edit\cf4 </\cf6 a\cf4 ></\cf6 td\cf4 >\cf2\par
+                        \cf4 <\cf6 td\cf4 ><\cf6 a\cf2  \cf1 href\cf4 ="#!submateri/\cf2\b\{\{\cf9\b0 item.Id\cf2\b\}\}\cf4\b0 ">\cf2 Details\cf4 </\cf6 a\cf4 ></\cf6 td\cf4 >\cf2\par
+                    \cf4 </\cf6 tr\cf4 >\cf2\par
+                   \par
+                \cf4 </\cf6 tbody\cf4 >\cf2\par
+            \cf4 </\cf6 table\cf4 >\cf2\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+    \cf4 </\cf6 div\cf4 >\cf2\par
+\cf4 </\cf6 div\cf4 >\cf2\par
+\par
+\cf1\b\f0\fs22 Action\par
+\cf2\b0\f2\fs19\par
+\cf1\f0\fs22\par
+\cf2\f1\fs19    \cf8 // GET: api/Materi/5\cf2\par
+        \cf4 public\cf2  materi Get(\cf4 int\cf2  id)\par
+        \{\par
+            \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+            \{\par
+                \cf4 return\cf2  db.Materi.Where(O => O.Id == id).FirstOrDefault();\par
+            \}\par
+        \}\par
+\par
+\cf1\f2\lang1033 Insert Materi :\par
+\cf4\f1\lang9 <\cf6 div\cf2  \cf1 class\cf4 ="container-fluid">\cf2\par
+    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-md-12">\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal fade"\cf2  \cf1 id\cf4 ="addMateri"\cf2  \cf1 role\cf4 ="dialog"\cf2  \cf1 aria-labelledby\cf4 ="addMateri"\cf2  \cf1 aria-hidden\cf4 ="true">\cf2\par
+            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-dialog">\cf2\par
+                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-content">\cf2\par
+                    \cf4 <\cf6 form\cf2  \cf1 ng-submit\cf4 ="\cf9 AddNewItem\cf2 (\cf9 model\cf2 )\cf4 ">\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-header">\cf2\par
+\par
+                            \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="button"\cf2  \cf1 class\cf4 ="close"\cf2  \cf1 data-dismiss\cf4 ="modal"\cf2  \cf1 aria-hidden\cf4 ="true">\cf2\par
+                                \f2\'d7\par
+                            \cf4 </\cf6 button\cf4 >\cf2\par
+                            \cf4 <\cf6 h4\cf2  \cf1 class\cf4 ="modal-title"\cf2  \cf1 id\cf4 ="myModalLabel">\cf2\par
+                                Tambah Materi\par
+                            \cf4 </\cf6 h4\cf4 >\cf2\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-body">\cf2\par
+                            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card">\cf2\par
+                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-block">\cf2\par
+\par
+                                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                                        \cf4 <\cf6 label\cf4 >\cf2 Kode Materi\cf4 </\cf6 label\cf4 >\cf2\par
+                                        \cf4 <\cf6 input\cf2  \cf1 type\cf4 ="text"\cf2  \cf1 required\cf2  \cf1 placeholder\cf4 ="Kode Materi"\cf2  \cf1 ng-model\cf4 ="\cf9 model.KodeMateri\cf4 "\cf2  \cf1 class\cf4 ="form-control">\cf2\par
+                                    \cf4 </\cf6 div\cf4 >\cf2\par
+                                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                                        \cf4 <\cf6 label\cf4 >\cf2 Materi\cf4 </\cf6 label\cf4 >\cf2\par
+                                        \cf4 <\cf6 textarea\cf2  \cf1 required\cf2  \cf1 placeholder\cf4 ="Materi"\cf2  \cf1 ng-model\cf4 ="\cf9 model.Judul\cf4 "\cf2  \cf1 class\cf4 ="form-control"></\cf6 textarea\cf4 >\cf2\par
+                                    \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                                \cf4 </\cf6 div\cf4 >\cf2\par
+                            \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-footer">\cf2\par
+                            \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="button"\cf2  \cf1 class\cf4 ="btn btn-default"\cf2  \cf1 data-dismiss\cf4 ="modal">\cf2\par
+                                Keluar\par
+                            \cf4 </\cf6 button\cf4 >\cf2\par
+                            \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="submit"\cf2  \cf1 class\cf4 ="btn btn-primary">\cf2\par
+                                Simpan\par
+                            \cf4 </\cf6 button\cf4 >\cf2\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+                    \cf4 </\cf6 form\cf4 >\cf2\par
+                \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+            \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+    \cf4 </\cf6 div\cf4 >\cf2\par
+\cf4 </\cf6 div\cf4 >\cf2\par
+\cf1\b\f0\fs22 Action\par
+\b0\f2\fs19\lang1033\par
+\cf2\f1   \cf4 public\cf2  HttpResponseMessage Post([FromBody]materi value)\par
+        \{\par
+            \cf4 try\cf2\par
+            \{\par
+                \cf4 if\cf2  (!ModelState.IsValid)\par
+                    \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Lengkapi Data Anda"\cf2 );\par
+                \cf4 else\cf2\par
+                \{\par
+                    \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+                    \{\par
+                        value.Id=db.Materi.InsertAndGetLastID(value);\par
+                        \cf4 if\cf2  (value.Id > 0)\par
+                            \cf4 return\cf2  Request.CreateResponse(HttpStatusCode.OK, value);\par
+                        \cf4 else\cf2\par
+                        \{\par
+                            \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Data Tidak Berhasil Ditambahkan"\cf2 );\par
+                        \}\par
+                    \}\par
+                \}\par
+            \}\par
+            \cf4 catch\cf2  (Exception ex)\par
+            \{\par
+                \cf4 return\cf2  Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);\par
+            \}\par
+        \}\par
+\par
+\cf0\f0\fs22\lang9\par
+\cf1 Update Materi : \par
+View\par
+\cf4\f1\fs19 <\cf6 div\cf2  \cf1 class\cf4 ="container-fluid">\cf2\par
+    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-md-12">\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal fade"\cf2  \cf1 id\cf4 ="addMateri"\cf2  \cf1 role\cf4 ="dialog"\cf2  \cf1 aria-labelledby\cf4 ="addMateri"\cf2  \cf1 aria-hidden\cf4 ="true">\cf2\par
+            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-dialog">\cf2\par
+                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-content">\cf2\par
+                    \cf4 <\cf6 form\cf2  \cf1 ng-submit\cf4 ="\cf9 AddNewItem\cf2 (\cf9 model\cf2 )\cf4 ">\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-header">\cf2\par
+\par
+                            \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="button"\cf2  \cf1 class\cf4 ="close"\cf2  \cf1 data-dismiss\cf4 ="modal"\cf2  \cf1 aria-hidden\cf4 ="true">\cf2\par
+                                \f2\'d7\par
+                            \cf4 </\cf6 button\cf4 >\cf2\par
+                            \cf4 <\cf6 h4\cf2  \cf1 class\cf4 ="modal-title"\cf2  \cf1 id\cf4 ="myModalLabel">\cf2\par
+                                Tambah Materi\par
+                            \cf4 </\cf6 h4\cf4 >\cf2\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-body">\cf2\par
+                            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card">\cf2\par
+                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-block">\cf2\par
+\par
+                                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                                        \cf4 <\cf6 label\cf4 >\cf2 Kode Materi\cf4 </\cf6 label\cf4 >\cf2\par
+                                        \cf4 <\cf6 input\cf2  \cf1 type\cf4 ="text"\cf2  \cf1 required\cf2  \cf1 placeholder\cf4 ="Kode Materi"\cf2  \cf1 ng-model\cf4 ="\cf9 model.KodeMateri\cf4 "\cf2  \cf1 class\cf4 ="form-control">\cf2\par
+                                    \cf4 </\cf6 div\cf4 >\cf2\par
+                                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                                        \cf4 <\cf6 label\cf4 >\cf2 Materi\cf4 </\cf6 label\cf4 >\cf2\par
+                                        \cf4 <\cf6 textarea\cf2  \cf1 required\cf2  \cf1 placeholder\cf4 ="Materi"\cf2  \cf1 ng-model\cf4 ="\cf9 model.Judul\cf4 "\cf2  \cf1 class\cf4 ="form-control"></\cf6 textarea\cf4 >\cf2\par
+                                    \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                                \cf4 </\cf6 div\cf4 >\cf2\par
+                            \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-footer">\cf2\par
+                            \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="button"\cf2  \cf1 class\cf4 ="btn btn-default"\cf2  \cf1 data-dismiss\cf4 ="modal">\cf2\par
+                                Keluar\par
+                            \cf4 </\cf6 button\cf4 >\cf2\par
+                            \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="submit"\cf2  \cf1 class\cf4 ="btn btn-primary">\cf2\par
+                                Simpan\par
+                            \cf4 </\cf6 button\cf4 >\cf2\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+                    \cf4 </\cf6 form\cf4 >\cf2\par
+                \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+            \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+    \cf4 </\cf6 div\cf4 >\cf2\par
+\cf4 </\cf6 div\cf4 >\cf2\par
+\cf1\b\f0\fs22 Action\par
+\b0\par
+\cf2\f1\fs19   \cf4 public\cf2  HttpResponseMessage Put(\cf4 int\cf2  id, [FromBody]materi value)\par
+        \{\par
+            \cf4 try\cf2\par
+            \{\par
+                \cf4 if\cf2  (!ModelState.IsValid)\par
+                    \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Lengkapi Data Anda"\cf2 );\par
+                \cf4 else\cf2\par
+                \{\par
+                    \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+                    \{\par
+                        \cf4 var\cf2  isUpdated= db.Materi.Update(O=>\cf4 new\cf2  \{O.KodeMateri,O.Judul \},value, O=>O.Id==value.Id);\par
+                        \cf4 if\cf2  (isUpdated)\par
+                            \cf4 return\cf2  Request.CreateResponse(HttpStatusCode.OK, value);\par
+                        \cf4 else\cf2\par
+                        \{\par
+                            \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Data Tidak Berhasil Diubah"\cf2 );\par
+                        \}\par
+                    \}\par
+                \}\par
+            \}\par
+            \cf4 catch\cf2  (Exception ex)\par
+            \{\par
+                \cf4 return\cf2  Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);\par
+            \}\par
+\par
+        \}\par
+\par
+\par
+\par
+\cf1\f0\fs22 SUB MATERI : \par
+\par
+\cf0 Menampilkan Sub Materi : \par
+\cf1 View : \par
+\cf4\f1\fs19 <\cf6 div\cf2  \cf1 class\cf4 ="col-lg-12"\cf2  \cf1 ng-init\cf4 ="\cf9 Init\cf2 ()\cf4 ">\cf2\par
+    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card">\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-header d-flex align-items-center">\cf2\par
+            \cf4 <\cf6 a\cf2  \cf1 data-target\cf4 ="#addSubMateri"\cf2  \cf1 role\cf4 ="button"\cf2  \cf1 data-toggle\cf4 ="modal"\cf2  \cf1 style\cf4 ="\cf1 color\cf2 :\cf4 green"\cf2  \cf1 class\cf4 ="btn"><\cf6 i\cf2  \cf1 class\cf4 ="fa fa-plus-circle fa-2x"></\cf6 i\cf4 ></\cf6 a\cf4 >\cf2\par
+            \cf4 <\cf6 h2\cf2  \cf1 class\cf4 ="h5 display">\cf2 DAFTAR SUB MATERI\cf4 </\cf6 h2\cf4 >\cf2\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-block">\cf2\par
+            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="row">\cf2\par
+                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-10">\cf2\par
+                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-md-6">\cf2\par
+                        \cf4 <\cf6 label\cf4 >\cf2 Kode : \b\{\{\cf9\b0 Materi.KodeMateri\cf2\b\}\}\b0  \cf4 </\cf6 label\cf4 >\cf2\par
+                    \cf4 </\cf6 div\cf4 >\cf2\par
+                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-md-6">\cf2\par
+                        \cf4 <\cf6 label\cf4 >\cf2 Materi : \b\{\{\cf9\b0 Materi.Judul\cf2\b\}\}\cf4\b0 </\cf6 label\cf4 >\cf2\par
+                    \cf4 </\cf6 div\cf4 >\cf2\par
+                \cf4 </\cf6 div\cf4 >\cf2\par
+            \cf4 </\cf6 div\cf4 >\cf2\par
+            \par
+            \cf4 <\cf6 table\cf2  \cf1 class\cf4 ="table table-striped">\cf2\par
+                \cf4 <\cf6 thead\cf4 >\cf2\par
+                    \cf4 <\cf6 tr\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf4 >\cf2 #\cf4 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf4 >\cf2 Kode Sub Materi\cf4 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf4 >\cf2 Sub Materi\cf4 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf2  \cf1 style\cf4 ="\cf1 width\cf2 :\cf4 10%\cf2 ; \cf1 align-content\cf2 :\cf4 center"\cf2  \cf4 >\cf2 Kelolah SubMateri\cf4 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 th\cf2  \cf1 style\cf4 ="\cf1 width\cf2 :\cf4 10%\cf2 ; \cf1 align-content\cf2 :\cf4 center">\cf2 Kelolah Kuis\cf4 </\cf6 th\cf4 >\cf2\par
+                    \cf4 </\cf6 tr\cf4 >\cf2\par
+                \cf4 </\cf6 thead\cf4 >\cf2\par
+                \cf4 <\cf6 tbody\cf4 >\cf2\par
+                    \cf4 <\cf6 tr\cf2  \cf1 ng-repeat\cf4 ="\cf9 item\cf4  \cf7\b in\cf4\b0  \cf9 Items\cf4 ">\cf2\par
+                        \cf4 <\cf6 th\cf2  \cf1 scope\cf4 ="row">\cf2\b\{\{\cf9\b0 $index+1\cf2\b\}\}\cf4\b0 </\cf6 th\cf4 >\cf2\par
+                        \cf4 <\cf6 td\cf4 >\cf2\b\{\{\cf9\b0 item.KodeSubMateri\cf2\b\}\}\cf4\b0 </\cf6 td\cf4 >\cf2\par
+                        \cf4 <\cf6 td\cf4 >\cf2\b\{\{\cf9\b0 item.JudulSubMateri\cf2\b\}\}\cf4\b0 </\cf6 td\cf4 >\cf2\par
+                        \cf4 <\cf6 td\cf2  \cf1 style\cf4 ="\cf1 align-items\cf2 :\cf4 center"><\cf6 a\cf2   \cf1 href\cf4 ="#!detail/\cf2\b\{\{\cf9\b0 Materi.Id\cf2\b\}\}\cf4\b0 /\cf2\b\{\{\cf9\b0 item.Id\cf2\b\}\}\cf4\b0 "\cf2  \cf4 ><\cf6 i\cf2  \cf1 class\cf4 ="fa fa-2x fa-edit"></\cf6 i\cf4 ></\cf6 a\cf4 ></\cf6 td\cf4 >\cf2\par
+                        \cf4 <\cf6 td\cf4 ><\cf6 a\cf2   \cf1 href\cf4 ="#!soal/\cf2\b\{\{\cf9\b0 item.Id\cf2\b\}\}\cf4\b0 "><\cf6 i\cf2  \cf1 class\cf4 ="fa fa-2x fa-list"></\cf6 i\cf4 ></\cf6 a\cf4 ></\cf6 td\cf4 >\cf2\par
+                    \cf4 </\cf6 tr\cf4 >\cf2\par
+\par
+                \cf4 </\cf6 tbody\cf4 >\cf2\par
+            \cf4 </\cf6 table\cf4 >\cf2\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+    \cf4 </\cf6 div\cf4 >\cf2\par
+\cf4 </\cf6 div\cf4 >\cf2\par
+\cf0\f0\fs22\par
+\cf1\b Action\par
+\cf0\b0\par
+\cf2\f1\fs19   [Route(\cf5 "api/\{materiId\}/submateri"\cf2 )]\par
+        [HttpGet]\par
+        \cf4 public\cf2  IEnumerable<submateri> GetById(\cf4 int\cf2  materiId)\par
+        \{\par
+            \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+            \{\par
+                \cf4 try\cf2\par
+                \{\par
+                    \cf4 var\cf2  result = db.SubMateri.Where(O => O.MateriId == materiId);\par
+                    \cf4 foreach\cf2  (var item \cf4 in\cf2  result)\par
+                    \{\par
+                        item.Topiks = db.Topics.Where(O => O.SubMateriId == item.Id).ToList();\par
+                    \}\par
+                    \cf4 return\cf2  result.ToList();\par
+                \}\par
+                \cf4 catch\cf2  (Exception ex)\par
+                \{\par
+\par
+                    \cf4 throw\cf2 ;\par
+                \}\par
+             \par
+            \}\par
+        \}\par
+\cf1\f2\lang1033\par
+\par
+\par
+Insert SUb  Materi : \par
+View\f1\par
+\cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-md-12">\cf2\par
+    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal fade"\cf2  \cf1 id\cf4 ="addSubMateri"\cf2  \cf1 role\cf4 ="dialog"\cf2  \cf1 aria-labelledby\cf4 ="addMateri"\cf2  \cf1 aria-hidden\cf4 ="true">\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-dialog">\cf2\par
+            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-content">\cf2\par
+                \cf4 <\cf6 form\cf2  \cf1 ng-submit\cf4 ="\cf9 AddSubMateri\cf2 (\cf9 model\cf2 )\cf4 ">\cf2\par
+                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-header">\cf2\par
+\par
+                        \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="button"\cf2  \cf1 class\cf4 ="close"\cf2  \cf1 data-dismiss\cf4 ="modal"\cf2  \cf1 aria-hidden\cf4 ="true">\cf2\par
+                            \f2\'d7\par
+                        \cf4 </\cf6 button\cf4 >\cf2\par
+                        \cf4 <\cf6 h4\cf2  \cf1 class\cf4 ="modal-title"\cf2  \cf1 id\cf4 ="myModalLabel">\cf2\par
+                            Tambah Sub Materi\par
+                        \cf4 </\cf6 h4\cf4 >\cf2\par
+                    \cf4 </\cf6 div\cf4 >\cf2\par
+                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-body">\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card">\cf2\par
+                            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-block">\cf2\par
+\par
+                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                                    \cf4 <\cf6 label\cf4 >\cf2 Kode Materi\cf4 </\cf6 label\cf4 >\cf2\par
+                                    \cf4 <\cf6 input\cf2  \cf1 type\cf4 ="text"\cf2  \cf1 placeholder\cf4 ="Kode Materi"\cf2  \cf1 ng-model\cf4 ="\cf9 model.KodeSubMateri\cf4 "\cf2  \cf1 class\cf4 ="form-control">\cf2\par
+                                \cf4 </\cf6 div\cf4 >\cf2\par
+                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                                    \cf4 <\cf6 label\cf4 >\cf2 Materi\cf4 </\cf6 label\cf4 >\cf2\par
+                                    \cf4 <\cf6 textarea\cf2  \cf1 placeholder\cf4 ="Materi"\cf2  \cf1 ng-model\cf4 ="\cf9 model.JudulSubMateri\cf4 "\cf2  \cf1 class\cf4 ="form-control"></\cf6 textarea\cf4 >\cf2\par
+                                \cf4 </\cf6 div\cf4 >\cf2\par
+                            \cf4 </\cf6 div\cf4 >\cf2\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                    \cf4 </\cf6 div\cf4 >\cf2\par
+                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-footer">\cf2\par
+                        \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="button"\cf2  \cf1 class\cf4 ="btn btn-default"\cf2  \cf1 data-dismiss\cf4 ="modal">\cf2\par
+                            Batal\par
+                        \cf4 </\cf6 button\cf4 >\cf2\par
+                        \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="submit"\cf2  \cf1 class\cf4 ="btn btn-primary">\cf2\par
+                            Simpan\par
+                        \cf4 </\cf6 button\cf4 >\cf2\par
+                    \cf4 </\cf6 div\cf4 >\cf2\par
+                \cf4 </\cf6 form\cf4 >\cf2\par
+            \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+    \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+\cf4 </\cf6 div\cf4 >\cf2\par
+\cf1\b\f0\fs22\lang9 Action\par
+\b0\f2\fs19\lang1033\par
+\cf2\f1    \cf8 // POST: api/Materi\cf2\par
+        \cf4 public\cf2  HttpResponseMessage Post([FromBody]submateri value)\par
+        \{\par
+            \cf4 try\cf2\par
+            \{\par
+                \cf4 if\cf2  (!ModelState.IsValid)\par
+                    \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Lengkapi Data Anda"\cf2 );\par
+                \cf4 else\cf2\par
+                \{\par
+                    \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+                    \{\par
+                        value.Id = db.SubMateri.InsertAndGetLastID(value);\par
+                        \cf4 if\cf2  (value.Id > 0)\par
+                            \cf4 return\cf2  Request.CreateResponse(HttpStatusCode.OK, value);\par
+                        \cf4 else\cf2\par
+                        \{\par
+                            \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Data Tidak Berhasil Ditambahkan"\cf2 );\par
+                        \}\par
+                    \}\par
+                \}\par
+            \}\par
+            \cf4 catch\cf2  (Exception ex)\par
+            \{\par
+                \cf4 return\cf2  Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);\par
+            \}\par
+        \}\cf1\f2\par
+\cf2\f1\lang9\par
+\cf1\f2\lang1033 Edit Judul And Penjelasan SubMateri \par
+\cf10 <link href="../jquery-timepicker-master/jquery.timepicker.css" rel="stylesheet" />\par
+<script src="../jquery-timepicker-master/jquery.timepicker.js"></script>\par
+<section class="forms" ng-init="Init()">\par
+    <div class="container-fluid">\par
+        <header>\par
+            <h1 class="h3 display">Forms</h1>\par
+        </header>\par
+        <div class="row">\par
+            <div class="col-lg-12">\par
+                <div class="card">\par
+                    <div class="card-header d-flex align-items-center">\par
+                        <h2 class="h5 display">Informasi</h2>\par
+                    </div>\par
+\par
+\cf1 //EDIT JUDUL SUBMATERI\par
+\cf10                     <div class="card-block">\par
+                        <form class="form-horizontal" ng-click="UpdateSubMateri(Item)">\par
+                            <div class="form-group row">\par
+                                <label class="col-sm-2 form-control-label">Kode Materi</label>\par
+                                <div class="col-sm-10">\par
+                                    <label class="col-sm-2 form-control-label">\{\{Materi.KodeMateri\}\}</label>\par
+                                </div>\par
+                            </div>\par
+                            <div class="form-group row">\par
+                                <label class="col-sm-2 form-control-label">Materi</label>\par
+                                <div class="col-sm-10">\par
+                                    <label class="col-sm-2 form-control-label">\{\{Materi.Judul\}\}</label>\par
+                                </div>\par
+                            </div>\par
+                            <div class="line"></div>\par
+                           \par
+                            <div class="form-group row">\par
+                                <label class="col-sm-2 form-control-label">Kode Sub Materi</label>\par
+                                <div class="col-sm-10">\par
+                                    <input type="text" ng-model="Item.KodeSubMateri" class="col-sm-4 form-control-label" />\par
+                                </div>\par
+                            </div>\par
+                            <div class="form-group row">\par
+                                <label class="col-sm-2 form-control-label">Judul Sub Materi</label>\par
+                                <div class="col-sm-10">\par
+                                    <input type="text" ng-model="Item.JudulSubMateri" class="col-sm-10 form-control-label" />\par
+                                </div>\par
+                            </div>\par
+                            <div class="form-group">\par
+                                <label class="col-sm-2 form-control-label"></label>\par
+                                <div class="col-sm-10">\par
+                                    <input type="submit" value="Simpan" class="btn btn-primary">\par
+                                </div>\par
+                                \par
+                            </div>\par
+                            \par
+\par
+                        </form>\par
+                    </div>\par
+                </div>\par
+            </div>\par
+\par
+\cf1 PENJELASAN VIEW\cf10\par
+            <div class="col-lg-6">\par
+                <div class="card">\par
+                    <div class="card-header d-flex align-items-center">\par
+                        <h2 class="h5 display">Penjelasan</h2>\par
+                    </div>\par
+                    <div class="card-block">\par
+                        <form class="form-horizontal" ng-submit="SavePenjelasan(Item)">\par
+                            <div class="form-group row">\par
+                                <div class="col-sm-12">\par
+                                    <textarea  id="editor1" ng-model="Item.Penjelasan"></textarea>\par
+                                </div>\par
+                            </div>\par
+\par
+                            <div class="form-group">\par
+                                <input type="submit" value="Simpan" class="btn btn-primary">\par
+                            </div>\par
+                          \par
+                        </form>\par
+                    </div>\par
+                </div>\par
+            </div>\par
+\par
+\par
+\par
+\cf1 Action Update Judul Dan Penjelasan SUb Materi\par
+\cf2\f1  \cf4 public\cf2  HttpResponseMessage Put(\cf4 int\cf2  id, [FromBody]submateri value)\par
+        \{\par
+            \cf4 try\cf2\par
+            \{\par
+                \cf4 if\cf2  (!ModelState.IsValid)\par
+                    \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Lengkapi Data Anda"\cf2 );\par
+                \cf4 else\cf2\par
+                \{\par
+                    \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+                    \{\par
+                        \cf4 var\cf2  isUpdated = db.SubMateri.Update(O => \cf4 new\cf2  \{ O.JudulSubMateri, O.Penjelasan \}, value, O => O.Id == value.Id);\par
+                        \cf4 if\cf2  (isUpdated)\par
+                            \cf4 return\cf2  Request.CreateResponse(HttpStatusCode.OK, value);\par
+                        \cf4 else\cf2\par
+                        \{\par
+                            \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Data Tidak Berhasil Diubah"\cf2 );\par
+                        \}\par
+                    \}\par
+                \}\par
+            \}\par
+            \cf4 catch\cf2  (Exception ex)\par
+            \{\par
+                \cf4 return\cf2  Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);\par
+            \}\par
+\par
+        \}\par
+\cf10\f2\par
+            <div class="col-lg-6">\par
+                <div class="card">\par
+                    <div class="card-header d-flex align-items-center">\par
+                        <h2 class="h5 display display">Gambar</h2>\par
+                    </div>\par
+                    <div class="card-block">\par
+                        <p>Tambha Gambar</p>\par
+                        <form>\par
+                            <div class="col-md-12 well" style="height:250px" file-canvas>\par
+                                <img style="height:150px;width:100%" src="data:image/gif;base64,\{\{Item.DataGambar\}\}" />\par
+                              \par
+                                <input style="visibility:hidden" type="file" file-model="myFile" />\par
+                            </div>\par
+                            <button class="btn btn-primary" ng-click="UploadFoto(myFile)">Upload</button>\par
+                        </form>\par
+                    </div>\par
+                </div>\par
+            </div>\par
+Action Gambar \par
+\cf2\f1\lang9\par
+\cf1\f2\lang1033 Insert And Edit Image :\par
+\cf2\f1  [Route(\cf5 "api/\{Id\}/image"\cf2 )]\par
+        [HttpPost]\par
+        \cf4 public\cf2  \cf4 async\cf2  Task<HttpResponseMessage> Post(\cf4 int\cf2  Id)\par
+        \{\par
+            \cf4 string\cf2  uploadPath = HttpContext.Current.Server.MapPath(\cf5 "~/Uploads"\cf2 );\par
+            \cf4 if\cf2  (!Request.Content.IsMimeMultipartContent())\par
+                \cf4 throw\cf2  \cf4 new\cf2  HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable,\par
+                \cf5 "This request is not properly formatted"\cf2 ));\par
+            \cf4 else\cf2\par
+                \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+                \{\par
+                    \cf4 var\cf2  trans = db.Connection.BeginTransaction();\par
+                    \cf4 try\cf2\par
+                    \{\par
+                        \cf4 var\cf2  provider = \cf4 new\cf2  MultipartFormDataStreamProvider(uploadPath);\par
+                        \cf4 await\cf2  Request.Content.ReadAsMultipartAsync(provider);\par
+                        \cf4 var\cf2  sub = \cf4 new\cf2  Models.submateri();\par
+                        FileInfo fi = \cf4 null\cf2 ;\par
+                        \cf4 foreach\cf2  (var file \cf4 in\cf2  provider.FileData)\par
+                        \{\par
+                            fi = \cf4 new\cf2  FileInfo(file.LocalFileName);\par
+                            sub.Gambar = fi.Name;\par
+                            \cf4 var\cf2  s = fi.OpenRead();\par
+                            \cf4 using\cf2  (MemoryStream ms = \cf4 new\cf2  MemoryStream())\par
+                            \{\par
+                                s.CopyTo(ms);\par
+                                sub.DataGambar = ms.ToArray();\par
+                            \}\par
+                            s.Close();\par
+                        \}\par
+\par
+                        \cf4 var\cf2  isUpdated = db.SubMateri.Update(O => \cf4 new\cf2  \{ O.Gambar \}, sub, O => O.Id == Id);\par
+                        \cf4 if\cf2  (isUpdated)\par
+                        \{\par
+                            trans.Commit();\par
+                            \cf4 return\cf2  Request.CreateResponse(HttpStatusCode.OK, sub);\par
+                        \}\par
+                        \cf4 else\cf2\par
+                            \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Gambar Gagal Disimpan"\cf2 );\par
+\par
+                    \}\par
+                    \cf4 catch\cf2  (Exception ex)\par
+                    \{\par
+                        trans.Rollback();\par
+                        \cf4 return\cf2  Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);\par
+                    \}\par
+                \}\par
+        \}\f2\lang9\par
+\par
+\par
+\par
+\par
+\cf1\lang1033\par
+\cf10\par
+\cf1 //ANIMASI\cf10\par
+            <div class="col-lg-12">\par
+                <div class="card">\par
+                    <div class="card-header d-flex align-items-center">\par
+                        <h2 class="h5 display">Materi Animasi</h2>\par
+                    </div>\par
+                    <div class="row card-block">\par
+                        <div class="col-lg-8">\par
+                            <p>Lorem ipsum dolor sit amet consectetur.</p>\par
+                            <form>\par
+                                <div class="col-md-12 well" style="height:250px" file-canvas>\par
+                                    <video width="320" height="240" controls src="data:video/mp4;base64,\{\{Item.DataAnimasi\}\}"></video>\par
+                                    <input style="visibility:hidden" type="file" file-model="videoFile" accept="*.mp4" />\par
+                                </div>\par
+                                <button class="btn btn-primary" ng-click="UploadVideo(videoFile)">Upload</button>\par
+                            </form>\par
+                        </div>\par
+                        <div class="col-lg-4">\par
+                            <a data-target="#addTopik" ng-click="CreateNewSoal()" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>\par
+\cf1 Action Animasi :\par
+Insert And edit Animation :\par
+\cf2\f1   \cf4 public\cf2  \cf4 async\cf2  Task<HttpResponseMessage> PostAnimation(\cf4 int\cf2  Id)\par
+        \{\par
+            \cf4 string\cf2  uploadPath = HttpContext.Current.Server.MapPath(\cf5 "~/Uploads"\cf2 );\par
+            \cf4 if\cf2  (!Request.Content.IsMimeMultipartContent())\par
+                \cf4 throw\cf2  \cf4 new\cf2  HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable,\par
+                \cf5 "This request is not properly formatted"\cf2 ));\par
+            \cf4 else\cf2\par
+                \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+                \{\par
+                    \cf4 var\cf2  trans = db.Connection.BeginTransaction();\par
+                    \cf4 try\cf2\par
+                    \{\par
+                        \cf4 var\cf2  provider = \cf4 new\cf2  MultipartFormDataStreamProvider(uploadPath);\par
+                        \cf4 await\cf2  Request.Content.ReadAsMultipartAsync(provider);\par
+                        \cf4 var\cf2  sub = \cf4 new\cf2  Models.submateri();\par
+                        FileInfo fi = \cf4 null\cf2 ;\par
+                        \cf4 foreach\cf2  (var file \cf4 in\cf2  provider.FileData)\par
+                        \{\par
+                            fi = \cf4 new\cf2  FileInfo(file.LocalFileName);\par
+                            sub.Animasi = fi.Name;\par
+                            \cf4 var\cf2  s = fi.OpenRead();\par
+                            \cf4 using\cf2  (MemoryStream ms = \cf4 new\cf2  MemoryStream())\par
+                            \{\par
+                                s.CopyTo(ms);\par
+                                sub.DataAnimasi = ms.ToArray();\par
+                            \}\par
+                            s.Close();\par
+                        \}\par
+\par
+                        \cf4 var\cf2  isUpdated = db.SubMateri.Update(O => \cf4 new\cf2  \{ O.Animasi \}, sub, O => O.Id == Id);\par
+                        \cf4 if\cf2  (isUpdated)\par
+                        \{\par
+                            trans.Commit();\par
+                            \cf4 return\cf2  Request.CreateResponse(HttpStatusCode.OK, sub);\par
+                        \}\par
+                        \cf4 else\cf2\par
+                            \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Gambar Gagal Disimpan"\cf2 );\par
+\par
+                    \}\par
+                    \cf4 catch\cf2  (Exception ex)\par
+                    \{\par
+                        trans.Rollback();\par
+                        \cf4 return\cf2  Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);\par
+                    \}\par
+                \}\par
+        \}\f2\lang9\par
+\cf10\lang1033\par
+\cf1                             Topik Dalam Video\par
+\cf10                             <table class="table">\par
+                                <thead>\par
+                                    <tr>\par
+                                        <th>Topik</th>\par
+                                        <th>Mulai</th>\par
+                                        <th>Selesai</th>\par
+                                        <th>Action</th>\par
+                                    </tr>\par
+                                </thead>\par
+                                <tbody>\par
+                                    <tr ng-repeat="item in Item.Topiks">\par
+                                        <td>\{\{item.Judul\}\}</td>\par
+                                        <td style="margin-top:10px">\{\{item.PosisiMulai\}\}</td>\par
+                                        <td style="margin-top:10px">\{\{item.PosisiAkhir\}\}</td>\par
+                                        <td><a data-target="#addTopik" ng-click="EditTopik(item)" role="button" data-toggle="modal" class="btn"><i class="fa fa-pencil"></i></a></td>\par
+                                    </tr>\par
+\par
+                                </tbody>\par
+                            </table>\par
+                        </div>\par
+                         \par
+                        </div>\par
+                </div>\par
+            </div>\par
+\par
+         \par
+\par
+        </div>\par
+\par
+\par
+\cf1\b  TOPIK\b0        INsert update\par
+\cf10         <div class="container-fluid">\par
+            <div class="col-md-12">\par
+                <div class="modal fade" id="addTopik" role="dialog" aria-labelledby="addMateri" aria-hidden="true">\par
+                    <div class="modal-dialog">\par
+                        <div class="modal-content">\par
+                            <form ng-submit="SaveNewTopik(Topik)">\par
+                                <div class="modal-header">\par
+\par
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">\par
+                                        \'d7\par
+                                    </button>\par
+                                    <h4 class="modal-title" id="myModalLabel">\par
+                                        Tambah Topik\par
+                                    </h4>\par
+                                </div>\par
+                                <div class="modal-body">\par
+                                    <table class="table">\par
+                                        <thead>\par
+                                        </thead>\par
+                                        <tbody>\par
+                                            <tr>\par
+                                                <td><input type="text" ng-model="Topik.Judul" class="form-control" required /></td>\par
+                                                <td style="margin-top:10px"><input ng-model="Topik.PosisiMulai" value="00:00:00" id="posisiMulai" type="text" class="form-control" required /></td>\par
+                                                <td style="margin-top:10px"><input ng-model="Topik.PosisiAkhir" value="00:00:00" id="posisiAkhir" type="text" class="form-control" required /></td>\par
+                                            </tr>\par
+\par
+                                        </tbody>\par
+                                    </table>\par
+\par
+                                </div>\par
+                                <div class="modal-footer">\par
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">\par
+                                        Keluar\par
+                                    </button>\par
+                                    <button type="submit" class="btn btn-primary">\par
+                                        Simpan\par
+                                    </button>\par
+                                </div>\par
+                            </form>\par
+                        </div>\par
+\par
+                        <script>\par
+                            $('#posisiAkhir').timepicker(\{ 'timeFormat': 'H:i:s' \});\par
+                            $('#posisiMulai').timepicker(\{ 'timeFormat': 'H:i:s' \});\par
+                        </script>\par
+                    </div>\par
+\par
+                </div>\par
+\par
+            </div>\par
+        </div>\par
+\par
+\par
+    </div>\par
+</section>\par
+\par
+\par
+<script type="text/javascript">\par
+                            CKEDITOR.replace("editor1");\par
+                            CKEDITOR.editorConfig = function (config) \{\par
+                                // Define changes to default configuration here. For example:\par
+                                // config.language = 'fr';\par
+                                // config.uiColor = '#AADC6E';\par
+                            \};\par
+\par
+</script>\par
+\par
+\par
+\cf2\f1\lang9\par
+\cf1\f2\lang1033 KUIS\par
+View Soal\par
+\cf4\f1 <\cf6 section\cf2  \cf1 class\cf4 ="forms"\cf2  \cf1 ng-init\cf4 ="\cf9 Init\cf2 ()\cf4 ">\cf2\par
+    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="container-fluid">\cf2\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-lg-12">\cf2\par
+            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card">\cf2\par
+                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-header d-flex align-items-center">\cf2\par
+                    \cf4 <\cf6 a\cf2  \cf1 data-target\cf4 ="#addMateri"\cf2  \cf1 ng-click\cf4 ="\cf9 CreateNewSoal\cf2 ()\cf4 "\cf2  \cf1 role\cf4 ="button"\cf2  \cf1 data-toggle\cf4 ="modal"\cf2  \cf1 style\cf4 ="\cf1 color\cf2 :\cf4 green"\cf2  \cf1 class\cf4 ="btn"><\cf6 i\cf2  \cf1 class\cf4 ="fa fa-plus-circle fa-2x"></\cf6 i\cf4 ></\cf6 a\cf4 >\cf2\par
+                    \cf4 <\cf6 h2\cf2  \cf1 class\cf4 ="h5 display">\cf2 SOAL\cf4 </\cf6 h2\cf4 >\cf2\par
+                \cf4 </\cf6 div\cf4 >\cf2\par
+                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-block">\cf2\par
+                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="panel-group"\cf2  \cf1 id\cf4 ="panel-753119"\cf2  \cf1 ng-repeat\cf4 ="\cf9 item\cf4  \cf7\b in\cf4\b0  \cf9 Soals\cf4 ">\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 style\cf4 ="\cf1 margin-top\cf2 :\cf4 10px"\cf2  \cf1 class\cf4 ="panel panel-default card">\cf2\par
+                            \cf4 <\cf6 div\cf2   \cf1 class\cf4 ="panel-heading card-header d-flex align-items-center"\cf2  \cf1 style\cf4 ="\cf1 color\cf2 :\cf4 brown\cf2 ;\cf1 max-height\cf2 :\cf4 500px">\cf2\par
+                                \cf4 <\cf6 table\cf2  \cf1 class\cf4 ="table">\cf2\par
+                                    \cf4 <\cf6 tbody\cf4 >\cf2\par
+                                        \cf4 <\cf6 tr\cf4 >\cf2\par
+                                            \cf4 <\cf6 td\cf2  \cf1 width\cf4 ="10px">\cf2\b\{\{\cf9\b0 $index+1\cf2\b\}\}\cf4\b0 </\cf6 td\cf4 >\cf2\par
+                                            \cf4 <\cf6 td\cf4 >\cf2\par
+                                                \cf4 <\cf6 a\cf2  \cf1 class\cf4 ="panel-title"\cf2  \cf1 data-toggle\cf4 ="collapse"\cf2  \cf1 data-parent\cf4 ="#panel-753119"\cf2  \cf1 data-target\cf4 ="#\cf2\b\{\{\cf9\b0 item.Id\cf2\b\}\}\cf4\b0 ">\cf2\b\{\{\cf9\b0 item.Value\cf2\b\}\}\cf4\b0 </\cf6 a\cf4 >\cf2\par
+                                            \cf4 </\cf6 td\cf4 >\cf2\par
+                                           \cf4 <\cf6 td\cf2  \cf1 width\cf4 ="10px">\cf2\par
+                                               \cf4 <\cf6 a\cf2  \cf1 role\cf4 ="button"\cf2  \cf1 data-target\cf4 ="#addMateri"\cf2  \cf1 data-toggle\cf4 ="modal"\cf2  \cf1 ng-click\cf4 ="\cf9 SelectedItem\cf2 (\cf9 item\cf2 )\cf4 ">\cf2 Edit\cf4 </\cf6 a\cf4 >\cf2\par
+                                           \cf4 </\cf6 td\cf4 >\cf2   \par
+                                        \cf4 </\cf6 tr\cf4 >\cf2\par
+                                    \cf4 </\cf6 tbody\cf4 >\cf2\par
+                                \cf4 </\cf6 table\cf4 >\cf2\par
+                            \par
+                            \par
+                            \cf4 </\cf6 div\cf4 >\cf2\par
+                            \cf4 <\cf6 div\cf2  \cf1 id\cf4 ="\cf2\b\{\{\cf9\b0 item.Id\cf2\b\}\}\cf4\b0 "\cf2  \cf1 class\cf4 ="card-block panel-collapse collapse in">\cf2\par
+                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="panel-body">\cf2\par
+                                    \cf4 <\cf6 table\cf2  \cf1 style\cf4 ="\cf1 margin-left\cf2 :\cf4 30px"\cf2  \cf1 class\cf4 ="table">\cf2\par
+                                        \cf4 <\cf6 tbody\cf4 >\cf2\par
+\par
+                                            \cf4 <\cf6 tr\cf2  \cf1 ng-repeat\cf4 ="\cf9 data\cf4  \cf7\b in\cf4\b0  \cf9 item.Choices\cf4 ">\cf2\par
+                                                \cf4 <\cf6 td\cf2  \cf1 style\cf4 ="\cf1 width\cf2 :\cf4 80%">\cf2\b\{\{\cf9\b0 data.Value\cf2\b\}\}\cf4\b0 </\cf6 td\cf4 >\cf2\par
+                                                \cf4 <\cf6 td\cf2  \cf1 style\cf4 ="\cf1 margin-top\cf2 :\cf4 10px\cf2 ;\cf1 width\cf2 :\cf4 20%"><\cf6 input\cf2  \cf1 disabled\cf2  \cf1 ng-model\cf4 ="\cf9 data.IsTrueAnswer\cf4 "\cf2  \cf1 type\cf4 ="checkbox"\cf2  \cf1 class\cf4 ="form-control"\cf2  \cf4 /></\cf6 td\cf4 >\cf2\par
+                                            \cf4 </\cf6 tr\cf4 >\cf2\par
+\par
+                                        \cf4 </\cf6 tbody\cf4 >\cf2\par
+                                    \cf4 </\cf6 table\cf4 >\cf2\par
+                                \cf4 </\cf6 div\cf4 >\cf2\par
+                            \cf4 </\cf6 div\cf4 >\cf2\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+                    \cf4 </\cf6 div\cf4 >\cf2\par
+                \cf4 </\cf6 div\cf4 >\cf2\par
+            \cf4 </\cf6 div\cf4 >\cf2\par
+        \cf4 </\cf6 div\cf4 >\cf2\f2\par
+            \cf4 </\cf6 div\cf4 >\cf2\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+        \cf4 </\cf6 div\cf4 >\cf2\par
+    \cf4 </\cf6 section\cf4 >\par
+\par
+\par
+\cf1 Action Soal \par
+\cf2\f1   \cf4 public\cf2  HttpResponseMessage Post([FromBody]Soal value)\par
+        \{\par
+            \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+            \{\par
+                \cf4 var\cf2  trans = db.Connection.BeginTransaction();\par
+                \cf4 try\cf2\par
+                \{\par
+\f2\tab\cf1\tab\tab //Insert Soal \cf2\f1\par
+                    value.Id = db.Soals.InsertAndGetLastID(value);\par
+                    \cf4 if\cf2 (value.Id>0)\par
+                    \{\par
+\cf1\f2\tab\tab\tab\tab // Insert Semua Pilihan\f1\par
+\cf2                         \cf4 foreach\cf2 (var item \cf4 in\cf2  value.Choices)\par
+                        \{\par
+                            item.SoalId = value.Id;\par
+                            item.Id = db.Options.InsertAndGetLastID(item);\par
+                        \}\par
+                        trans.Commit();\par
+                        \cf4 return\cf2  Request.CreateResponse(HttpStatusCode.OK, value);\par
+                    \}\cf4 else\cf2\par
+                    \{\par
+                        \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Data tidak tersipan !"\cf2 );\par
+                    \}\par
+                \}\par
+                \cf4 catch\cf2  (Exception ex)\par
+                \{\par
+                    trans.Rollback();\par
+                   \cf4 return\cf2  Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);\par
+                \}\par
+            \}\par
+          \par
+        \}\f2\par
+\par
+   \cf1\par
+Insert Soal And Pilihan :\par
+View :\par
+\cf2\f1\par
+        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="container-fluid">\cf2\par
+            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="col-md-12">\cf2\par
+                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal fade"\cf2  \cf1 id\cf4 ="addMateri"\cf2  \cf1 role\cf4 ="dialog"\cf2  \cf1 aria-labelledby\cf4 ="addMateri"\cf2  \cf1 aria-hidden\cf4 ="true">\cf2\par
+                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-dialog">\cf2\par
+                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-content">\cf2\par
+                            \cf4 <\cf6 form\cf2  \cf1 ng-submit\cf4 ="\cf9 SaveNewSoal\cf2 (\cf9 NewSoal\cf2 )\cf4 ">\cf2\par
+                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-header">\cf2\par
+\par
+                                    \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="button"\cf2  \cf1 class\cf4 ="close"\cf2  \cf1 data-dismiss\cf4 ="modal"\cf2  \cf1 aria-hidden\cf4 ="true">\cf2\par
+                                        \f2\'d7\par
+                                    \cf4 </\cf6 button\cf4 >\cf2\par
+                                    \cf4 <\cf6 h4\cf2  \cf1 class\cf4 ="modal-title"\cf2  \cf1 id\cf4 ="myModalLabel">\cf2\par
+                                        Tambah Soal\par
+                                    \cf4 </\cf6 h4\cf4 >\cf2\par
+                                \cf4 </\cf6 div\cf4 >\cf2\par
+                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-body">\cf2\par
+                                    \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card">\cf2\par
+                                        \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-block">\cf2\par
+                                            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="form-group">\cf2\par
+                                                \cf4 <\cf6 label\cf4 >\cf2 Soal\cf4 </\cf6 label\cf4 >\cf2\par
+                                                \cf4 <\cf6 textarea\cf2  \cf1 style\cf4 ="\cf1 height\cf2 :\cf4 100px\cf2 ;\cf1 width\cf2 :\cf4 100%"\cf2  \cf1 type\cf4 ="text"\cf2  \cf1 required\cf2  \cf1 placeholder\cf4 ="Soal"\cf2  \cf1 ng-model\cf4 ="\cf9 NewSoal.Value\cf4 "\cf2  \cf1 class\cf4 ="form-control"></\cf6 textarea\cf4 >\cf2\par
+                                            \cf4 </\cf6 div\cf4 >\cf2\par
+                                            \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card">\cf2\par
+                                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="card-block">\cf2\par
+                                                    \cf4 <\cf6 table\cf2  \cf1 class\cf4 ="table">\cf2\par
+                                                        \cf4 <\cf6 thead\cf4 >\cf2\par
+                                                            \cf4 <\cf6 tr\cf4 >\cf2\par
+                                                                \cf4 <\cf6 th\cf4 >\cf2 Pilihan\cf4 </\cf6 th\cf4 >\cf2\par
+                                                                \cf4 <\cf6 th\cf4 >\cf2 Benar\cf4 </\cf6 th\cf4 >\cf2\par
+                                                            \cf4 </\cf6 tr\cf4 >\cf2\par
+                                                        \cf4 </\cf6 thead\cf4 >\cf2\par
+                                                        \cf4 <\cf6 tbody\cf4 >\cf2\par
+                                                            \cf4 <\cf6 tr\cf2  \cf1 ng-repeat\cf4 ="\cf9 item\cf4  \cf7\b in\cf4\b0  \cf9 NewSoal.Choices\cf4 ">\cf2\par
+                                                                \cf4 <\cf6 td\cf4 ><\cf6 textarea\cf2  \cf1 style\cf4 ="\cf1 height\cf2 :\cf4 50px"\cf2   \cf1 type\cf4 ="text"\cf2  \cf1 ng-model\cf4 ="\cf9 item.Value\cf4 "\cf2  \cf1 class\cf4 ="form-control"\cf2  \cf1 required\cf4 ></\cf6 textarea\cf4 ></\cf6 td\cf4 >\cf2\par
+                                                                \cf4 <\cf6 td\cf2  \cf1 style\cf4 ="\cf1 margin-top\cf2 :\cf4 10px"><\cf6 input\cf2  \cf1 style\cf4 ="\cf1 margin-top\cf2 :\cf4 10px"\cf2  \cf1 ng-click\cf4 ="\cf9 ChangeSelectAnswer\cf2 (\cf9 NewSoal.Choices\cf2 ,\cf9 item\cf2 )\cf4 "\cf2  \cf1 ng-model\cf4 ="\cf9 item.IsTrueAnswer\cf4 "\cf2  \cf1 type\cf4 ="checkbox"\cf2  \cf1 class\cf4 ="form-control"\cf2  \cf4 /></\cf6 td\cf4 >\cf2\par
+                                                            \cf4 </\cf6 tr\cf4 >\cf2\par
+\par
+                                                        \cf4 </\cf6 tbody\cf4 >\cf2\par
+                                                    \cf4 </\cf6 table\cf4 >\cf2\par
+                                                \cf4 </\cf6 div\cf4 >\cf2\par
+                                            \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                                        \cf4 </\cf6 div\cf4 >\cf2\par
+                                    \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                                \cf4 </\cf6 div\cf4 >\cf2\par
+                                \cf4 <\cf6 div\cf2  \cf1 class\cf4 ="modal-footer">\cf2\par
+                                    \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="button"\cf2  \cf1 class\cf4 ="btn btn-default"\cf2  \cf1 data-dismiss\cf4 ="modal">\cf2\par
+                                        Keluar\par
+                                    \cf4 </\cf6 button\cf4 >\cf2\par
+                                    \cf4 <\cf6 button\cf2  \cf1 type\cf4 ="submit"\cf2  \cf1 class\cf4 ="btn btn-primary">\cf2\par
+                                        Simpan\par
+                                    \cf4 </\cf6 button\cf4 >\cf2\par
+                                \cf4 </\cf6 div\cf4 >\cf2\par
+                            \cf4 </\cf6 form\cf4 >\cf2\par
+                        \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                    \cf4 </\cf6 div\cf4 >\cf2\par
+\par
+                \cf4 </\cf6 div\cf4 >\cf2\par
+\f1\lang9\par
+\par
+\cf1\f2\lang1033 UPDATE Soal \par
+\cf8\f1 /   [Route("api/\{soal\}/EditSoal")]\cf2\par
+        [HttpPut]\par
+        \cf4 public\cf2  HttpResponseMessage PutSoal([FromBody]Soal value)\par
+        \{\par
+\par
+            \cf4 using\cf2  (\cf4 var\cf2  db = \cf4 new\cf2  OcphDbContext())\par
+            \{\par
+                \cf4 try\cf2\par
+                \{\par
+                    \cf4 var\cf2  isSaved = db.Soals.Update(O => \cf4 new\cf2  \{ O.Value \}, value, O => O.Id == value.Id);\par
+                    \cf4 if\cf2  (isSaved)\par
+                    \{\par
+                        \cf4 foreach\cf2 (var item \cf4 in\cf2  value.Choices)\par
+                        \{\par
+                          \cf4 if\cf2 (!db.Options.Update(O => \cf4 new\cf2  \{ O.IsTrueAnswer, O.Value \}, item, O => O.Id == item.Id))\par
+                            \{\par
+                                \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Data tidak tersimpan !"\cf2 );\par
+                            \}\par
+\par
+                        \}\par
+                        \cf4 return\cf2  Request.CreateResponse(HttpStatusCode.OK, isSaved);\par
+                    \}\par
+                       \par
+                    \cf4 else\cf2\par
+                    \{\par
+                        \cf4 throw\cf2  \cf4 new\cf2  SystemException(\cf5 "Data tidak tersimpan !"\cf2 );\par
+                    \}\par
+                \}\par
+                \cf4 catch\cf2  (Exception ex)\par
+                \{\par
+                    \cf4 return\cf2  Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);\par
+                \}\par
+            \}\par
+        \}\lang9\par
+\par
+\par
+\par
+\cf3\par
+\cf11\f2\lang1033 ANDROID\par
+Materi \par
+View \par
+\tab\cf4\f1 <?xml version="1.0" encoding="utf-8" ?>\cf2\par
+\cf4 <\cf5 ContentPage\cf1  xmlns\cf4 ="http://xamarin.com/schemas/2014/forms"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 x\cf4 ="http://schemas.microsoft.com/winfx/2009/xaml"\cf2\par
+             \cf1  xmlns\cf4 :\cf1 local\cf4 ="clr-namespace:Mobile"\cf2\par
+            \cf1  BackgroundImage\cf4 ="HumanAnatomy.jpg"\cf2\par
+            \cf1  Title\cf4 ="Materi"\cf2\par
+            \cf1  x\cf4 :\cf1 Class\cf4 ="Mobile.Views.MateriView">\cf2\par
+    \cf4 <\cf5 ContentPage.ToolbarItems\cf4 >\cf2\par
+        \cf4 <\cf5 ToolbarItem\cf1  Name\cf4 ="keluar"\cf1  Activated\cf4 ="keluar_Activated"></\cf5 ToolbarItem\cf4 >\cf2\par
+    \cf4 </\cf5 ContentPage.ToolbarItems\cf4 >\cf2\par
+    \cf4 <\cf5 ContentPage.Content\cf4 >\cf2\par
+        \cf4 <\cf5 StackLayout\cf4 >\cf2\par
+            \cf4 <\cf5 ListView\cf1  x\cf4 :\cf1 Name\cf4 ="ItemsListView"\cf2  \par
+               \cf1  ItemsSource\cf4 ="\{\cf5 Binding\cf1  Materis\cf4\}"\cf2\par
+               \cf1  VerticalOptions\cf4 ="FillAndExpand"\cf2\par
+                \cf1  HasUnevenRows\cf4 ="true"\cf2\par
+                \cf1  RefreshCommand\cf4 ="\{\cf5 Binding\cf1  LoadItemsCommand\cf4\}"\cf2\par
+                \cf1  IsPullToRefreshEnabled\cf4 ="true"\cf2\par
+                \cf1  IsRefreshing\cf4 ="\{\cf5 Binding\cf1  IsBusy\cf4 ,\cf1  Mode\cf4 =OneWay\}"\cf2\par
+                \cf1  CachingStrategy\cf4 ="RecycleElement"\cf1  SelectedItem\cf4 ="\{\cf5 Binding\cf1  SelectedItem\cf4\}"\cf2  \par
+                \cf1  ItemSelected\cf4 ="ItemsListView_ItemSelectedAsync">\cf2\par
+                \cf4 <\cf5 ListView.ItemTemplate\cf4 >\cf2\par
+                    \cf4 <\cf5 DataTemplate\cf4 >\cf2\par
+                        \cf4 <\cf5 ViewCell\cf4 >\cf2\par
+                            \cf4 <\cf5 StackLayout\cf1  Padding\cf4 ="10">\cf2\par
+                                \cf4 <\cf5 Label\cf1  TextColor\cf4 ="White"\cf1  Text\cf4 ="\{\cf5 Binding\cf1  Judul\cf4\}"\cf2  \cf1  LineBreakMode\cf4 ="WordWrap"\cf1  Style\cf4 ="\{\cf5 DynamicResource\cf1  ListItemTextStyle\cf4\}"\cf1  FontSize\cf4 ="16" />\cf2\par
+                            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+                        \cf4 </\cf5 ViewCell\cf4 >\cf2\par
+                    \cf4 </\cf5 DataTemplate\cf4 >\cf2\par
+                \cf4 </\cf5 ListView.ItemTemplate\cf4 >\cf2\par
+            \cf4 </\cf5 ListView\cf4 >\cf2\par
+        \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+    \cf4 </\cf5 ContentPage.Content\cf4 >\cf2\par
+\cf4 </\cf5 ContentPage\cf4 >\cf11\f2\par
+\par
+\par
+backend\par
+\cf4\f1 public\cf2  \cf4 partial\cf2  \cf4 class\cf2  \cf12 MateriView\cf2  : ContentPage\par
+    \{\par
+        \cf4 public\cf2  MateriView()\par
+        \{\par
+            InitializeComponent();\par
+\par
+            BindingContext = \cf4 new\cf2  ViewModels.MateriViewModel(Navigation);\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  ItemsListView_ItemSelectedAsync(\cf4 object\cf2  sender, SelectedItemChangedEventArgs e)\par
+        \{\par
+            \cf4 var\cf2  item = e.SelectedItem \cf4 as\cf2  Models.materi;\par
+            \cf4 if\cf2  (item == \cf4 null\cf2 )\par
+                \cf4 return\cf2 ;\par
+            \cf4 await\cf2  Navigation.PushAsync(\cf4 new\cf2  Views.SubMateriView(item));\par
+\par
+            \cf8 // Manually deselect item\cf2\par
+            ItemsListView.SelectedItem = \cf4 null\cf2 ;\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 void\cf2  keluar_Activated(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+            DependencyService.Get<IAndroidHelper>().Quit();\par
+        \}\par
+    \}\cf11\f2\par
+DataStore: \par
+\cf2\f1  \cf4 internal\cf2  \cf4 class\cf2  \cf12 MateriViewModel\cf2 :BaseViewModel\par
+    \{\par
+        \cf4 private\cf2  INavigation navigation;\par
+        \cf4 private\cf2  materi selectedItem;\par
+\par
+        \cf4 public\cf2  ObservableCollection<materi> Materis \{ \cf4 get\cf2 ; \cf4 set\cf2 ; \}\par
+        \cf4 public\cf2  Command LoadItemsCommand \{ \cf4 get\cf2 ; \cf4 private\cf2  \cf4 set\cf2 ; \}\par
+\par
+        \cf4 public\cf2  Models.materi SelectedItem \{\par
+            \cf4 get\cf2\par
+            \{\par
+                \cf4 return\cf2  selectedItem;\par
+            \}\par
+            \cf4 set\cf2\par
+            \{\par
+                SetProperty(\cf4 ref\cf2  selectedItem, value);\par
+            \}\par
+        \}\par
+        \cf4 public\cf2  MateriViewModel(INavigation navigation)\par
+        \{\par
+            \cf4 this\cf2 .navigation = navigation;\par
+            Materis = \cf4 new\cf2  ObservableCollection<Models.materi>();\par
+            LoadItemsCommand = \cf4 new\cf2  Command((x) => ExecuteLoadItemsCommand(x));\par
+            ExecuteLoadItemsCommand(\cf4 null\cf2 );\par
+            \cf8 /*\par
+            Materis.Add(new materi \{ Id = 1, KodeMateri = "SP", Judul = "Sistem Pencernaan" \});\par
+            Materis.Add(new materi \{ Id = 2, KodeMateri = "SF", Judul = "Sistem Pernafasan" \});\par
+            Materis.Add(new materi \{ Id = 3, KodeMateri = "AD", Judul = "Aliran Darah" \});\par
+            Materis.Add(new materi \{ Id = 4, KodeMateri = "SK", Judul = "Sistem Kepala" \});\par
+            */\cf2\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  ExecuteLoadItemsCommand(\cf4 object\cf2  x)\par
+        \{\par
+            \cf4 if\cf2  (IsBusy)\par
+                \cf4 return\cf2 ;\par
+            \cf4 try\cf2\par
+            \{\par
+                IsBusy = \cf4 true\cf2 ;\par
+                Materis.Clear();\par
+                \cf4 var\cf2  pegawais = \cf4 await\cf2  MateriDataStore.GetItemsAsync(\cf4 true\cf2 );\par
+                \cf4 foreach\cf2  (var item \cf4 in\cf2  pegawais)\par
+                \{\par
+                    Materis.Add(item);\par
+                \}\par
+            \}\par
+            \cf4 catch\cf2  (Exception ex)\par
+            \{\par
+                Debug.WriteLine(ex);\par
+                MessagingCenter.Send(\cf4 new\cf2  MessagingCenterAlert\par
+                \{\par
+                    Title = \cf5 "Error"\cf2 ,\par
+                    Message = \cf5 "Unable to load items."\cf2 ,\par
+                    Cancel = \cf5 "OK"\cf2\par
+                \}, \cf5 "message"\cf2 );\par
+            \}\par
+            \cf4 finally\cf2\par
+            \{\par
+                IsBusy = \cf4 false\cf2 ;\par
+            \}\par
+        \}\par
+    \}\par
+\par
+\cf11\f2 Sub Materi :\cf2\f1\par
+\f2 View\par
+\cf4\f1 <?xml version="1.0" encoding="utf-8" ?>\cf2\par
+\cf4 <\cf5 ContentPage\cf1  xmlns\cf4 ="http://xamarin.com/schemas/2014/forms"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 x\cf4 ="http://schemas.microsoft.com/winfx/2009/xaml"\cf2\par
+              \cf1  BackgroundImage\cf4 ="HumanAnatomy.jpg"\cf1  Title\cf4 ="Kuis"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 ctrls\cf4 ="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"\cf2\par
+            \cf1  x\cf4 :\cf1 Class\cf4 ="Mobile.Views.KuisView">\cf2\par
+    \cf4 <\cf5 ContentPage.Content\cf4 >\cf2\par
+        \cf4 <\cf5 Grid\cf4 >\cf2\par
+            \cf4 <\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="90*"></\cf5 RowDefinition\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="10*"></\cf5 RowDefinition\cf4 >\cf2\par
+            \cf4 </\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+            \cf4 <\cf5 StackLayout\cf1  Margin\cf4 ="5,10">\cf2\par
+                \cf4 <\cf5 Label\cf1  HorizontalOptions\cf4 ="Center"\cf1  TextColor\cf4 ="White"\cf1  FontSize\cf4 ="Medium"\cf1  HorizontalTextAlignment\cf4 ="Center"\cf1  Text\cf4 ="\{\cf5 Binding\cf1  Soal\cf4 .Value\}"></\cf5 Label\cf4 >\cf2\par
+                \cf4 <\cf5 ctrls\cf4 :\cf5 RadioGroup\cf2  \cf1  Margin\cf4 ="10"\cf2  \cf1  Orientation\cf4 ="Vertical"\cf2  \par
+                 \cf1  ItemsSource\cf4 ="\{\cf5 Binding\cf1  Soal\cf4 .Choices\}"\cf2\par
+                             \cf1  SelectedItem\cf4 ="\{\cf5 Binding\cf1  Soal\cf4 .OptionSelected\}"\cf2\par
+                 \cf1  DisplayPath\cf4 ="Value"\cf2\par
+                 \cf4  />\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+            \cf4 <\cf5 StackLayout\cf1  Grid.Row\cf4 ="1"\cf1  Orientation\cf4 ="Horizontal"\cf1  HorizontalOptions\cf4 ="Center"\cf1  VerticalOptions\cf4 ="End">\cf2\par
+                \cf4 <\cf5 Button\cf1  Text\cf4 ="Back"\cf2  \cf1  Command\cf4 ="\{\cf5 Binding\cf1  BackCommand\cf4\}"></\cf5 Button\cf4 >\cf2\par
+                \cf4 <\cf5 Button\cf1  Text\cf4 ="Next"\cf1  Command\cf4 ="\{\cf5 Binding\cf1  NextCommand\cf4\}"></\cf5 Button\cf4 >\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+        \cf4 </\cf5 Grid\cf4 >\cf2\par
+    \cf4 </\cf5 ContentPage.Content\cf4 >\cf2\par
+\cf4 </\cf5 ContentPage\cf4 >\cf2\f2\par
+\cf11\b\par
+\par
+BackEnd :\par
+\cf4\b0\f1 namespace\cf2  Mobile.Views\par
+\{\par
+\tab [XamlCompilation(XamlCompilationOptions.Compile)]\par
+\tab\cf4 public\cf2  \cf4 partial\cf2  \cf4 class\cf2  \cf12 SubMateriView\cf2  : ContentPage\par
+\tab\{\par
+        \cf4 private\cf2  materi item;\par
+\par
+        \cf4 public\cf2  SubMateriView()\par
+        \{\par
+            InitializeComponent();\par
+        \}\par
+\par
+        \cf4 public\cf2  SubMateriView(materi item)\par
+        \{\par
+            InitializeComponent();\par
+            \cf4 this\cf2 .item = item;\par
+            \cf4 this\cf2 .BindingContext = \cf4 new\cf2  ViewModels.SubMateriViewModel(Navigation,item);\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  ItemsListView_ItemSelected(\cf4 object\cf2  sender, SelectedItemChangedEventArgs e)\par
+        \{\par
+            \cf4 var\cf2  subitem = e.SelectedItem \cf4 as\cf2  Models.submateri;\par
+            \cf4 if\cf2  (subitem == \cf4 null\cf2 )\par
+                \cf4 return\cf2 ;\par
+            \cf4 await\cf2  Navigation.PushAsync(\cf4 new\cf2  Views.DetailView(item,subitem));\par
+\par
+            \cf8 // Manually deselect item\cf2\par
+            ItemsListView.SelectedItem = \cf4 null\cf2 ;\par
+        \}\par
+    \}\par
+\}\par
+\f2\par
+\cf11 DataStore :\par
+\cf2\f1 items = \cf4 new\cf2  List<submateri>();\par
+            \cf4 using\cf2  (\cf4 var\cf2  service = \cf4 new\cf2  RestClient())\par
+            \{\par
+                \cf4 try\cf2\par
+                \{\par
+                    \cf4 var\cf2  url = \cf4 string\cf2 .Format(\cf5 "api/\{0\}/submateri"\cf2 , Id);\par
+                    \cf4 var\cf2  response = \cf4 await\cf2  service.GetAsync(url);\par
+                    \cf4 if\cf2  (response.IsSuccessStatusCode)\par
+                    \{\par
+                        \cf4 var\cf2  content = \cf4 await\cf2  response.Content.ReadAsStringAsync();\par
+                        \cf4 var\cf2  Items = JsonConvert.DeserializeObject<List<submateri>>(content);\par
+                        \cf4 foreach\cf2  (var item \cf4 in\cf2  Items)\par
+                        \{\par
+                            items.Add(item);\par
+                        \}\par
+                    \}\par
+                    \cf4 else\cf2\par
+                    \{\par
+                        \cf4 throw\cf2  \cf4 new\cf2  System.Exception(response.StatusCode.ToString());\par
+                    \}\par
+                \}\par
+                \cf4 catch\cf2  (Exception ex)\par
+                \{\par
+                   MessagingCenter.Send(\cf4 new\cf2  MessagingCenterAlert\par
+                    \{\par
+                        Title = \cf5 "Error"\cf2 ,\par
+                        Message = ex.Message,\par
+                        Cancel = \cf5 "OK"\cf2\par
+                    \}, \cf5 "message"\cf2 );\par
+                \}\par
+                \cf4 finally\cf2\par
+                \{\par
+                    isInitialized = \cf4 true\cf2 ;\par
+                \}\par
+            \}\par
+\par
+\par
+\f2 Pembelajaran :\par
+\b Penjelasan\b0\par
+\cf11 View \par
+\cf4\f1 <?xml version="1.0" encoding="utf-8" ?>\cf2\par
+\cf4 <\cf5 ContentPage\cf1  xmlns\cf4 ="http://xamarin.com/schemas/2014/forms"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 x\cf4 ="http://schemas.microsoft.com/winfx/2009/xaml"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 forms\cf4 ="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"\cf2\par
+              \cf1  xmlns\cf4 :\cf1 dltag\cf4 ="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.TagEntryView"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 local\cf4 ="clr-namespace:Mobile;assembly=Mobile"\cf2\par
+             \cf1  BackgroundImage\cf4 ="HumanAnatomy.jpg"\cf1  Title\cf4 ="Detail"\cf2\par
+            \cf1  x\cf4 :\cf1 Class\cf4 ="Mobile.Views.DetailView">\cf2\par
+    \cf4 <\cf5 ContentPage.Content\cf4 >\cf2\par
+        \cf4 <\cf5 Grid\cf4 >\cf2\par
+            \cf4 <\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="70*"></\cf5 RowDefinition\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf2  \cf1  Height\cf4 ="20*"></\cf5 RowDefinition\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="10*"></\cf5 RowDefinition\cf4 >\cf2\par
+            \cf4 </\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+            \cf4 <\cf5 ScrollView\cf1  Grid.Row\cf4 ="0"\cf1  Margin\cf4 ="10">\cf2\par
+                \cf4 <\cf5 Grid\cf4 >\cf2\par
+                    \cf4 <\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+                        \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="100"></\cf5 RowDefinition\cf4 >\cf2\par
+                        \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="*"></\cf5 RowDefinition\cf4 >\cf2\par
+                    \cf4 </\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+                    \cf4 <\cf5 StackLayout\cf1  Grid.Row\cf4 ="0">\cf2\par
+                        \cf4 <\cf5 Image\cf1  x\cf4 :\cf1 Name\cf4 ="gambar"\cf1  Aspect\cf4 ="AspectFit"\cf2  \cf1  HorizontalOptions\cf4 ="FillAndExpand"\cf1  VerticalOptions\cf4 ="FillAndExpand"/>\cf2\par
+                    \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+                    \cf4 <\cf5 StackLayout\cf1  Grid.Row\cf4 ="1">\cf2\par
+                        \cf4 <\cf5 local\cf4 :\cf5 TransparentWebView\cf1  x\cf4 :\cf1 Name\cf4 ="browser"\cf1  BackgroundColor\cf4 ="Transparent"\cf1  WidthRequest\cf4 ="1000"\cf1  HeightRequest\cf4 ="100000" />\cf2\par
+                    \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+                    \par
+                \cf4 </\cf5 Grid\cf4 >\cf2\par
+            \cf4 </\cf5 ScrollView\cf4 >\cf2\par
+            \cf4 <\cf5 ScrollView\cf1  Grid.Row\cf4 ="1">\cf2\par
+                \cf4 <\cf5 StackLayout\cf1  Margin\cf4 ="10,0"\cf1  VerticalOptions\cf4 ="End">\cf2\par
+                    \cf4 <\cf5 dltag\cf4 :\cf5 TagEntryView\cf2  \cf1  TagItems\cf4 ="\{\cf5 Binding\cf1  Items\cf4\}"\cf1  x\cf4 :\cf1 Name\cf4 ="tag"\cf1  TagTapped\cf4 ="tag_TagTapped"\cf1  VerticalOptions\cf4 ="End">\cf2\par
+                        \cf4 <\cf5 dltag\cf4 :\cf5 TagEntryView.TagItemTemplate\cf4 >\cf2\par
+                            \cf4 <\cf5 DataTemplate\cf4 >\cf2\par
+                                \cf4 <\cf5 Frame\cf1  BackgroundColor\cf4 ="#2196F3"\cf1  OutlineColor\cf4 ="Transparent"\cf1  Padding\cf4 ="10"\cf1  HasShadow\cf4 ="false">\cf2\par
+                                    \cf4 <\cf5 Label\cf1  TextColor\cf4 ="White"\cf1  Text\cf4 ="\{\cf5 Binding\cf1  Name\cf4\}"/>\cf2\par
+                                \cf4 </\cf5 Frame\cf4 >\cf2\par
+                            \cf4 </\cf5 DataTemplate\cf4 >\cf2\par
+                        \cf4 </\cf5 dltag\cf4 :\cf5 TagEntryView.TagItemTemplate\cf4 >\cf2\par
+                    \cf4 </\cf5 dltag\cf4 :\cf5 TagEntryView\cf4 >\cf2\par
+                \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+            \cf4 </\cf5 ScrollView\cf4 >\cf2\par
+            \cf4 <\cf5 StackLayout\cf1  Grid.Row\cf4 ="2"\cf1  x\cf4 :\cf1 Name\cf4 ="menuPanel"\cf1  Orientation\cf4 ="Horizontal"\cf1  HorizontalOptions\cf4 ="Center">\cf2\par
+                \cf4 <\cf5 Button\cf1  TextColor\cf4 ="White"\cf1  BackgroundColor\cf4 ="Transparent"\cf2  \cf1  Text\cf4 ="Video"\cf1  x\cf4 :\cf1 Name\cf4 ="video"\cf1  Clicked\cf4 ="video_Clicked"></\cf5 Button\cf4 >\cf2\par
+                \cf4 <\cf5 Button\cf1  TextColor\cf4 ="White"\cf1  BackgroundColor\cf4 ="Transparent"\cf2  \cf1  Text\cf4 ="Kuis"\cf1  x\cf4 :\cf1 Name\cf4 ="kuis"\cf1  Clicked\cf4 ="kuis_Clicked"></\cf5 Button\cf4 >\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+        \cf4 </\cf5 Grid\cf4 >\cf2\par
+    \cf4 </\cf5 ContentPage.Content\cf4 >\cf2\par
+\cf4 </\cf5 ContentPage\cf4 >\cf2\par
+\cf11\par
+\cf2\par
+\cf11\f2 BackEnd:\par
+\cf2\f1\par
+\cf4 namespace\cf2  Mobile.Views\par
+\{\par
+    [XamlCompilation(XamlCompilationOptions.Compile)]\par
+\tab\cf4 public\cf2  \cf4 partial\cf2  \cf4 class\cf2  \cf12 DetailView\cf2  : ContentPage\par
+\tab\{\par
+        \cf4 private\cf2  materi item;\par
+        \cf4 private\cf2  submateri subitem;\par
+        \cf4 private\cf2  Downloader foo;\par
+\par
+\par
+        \cf4 public\cf2  DetailView(materi item, submateri subitem)\par
+        \{\par
+            InitializeComponent();\par
+            tag.TagEntry.IsVisible = \cf4 false\cf2 ;\par
+            \cf4 this\cf2 .item = item;\par
+            \cf4 this\cf2 .subitem = subitem;\par
+            BindingContext = \cf4 new\cf2  ViewModels.DetailViewModel(Navigation,item, subitem);\par
+            \cf4 var\cf2  htmlSource = \cf4 new\cf2  HtmlWebViewSource();\par
+            htmlSource.Html = subitem.Penjelasan;\par
+            browser.Source = htmlSource;\par
+\par
+            \cf4 if\cf2  (!\cf4 string\cf2 .IsNullOrEmpty(subitem.Gambar))\par
+            \{\par
+                \cf4 if\cf2  (DependencyService.Get<IFileService>().FileExists(subitem.Gambar))\par
+                \{\par
+                    gambar.Source = DependencyService.Get<IFileService>().GetFile(subitem.Gambar);\par
+                \}\par
+                \cf4 else\cf2\par
+                \{\par
+                    Download(subitem.Gambar);\par
+                \}\par
+            \}\par
+            \cf4 else\cf2\par
+            \{\par
+                \cf8 //add default image\cf2\par
+            \}\par
+        \}\par
+              \par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  video_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+           \cf4 await\cf2  Navigation.PushModalAsync(\cf4 new\cf2  Views.VideoView(subitem));\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  kuis_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+            \cf4 await\cf2  Navigation.PushAsync(\cf4 new\cf2  Views.LoginView(subitem));\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  tag_TagTapped(\cf4 object\cf2  sender, ItemTappedEventArgs e)\par
+        \{\par
+            \cf4 var\cf2  tagItem = (TagItem)e.Item;\par
+            \cf4 if\cf2  (tagItem == \cf4 null\cf2 )\par
+                \cf4 return\cf2 ;\par
+            \cf4 await\cf2  Navigation.PushModalAsync(\cf4 new\cf2  Views.VideoView(subitem, tagItem));\par
+        \}\par
+    \}\par
+\}\par
+\par
+\par
+\cf11\b\f2 Video:\par
+\cf4\b0\f1 <?xml version="1.0" encoding="utf-8" ?>\cf2\par
+\cf4 <\cf5 ContentPage\cf1  xmlns\cf4 ="http://xamarin.com/schemas/2014/forms"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 x\cf4 ="http://schemas.microsoft.com/winfx/2009/xaml"\cf2\par
+         \cf1  xmlns\cf4 :\cf1 forms\cf4 ="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"\cf2\par
+              \cf1  xmlns\cf4 :\cf1 xamarians\cf4 ="clr-namespace:Xamarians.MediaPlayer;assembly=Xamarians.MediaPlayer"\cf2\par
+   \cf1  x\cf4 :\cf1 Class\cf4 ="Mobile.Views.VideoView">\cf2\par
+    \cf4 <\cf5 ContentPage.Content\cf4 >\cf2\par
+        \cf4 <\cf5 Grid\cf4 >\cf2\par
+            \cf4 <\cf5 forms\cf4 :\cf5 VideoView\cf1  HorizontalOptions\cf4 ="FillAndExpand"\cf1  VerticalOptions\cf4 ="FillAndExpand"\cf2\par
+                    \cf1  AspectMode\cf4 ="AspectFill"\cf2  \cf4  />\cf2\par
+\par
+            \cf4 <\cf5 StackLayout\cf1  VerticalOptions\cf4 ="End"\cf1  HorizontalOptions\cf4 ="FillAndExpand">\cf2\par
+                \cf4 <\cf5 StackLayout\cf1  Orientation\cf4 ="Horizontal">\cf2\par
+                    \cf4 <\cf5 Label\cf1  Text\cf4 ="\{\cf5 Binding\cf1  Position\cf4 ,\cf1  StringFormat\cf4 ='\{\}\{0:hh\\\\:mm\\\\:ss\}/'\}"/>\cf2\par
+                    \cf4 <\cf5 Label\cf1  Text\cf4 ="\{\cf5 Binding\cf1  Duration\cf4 ,\cf1  StringFormat\cf4 ='\{\}\{0:hh\\\\:mm\\\\:ss\}'\}"/>\cf2\par
+                \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+                \cf4 <\cf5 ProgressBar\cf2  \cf1  x\cf4 :\cf1 Name\cf4 ="progress"\cf2   \cf1  HeightRequest\cf4 ="10"></\cf5 ProgressBar\cf4 >\cf2\par
+                \cf4 <\cf5 StackLayout\cf1  HeightRequest\cf4 ="50"\cf1  Orientation\cf4 ="Horizontal"\cf1  HorizontalOptions\cf4 ="Center"\cf1  Spacing\cf4 ="10"\cf1  VerticalOptions\cf4 ="End">\cf2\par
+                    \cf4 <\cf5 Image\cf2  \cf1  x\cf4 :\cf1 Name\cf4 ="sound"\cf1  Source\cf4 ="soundOn.png"/>\cf2\par
+                    \cf4 <\cf5 Image\cf2  \cf1  x\cf4 :\cf1 Name\cf4 ="play"\cf1  Source\cf4 ="play.png"/>\cf2\par
+                    \cf4 <\cf5 Image\cf2  \cf1  x\cf4 :\cf1 Name\cf4 ="pause"\cf1  Source\cf4 ="pause.png"/>\cf2\par
+                    \cf4 <\cf5 Image\cf2  \cf1  x\cf4 :\cf1 Name\cf4 ="stop"\cf1  Source\cf4 ="stop.png"/>\cf2\par
+                \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+        \cf4 </\cf5 Grid\cf4 >\cf2\par
+       \par
+    \cf4 </\cf5 ContentPage.Content\cf4 >\cf2\par
+\cf4 </\cf5 ContentPage\cf4 >\cf11\f2\par
+\par
+BackEnd\par
+\cf2\f1\par
+\cf4 namespace\cf2  Mobile.Views\par
+\{\par
+    [XamlCompilation(XamlCompilationOptions.Compile)]\par
+    \cf4 public\cf2  \cf4 partial\cf2  \cf4 class\cf2  \cf12 VideoView\cf2  : ContentPage\par
+    \{\par
+        \cf4 private\cf2  submateri subitem;\par
+        \cf4 private\cf2  MediaPlayerViewModel vm;\par
+        \cf4 private\cf2  Downloader foo;\par
+        \cf4 private\cf2  TagItem tagItem;\par
+\par
+        \cf4 public\cf2  VideoView(submateri subitem)\par
+        \{\par
+            InitializeComponent();\par
+            \cf4 this\cf2 .Load(subitem);\par
+        \}\par
+\par
+        \cf4 public\cf2  VideoView(submateri subitem, TagItem tagItem)\par
+        \{\par
+            InitializeComponent();\par
+            \cf4 this\cf2 .subitem = subitem;\par
+            \cf4 this\cf2 .tagItem = tagItem;\par
+          \par
+            \cf4 this\cf2 .Load(subitem);\par
+            \cf8 //Task.Factory.StartNew(()=> PlaySeek(tagItem));\cf2\par
+            \par
+\par
+        \}\par
+\par
+        \cf4 protected\cf2  \cf4 async\cf2  \cf4 override\cf2  \cf4 void\cf2  OnAppearing()\par
+        \{\par
+            \cf4 base\cf2 .OnAppearing();\par
+            \cf4 if\cf2  (vm.MediaPlayer.Status == MediaPlayerStatus.Playing)\par
+                \cf4 await\cf2  vm.MediaPlayer.Stop();\par
+            DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);\par
+\par
+            \cf4 if\cf2 (tagItem!=\cf4 null\cf2 )\par
+                \cf4 await\cf2  vm.MediaPlayer.Seek(tagItem.PositionStart);\par
+        \}\par
+\par
+        \cf4 protected\cf2  \cf4 override\cf2  \cf4 void\cf2  OnDisappearing()\par
+        \{\par
+            \cf4 if\cf2  (vm.MediaPlayer.Status == MediaPlayerStatus.Playing)\par
+                vm.MediaPlayer.Stop();\par
+            \cf4 base\cf2 .OnDisappearing();\par
+        \}\par
+\par
+      \par
+\par
+        \cf4 private\cf2  \cf4 void\cf2  Load(submateri subitem)\par
+        \{\par
+           \par
+            \cf4 var\cf2  playTap = \cf4 new\cf2  TapGestureRecognizer();\par
+            playTap.Tapped += PlayTap_Tapped;\par
+            play.GestureRecognizers.Add(playTap);\par
+\par
+            \cf4 var\cf2  pauseTap = \cf4 new\cf2  TapGestureRecognizer();\par
+            pauseTap.Tapped += pause_Clicked;\par
+            pause.GestureRecognizers.Add(pauseTap);\par
+\par
+            \cf4 var\cf2  stopTap = \cf4 new\cf2  TapGestureRecognizer();\par
+            stopTap.Tapped += stop_Clicked;\par
+            stop.GestureRecognizers.Add(stopTap);\par
+\par
+            \cf4 var\cf2  soundTap = \cf4 new\cf2  TapGestureRecognizer();\par
+            soundTap.Tapped += sound_Clicked;\par
+            sound.GestureRecognizers.Add(soundTap);\par
+\par
+            \cf4 this\cf2 .subitem = subitem;\par
+            \cf4 this\cf2 .vm = \cf4 new\cf2  ViewModels.MediaPlayerViewModel(subitem);\par
+            BindingContext = vm;\par
+            vm.MediaPlayer.VolumeManager.VolumeChanged += VolumeManager_VolumeChanged;\par
+\par
+            vm.MediaPlayer.PlayingChanged += MediaPlayer_PlayingChanged;\par
+           \par
+            \cf4 var\cf2  muted = DependencyService.Get<IVolumeManager>().Mute;\par
+            \cf4 if\cf2  (muted)\par
+            \{\par
+                sound.Source = \cf5 "soundoff"\cf2 ;\par
+            \}\par
+            \cf4 else\cf2\par
+            \{\par
+                sound.Source = \cf5 "soundOn"\cf2 ;\par
+            \}\par
+\par
+            \cf4 if\cf2  (DependencyService.Get<IFileService>().FileExists(subitem.Animasi))\par
+            \{\par
+              \cf8 //  DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);\cf2\par
+\par
+            \}\par
+            \cf4 else\cf2\par
+            \{\par
+                Download(subitem);\par
+            \}\par
+        \}\par
+\par
+      \par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  PlayTap_Tapped(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+            \cf4 var\cf2  a = vm.PlaybackController;\par
+            \cf4 if\cf2  (tagItem != \cf4 null\cf2 )\par
+            \{\par
+                \cf4 await\cf2  a.SeekTo(tagItem.PositionStart.TotalSeconds);\par
+            \}\par
+\par
+           \cf4 else\cf2\par
+                \cf4 await\cf2  vm.MediaPlayer.Play();\par
+\par
+        \}\par
+\par
+        \par
+        \cf4 private\cf2  \cf4 void\cf2  Download(submateri subitem)\par
+        \{\par
+           \par
+            foo = \cf4 new\cf2  Downloader();\par
+            foo.InitializeDownload(subitem.Animasi);\par
+\par
+            foo.File.PropertyChanged += (sender, e) =>\par
+            \{\par
+                System.Diagnostics.Debug.WriteLine(\cf5 "[Property changed] "\cf2  + e.PropertyName + \cf5 " -> "\cf2  + sender.GetType().GetProperty(e.PropertyName).GetValue(sender, \cf4 null\cf2 ).ToString());\par
+\par
+                \cf8 // Update UI text-fields\cf2\par
+                \cf4 var\cf2  downloadFile = ((IDownloadFile)sender);\par
+                \cf4 switch\cf2  (e.PropertyName)\par
+                \{\par
+                    \cf4 case\cf2  nameof(IDownloadFile.Status):\par
+                        \cf4 break\cf2 ;\par
+                    \cf4 case\cf2  nameof(IDownloadFile.StatusDetails):\par
+                        \cf4 break\cf2 ;\par
+                    \cf4 case\cf2  nameof(IDownloadFile.TotalBytesExpected):\par
+                        \cf4 break\cf2 ;\par
+                    \cf4 case\cf2  nameof(IDownloadFile.TotalBytesWritten):\par
+                        \cf4 break\cf2 ;\par
+                \}\par
+\par
+                \cf8 // Update UI if download-status changed.\cf2\par
+                \cf4 if\cf2  (e.PropertyName == \cf5 "Status"\cf2 )\par
+                \{\par
+                    \cf4 switch\cf2  (((IDownloadFile)sender).Status)\par
+                    \{\par
+                        \cf4 case\cf2  DownloadFileStatus.COMPLETED:\par
+                            DependencyService.Get<IFileService>().PlayMedia(subitem.Animasi);\par
+                            \cf4 break\cf2 ;\par
+                        \cf4 case\cf2  DownloadFileStatus.FAILED:\par
+                        \cf4 case\cf2  DownloadFileStatus.CANCELED:\par
+\par
+                            \cf8 // Get the path this file was saved to. When you didn't set a custom path, this will be some temporary directory.\cf2\par
+                            \cf8 // var nativeDownloadManager = (Plugin.DownloadManager)ApplicationContext.GetSystemService(DownloadService);\cf2\par
+                            \cf8 // System.Diagnostics.Debug.WriteLine(nativeDownloadManager.GetUriForDownloadedFile(((DownloadFileImplementation)sender).Id));\cf2\par
+\par
+                            \cf4 break\cf2 ;\par
+                    \}\par
+                \}\par
+\par
+                \cf8 // Update UI while donwloading.\cf2\par
+                \cf4 if\cf2  (e.PropertyName == \cf5 "TotalBytesWritten"\cf2  || e.PropertyName == \cf5 "TotalBytesExpected"\cf2 )\par
+                \{\par
+                    \cf4 var\cf2  bytesExpected = ((IDownloadFile)sender).TotalBytesExpected;\par
+                    \cf4 var\cf2  bytesWritten = ((IDownloadFile)sender).TotalBytesWritten;\par
+\par
+                    \cf4 if\cf2  (bytesExpected > 0)\par
+                    \{\par
+                        \cf4 var\cf2  percentage = Math.Round(bytesWritten / bytesExpected * 100);\par
+                        progress.Progress = percentage;\par
+                    \}\par
+                \}\par
+            \};\par
+\par
+            foo.StartDownloading(\cf4 true\cf2 );\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 void\cf2  MediaPlayer_PlayingChanged(\cf4 object\cf2  sender, PlayingChangedEventArgs e)\par
+        \{\par
+            Device.BeginInvokeOnMainThread(() =>\par
+            \{\par
+                progress.Progress = e.Progress;\par
+                \cf4 if\cf2 (tagItem!=\cf4 null\cf2  && vm.Position >= tagItem.PositionStop)\par
+                \{\par
+                    Task.Factory.StartNew(() => Stoped());\par
+                \}\par
+            \});\par
+\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  Stoped()\par
+        \{\par
+            \cf4 var\cf2  a = vm.PlaybackController;\par
+             \cf4 await\cf2  a.Stop();\par
+            \cf4 await\cf2  Navigation.PopModalAsync();\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  play_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+         \par
+            \cf4 await\cf2  vm.MediaPlayer.Play();\par
+          \par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  pause_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+            \cf4 var\cf2  a = vm.PlaybackController;\par
+            \cf4 await\cf2  a.PlayPause();\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  stop_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+\par
+            \cf4 var\cf2  a = vm.PlaybackController;\par
+            \cf4 await\cf2  a.Stop();\par
+\par
+\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 void\cf2  sound_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+\par
+            \cf4 var\cf2  muted = DependencyService.Get<IVolumeManager>().Mute;\par
+            \cf4 if\cf2  (muted)\par
+            \{\par
+                DependencyService.Get<IVolumeManager>().Mute = \cf4 false\cf2 ;\par
+                sound.Source = \cf5 "soundOn"\cf2 ;\par
+            \}\par
+            \cf4 else\cf2\par
+            \{\par
+                DependencyService.Get<IVolumeManager>().Mute = \cf4 true\cf2 ;\par
+                sound.Source = \cf5 "soundoff"\cf2 ;\par
+            \}\par
+              \par
+        \}\par
+    \}\par
+\}\cf11\f2\par
+\par
+KUIS\par
+View Login :\par
+\cf4\f1 <?xml version="1.0" encoding="utf-8" ?>\cf2\par
+\cf4 <\cf5 ContentPage\cf1  xmlns\cf4 ="http://xamarin.com/schemas/2014/forms"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 x\cf4 ="http://schemas.microsoft.com/winfx/2009/xaml"\cf2\par
+              \cf1  BackgroundImage\cf4 ="HumanAnatomy.jpg"\cf1  Title\cf4 ="Kuis"\cf2\par
+            \cf1  x\cf4 :\cf1 Class\cf4 ="Mobile.Views.LoginView">\cf2\par
+    \cf4 <\cf5 ContentPage.Content\cf4 >\cf2\par
+        \cf4 <\cf5 Grid\cf4 >\cf2\par
+            \cf4 <\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="*"/>\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="50"/>\cf2\par
+            \cf4 </\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+            \cf4 <\cf5 StackLayout\cf1  Grid.Row\cf4 ="0"\cf2  \par
+               \cf1  VerticalOptions\cf4 ="CenterAndExpand"\cf2  \par
+               \cf1  HorizontalOptions\cf4 ="CenterAndExpand" >\cf2\par
+                \cf4 <\cf5 Label\cf1  Text\cf4 ="Masukkan Nama Anda"/>\cf2\par
+                \cf4 <\cf5 Entry\cf1  x\cf4 :\cf1 Name\cf4 ="Nama"\cf1  TextColor\cf4 ="White" />\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+            \cf4 <\cf5 StackLayout\cf1  Orientation\cf4 ="Horizontal"\cf1  HorizontalOptions\cf4 ="End"\cf1  Grid.Row\cf4 ="1">\cf2\par
+                \cf4 <\cf5 Button\cf1  BackgroundColor\cf4 ="Transparent"\cf1  TextColor\cf4 ="White"\cf1  Text\cf4 ="Batal"\cf1  x\cf4 :\cf1 Name\cf4 ="cancelButton"\cf1  Clicked\cf4 ="cancelButton_Clicked"/>\cf2\par
+                \cf4 <\cf5 Button\cf1  BackgroundColor\cf4 ="Transparent"\cf1  TextColor\cf4 ="White"\cf1  Text\cf4 ="Lanjut"\cf1  x\cf4 :\cf1 Name\cf4 ="okButton"\cf1  Clicked\cf4 ="okButton_Clicked"/>\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+        \cf4 </\cf5 Grid\cf4 >\cf2\par
+    \cf4 </\cf5 ContentPage.Content\cf4 >\cf2\par
+\cf4 </\cf5 ContentPage\cf4 >\par
+\f2\par
+\cf11\par
+\par
+BackEndLogin \f1\par
+\cf4 namespace\cf2  Mobile.Views\par
+\{\par
+\tab [XamlCompilation(XamlCompilationOptions.Compile)]\par
+\tab\cf4 public\cf2  \cf4 partial\cf2  \cf4 class\cf2  \cf12 LoginView\cf2  : ContentPage\par
+\tab\{\par
+        \cf4 private\cf2  submateri subitem;\par
+\par
+        \cf4 public\cf2  LoginView(submateri subitem)\par
+        \{\par
+            InitializeComponent();\par
+            \cf4 this\cf2 .subitem = subitem;\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  okButton_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+            \cf4 if\cf2 (\cf4 string\cf2 .IsNullOrEmpty(Nama.Text))\par
+            \{\par
+                MessagingCenter.Send(\cf4 new\cf2  MessagingCenterAlert\par
+                \{\par
+                    Title = \cf5 "Error"\cf2 ,\par
+                    Message = \cf5 "Input Nama Anda"\cf2 ,\par
+                    Cancel = \cf5 "OK"\cf2\par
+                \}, \cf5 "message"\cf2 );\par
+            \}\par
+            \cf4 else\cf2\par
+          \f2\tab\f1   \cf4 await\cf2  Navigation.PushAsync(\cf4 new\cf2  KuisView(subitem,Nama.Text));\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  cancelButton_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+            \cf4 await\cf2  Navigation.PopAsync();\par
+        \}\par
+    \}\par
+\}\par
+\par
+\par
+\cf11\f2 Halam KUIS\par
+View \par
+\cf4\f1 <?xml version="1.0" encoding="utf-8" ?>\cf2\par
+\cf4 <\cf5 ContentPage\cf1  xmlns\cf4 ="http://xamarin.com/schemas/2014/forms"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 x\cf4 ="http://schemas.microsoft.com/winfx/2009/xaml"\cf2\par
+              \cf1  BackgroundImage\cf4 ="HumanAnatomy.jpg"\cf1  Title\cf4 ="Kuis"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 ctrls\cf4 ="clr-namespace:AsNum.XFControls;assembly=AsNum.XFControls"\cf2\par
+            \cf1  x\cf4 :\cf1 Class\cf4 ="Mobile.Views.KuisView">\cf2\par
+    \cf4 <\cf5 ContentPage.Content\cf4 >\cf2\par
+        \cf4 <\cf5 Grid\cf4 >\cf2\par
+            \cf4 <\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="90*"></\cf5 RowDefinition\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="10*"></\cf5 RowDefinition\cf4 >\cf2\par
+            \cf4 </\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+            \cf4 <\cf5 StackLayout\cf1  Margin\cf4 ="5,10">\cf2\par
+                \cf4 <\cf5 Label\cf1  HorizontalOptions\cf4 ="Center"\cf1  TextColor\cf4 ="White"\cf1  FontSize\cf4 ="Medium"\cf1  HorizontalTextAlignment\cf4 ="Center"\cf1  Text\cf4 ="\{\cf5 Binding\cf1  Soal\cf4 .Value\}"></\cf5 Label\cf4 >\cf2\par
+                \cf4 <\cf5 ctrls\cf4 :\cf5 RadioGroup\cf2  \cf1  Margin\cf4 ="10"\cf2  \cf1  Orientation\cf4 ="Vertical"\cf2  \par
+                 \cf1  ItemsSource\cf4 ="\{\cf5 Binding\cf1  Soal\cf4 .Choices\}"\cf2\par
+                             \cf1  SelectedItem\cf4 ="\{\cf5 Binding\cf1  Soal\cf4 .OptionSelected\}"\cf2\par
+                 \cf1  DisplayPath\cf4 ="Value"\cf2\par
+                 \cf4  />\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+            \cf4 <\cf5 StackLayout\cf1  Grid.Row\cf4 ="1"\cf1  Orientation\cf4 ="Horizontal"\cf1  HorizontalOptions\cf4 ="Center"\cf1  VerticalOptions\cf4 ="End">\cf2\par
+                \cf4 <\cf5 Button\cf1  Text\cf4 ="Back"\cf2  \cf1  Command\cf4 ="\{\cf5 Binding\cf1  BackCommand\cf4\}"></\cf5 Button\cf4 >\cf2\par
+                \cf4 <\cf5 Button\cf1  Text\cf4 ="Next"\cf1  Command\cf4 ="\{\cf5 Binding\cf1  NextCommand\cf4\}"></\cf5 Button\cf4 >\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+        \cf4 </\cf5 Grid\cf4 >\cf2\par
+    \cf4 </\cf5 ContentPage.Content\cf4 >\cf2\par
+\cf4 </\cf5 ContentPage\cf4 >\f2 .\par
+\cf11\par
+BackEnd\par
+\cf2\f1\par
+\cf4 namespace\cf2  Mobile.Views\par
+\{\par
+\tab [XamlCompilation(XamlCompilationOptions.Compile)]\par
+\tab\cf4 public\cf2  \cf4 partial\cf2  \cf4 class\cf2  \cf12 KuisView\cf2  : ContentPage\par
+\tab\{\par
+        \cf4 private\cf2  submateri subitem;\par
+\par
+      \par
+        \cf4 public\cf2  KuisView(submateri subitem,\cf4 string\cf2  nama)\par
+        \{\par
+            InitializeComponent();\par
+            \cf4 this\cf2 .subitem = subitem;\par
+            \cf4 this\cf2 .BindingContext = \cf4 new\cf2  \f2\tab\tab\tab\tab\tab\f1 ViewModels.KuisViewModel(subitem,Navigation,nama);\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 void\cf2  ItemsListView_ItemSelected(\cf4 object\cf2  sender, SelectedItemChangedEventArgs e)\par
+        \{\par
+\par
+        \}\par
+    \}\par
+\}\cf11\f2\par
+DataStore & Model :\par
+\cf2\f1\par
+\cf4 namespace\cf2  Mobile.ViewModels\par
+\{\par
+    \cf4 internal\cf2  \cf4 class\cf2  \cf12 KuisViewModel\cf2 :BaseViewModel\par
+    \{\par
+        \cf4 public\cf2  \cf4 string\cf2  Nama \{ \cf4 get\cf2 ; \}\par
+\par
+        \cf4 private\cf2  submateri subitem;\par
+        \cf4 private\cf2  INavigation navigation;\par
+        \cf4 private\cf2  soal _soal;\par
+        \cf4 public\cf2  ObservableCollection<soal> Soals \{ \cf4 get\cf2 ; \cf4 set\cf2 ; \}\par
+        \cf4 public\cf2  Command LoadItemsCommand \{ \cf4 get\cf2 ; \}\par
+        \cf4 public\cf2  Command NextCommand \{ \cf4 get\cf2 ; \}\par
+\par
+        \cf4 public\cf2  soal Soal \{\par
+            \cf4 get\cf2  \{ \cf4 return\cf2  _soal; \}\par
+            \cf4 set\cf2\par
+            \{\par
+                SetProperty(\cf4 ref\cf2  _soal, value);\par
+            \}\par
+        \}\par
+\par
+        \cf4 public\cf2  \cf4 int\cf2  QuizPosition \{ \cf4 get\cf2 ; \cf4 private\cf2  \cf4 set\cf2 ; \}\par
+\par
+        \cf4 public\cf2  KuisViewModel(submateri subitem, INavigation navigation,\cf4 string\cf2  nama)\par
+        \{\par
+            \cf4 this\cf2 .Nama = nama;\par
+            \cf4 this\cf2 .subitem = subitem;\par
+            \cf4 this\cf2 .navigation = navigation;\par
+            Soals = \cf4 new\cf2  ObservableCollection<Models.soal>();\par
+            LoadItemsCommand = \cf4 new\cf2  Command((x) => ExecuteLoadItemsCommand(x));\par
+            NextCommand = \cf4 new\cf2  Command((x) => NextCommandAction(x));\par
+            ExecuteLoadItemsCommand(\cf4 null\cf2 );\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  NextCommandAction(\cf4 object\cf2  x)\par
+        \{\par
+            \cf4 if\cf2  (Soal.OptionSelected == \cf4 null\cf2 )\par
+            \{\par
+                MessagingCenter.Send(\cf4 new\cf2  MessagingCenterAlert\par
+                \{\par
+                    Title = \cf5 "Error"\cf2 ,\par
+                    Message = \cf5 "Pilih Jawaban Anda"\cf2 ,\par
+                    Cancel = \cf5 "OK"\cf2\par
+                \}, \cf5 "message"\cf2 );\par
+            \}\par
+            \cf4 else\cf2\par
+            \{\par
+                QuizPosition++;\par
+                \cf4 if\cf2  (QuizPosition<=Soals.Count())\par
+                \{\par
+                   Soal = Soals.Where(O => O.Number == QuizPosition).FirstOrDefault();\par
+                \}\cf4 else\cf2\par
+                \{\par
+                    \cf4 var\cf2  benar = Soals.Where(O => O.OptionSelected.IsTrueAnswer).Count();\par
+                    \cf4 await\cf2  navigation.PushAsync(\cf4 new\cf2  Views.QuizFinishView(Soals.Count(),benar,Nama));\par
+                \}\par
+                \par
+            \}\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  ExecuteLoadItemsCommand(\cf4 object\cf2  x)\par
+        \{\par
+            \cf4 if\cf2  (IsBusy)\par
+                \cf4 return\cf2 ;\par
+            \cf4 try\cf2\par
+            \{\par
+                IsBusy = \cf4 true\cf2 ;\par
+                Soals.Clear();\par
+                \cf4 var\cf2  datas = \cf4 await\cf2  SoalDataStore.GetItemsAsync(subitem.Id);\par
+                \cf4 if\cf2 (datas.Count()>=0)\par
+                \{\par
+                    \cf4 var\cf2  ramdomData = ShuffleList<soal>(datas.ToList());\par
+                    \cf4 var\cf2  i = 1;\par
+                    \cf4 foreach\cf2  (var item \cf4 in\cf2  ramdomData)\par
+                    \{\par
+                        \cf4 var\cf2  aData = item;\par
+                        aData.Choices = ShuffleList<Option>(item.Choices);\par
+                        item.Number = i;\par
+                        Soals.Add(aData);\par
+                        i++;\par
+                    \}\par
+\par
+                    MessagingCenter.Send(\cf4 new\cf2  MessagingCenterAlert\par
+                    \{\par
+                        Title = \cf5 "Info"\cf2 ,\par
+                        Message = \cf5 "Baca soal dengan baik sebelum menjawab !"\cf2 ,\par
+                        Cancel = \cf5 "OK"\cf2\par
+                    \}, \cf5 "message"\cf2 );\par
+                    Soal = Soals[0];\par
+                    QuizPosition++;\par
+                \}\par
+                \cf4 else\cf2\par
+                \{\par
+                    MessagingCenter.Send(\cf4 new\cf2  MessagingCenterAlert\par
+                    \{\par
+                        Title = \cf5 "Info"\cf2 ,\par
+                        Message = \cf5 "Daftar Soal Tidak Ada"\cf2 ,\par
+                        Cancel = \cf5 "OK"\cf2\par
+                    \}, \cf5 "message"\cf2 );\par
+                    \cf4 await\cf2  navigation.PopAsync();\par
+                \}\par
+            \}\par
+            \cf4 catch\cf2  (Exception ex)\par
+            \{\par
+                MessagingCenter.Send(\cf4 new\cf2  MessagingCenterAlert\par
+                \{\par
+                    Title = \cf5 "Error"\cf2 ,\par
+                    Message = ex.Message,\par
+                    Cancel = \cf5 "OK"\cf2\par
+                \}, \cf5 "message"\cf2 );\par
+            \}\par
+            \cf4 finally\cf2\par
+            \{\par
+                IsBusy = \cf4 false\cf2 ;\par
+            \}\par
+        \}\par
+\par
+        \cf4 public\cf2  \cf4 static\cf2  List<E> ShuffleList<\cf12 E\cf2 >(List<E> inputList)\par
+        \{\par
+            List<E> randomList = \cf4 new\cf2  List<E>();\par
+\par
+            Random r = \cf4 new\cf2  Random();\par
+            \cf4 int\cf2  randomIndex = 0;\par
+            \cf4 while\cf2  (inputList.Count > 0)\par
+            \{\par
+                randomIndex = r.Next(0, inputList.Count); \par
+                randomList.Add(inputList[randomIndex]); \par
+\par
+                inputList.RemoveAt(randomIndex);\par
+            \}\par
+\par
+            \cf4 return\cf2  randomList; \cf8 //return the new random list\cf2\par
+        \}\par
+    \}\par
+\}\par
+\par
+\par
+\cf11\f2 Halaman Akhir Kuiz\par
+View\par
+\cf4\f1 <?xml version="1.0" encoding="utf-8" ?>\cf2\par
+\cf4 <\cf5 ContentPage\cf1  xmlns\cf4 ="http://xamarin.com/schemas/2014/forms"\cf2\par
+            \cf1  xmlns\cf4 :\cf1 x\cf4 ="http://schemas.microsoft.com/winfx/2009/xaml"\cf2\par
+              \cf1  BackgroundImage\cf4 ="HumanAnatomy.jpg"\cf2\par
+            \cf1  x\cf4 :\cf1 Class\cf4 ="Mobile.Views.QuizFinishView">\cf2\par
+    \cf4 <\cf5 ContentPage.Content\cf4 >\cf2\par
+        \cf4 <\cf5 Grid\cf1  Margin\cf4 ="10">\cf2\par
+            \cf4 <\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="30*"/>\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="40*"/>\cf2\par
+                \cf4 <\cf5 RowDefinition\cf1  Height\cf4 ="30*"/>\cf2\par
+            \cf4 </\cf5 Grid.RowDefinitions\cf4 >\cf2\par
+            \par
+            \cf4 <\cf5 StackLayout\cf1  Grid.Row\cf4 ="0"\cf1  Orientation\cf4 ="Horizontal"\cf1  HorizontalOptions\cf4 ="Center">\cf2\par
+                \cf4 <\cf5 Label\cf2  \cf1  VerticalOptions\cf4 ="Center"\cf1  TextColor\cf4 ="White"\cf1  FontSize\cf4 ="20"\cf1  Text\cf4 ="Hai ,"\cf1  HorizontalOptions\cf4 ="Center"/>\cf2\par
+                \cf4 <\cf5 Label\cf2  \cf1  VerticalOptions\cf4 ="Center"\cf1  TextColor\cf4 ="White"\cf1  FontSize\cf4 ="20"\cf1  x\cf4 :\cf1 Name\cf4 ="UserName"\cf1  Text\cf4 ="Score Anda Adalah : "\cf1  HorizontalOptions\cf4 ="Center"/>\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+            \par
+           \cf4 <\cf5 StackLayout\cf1  Orientation\cf4 ="Vertical"\cf1  HorizontalOptions\cf4 ="Center"\cf1  Grid.Row\cf4 ="1">\cf2\par
+                \cf4 <\cf5 StackLayout\cf1  Orientation\cf4 ="Vertical"\cf1  HorizontalOptions\cf4 ="Center">\cf2\par
+                    \cf4 <\cf5 Label\cf1  TextColor\cf4 ="White"\cf1  FontSize\cf4 ="14"\cf1  Text\cf4 ="Jawaban Benar Anda"\cf1  HorizontalOptions\cf4 ="Center"/>\cf2\par
+                    \cf4 <\cf5 Label\cf1  TextColor\cf4 ="Green"\cf1  FontSize\cf4 ="20"\cf1  x\cf4 :\cf1 Name\cf4 ="benarScore"\cf1  HorizontalOptions\cf4 ="Center"/>\cf2\par
+                \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+                \cf4 <\cf5 StackLayout\cf2  \cf1  Orientation\cf4 ="Vertical"\cf1  HorizontalOptions\cf4 ="Center">\cf2\par
+                    \cf4 <\cf5 Label\cf1  TextColor\cf4 ="White"\cf1  FontSize\cf4 ="14"\cf1  Text\cf4 ="Jawaban  Salah Anda"\cf1  HorizontalOptions\cf4 ="Center"/>\cf2\par
+                    \cf4 <\cf5 Label\cf1  TextColor\cf4 ="Red"\cf1  FontSize\cf4 ="20"\cf1  x\cf4 :\cf1 Name\cf4 ="salahScore"\cf1  HorizontalOptions\cf4 ="Center"/>\cf2\par
+                \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+                \cf4 <\cf5 StackLayout\cf2  \cf1  Orientation\cf4 ="Vertical"\cf1  HorizontalOptions\cf4 ="Center">\cf2\par
+                    \cf4 <\cf5 Label\cf1  TextColor\cf4 ="White"\cf1  FontSize\cf4 ="14"\cf1  Text\cf4 ="Score Anda"\cf1  HorizontalOptions\cf4 ="Center"/>\cf2\par
+                    \cf4 <\cf5 Label\cf1  TextColor\cf4 ="White"\cf1  FontSize\cf4 ="20"\cf1  x\cf4 :\cf1 Name\cf4 ="score"\cf1  HorizontalOptions\cf4 ="Center"/>\cf2\par
+                \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+            \par
+            \cf4 <\cf5 StackLayout\cf1  Margin\cf4 ="20,20"\cf1  Grid.Row\cf4 ="2"\cf1  HorizontalOptions\cf4 ="Center">\cf2\par
+                \cf4 <\cf5 Button\cf1  TextColor\cf4 ="White"\cf1  x\cf4 :\cf1 Name\cf4 ="nextLearn"\cf1  Clicked\cf4 ="nextLearn_Clicked"\cf1  BackgroundColor\cf4 ="Transparent"\cf1  Text\cf4 ="Melanjutkan Belajar"></\cf5 Button\cf4 >\cf2\par
+                \cf4 <\cf5 Button\cf1  TextColor\cf4 ="White"\cf1  x\cf4 :\cf1 Name\cf4 ="close"\cf1  Clicked\cf4 ="close_Clicked"\cf1  BackgroundColor\cf4 ="Transparent"\cf1  Text\cf4 ="Keluar"></\cf5 Button\cf4 >\cf2\par
+            \cf4 </\cf5 StackLayout\cf4 >\cf2\par
+          \par
+        \cf4 </\cf5 Grid\cf4 >\cf2\par
+    \cf4 </\cf5 ContentPage.Content\cf4 >\cf2\par
+\cf4 </\cf5 ContentPage\cf4 >\cf2\f2\par
+\par
+\par
+\par
+\cf11 BackEnd\par
+\cf2\f1\par
+\cf4 namespace\cf2  Mobile.Views\par
+\{\par
+\tab [XamlCompilation(XamlCompilationOptions.Compile)]\par
+\tab\cf4 public\cf2  \cf4 partial\cf2  \cf4 class\cf2  \cf12 QuizFinishView\cf2  : ContentPage\par
+\tab\{\par
+        \cf4 public\cf2  QuizFinishView(\cf4 int\cf2  jumlah, \cf4 int\cf2  benar, \cf4 string\cf2  nama)\par
+        \{\par
+            InitializeComponent();\par
+            UserName.Text = nama;\par
+            benarScore.Text = benar.ToString();\par
+            salahScore.Text = (jumlah - benar).ToString();\par
+            \cf4 double\cf2  result = ((Convert.ToDouble(benar) /Convert.ToDouble( jumlah)) * 100);\par
+            score.Text = result.ToString();\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 async\cf2  \cf4 void\cf2  nextLearn_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+            \cf4 await\cf2  Navigation.PopToRootAsync();\par
+        \}\par
+\par
+        \cf4 private\cf2  \cf4 void\cf2  close_Clicked(\cf4 object\cf2  sender, EventArgs e)\par
+        \{\par
+            DependencyService.Get<IAndroidHelper>().Quit();\par
+        \}\par
+    \}\par
+\}\f2\par
+\par
+\cf11\par
+\par
+\par
+\par
+\par
+\par
+\f1\lang9\par
+\cf0\f0\fs22\par
+}
+ 

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-               BackgroundImage="HumanAnatomy.jpg"
+               BackgroundImage="HumanAnatomy.jpg" Title="Kuis"
              x:Class="Mobile.Views.LoginView">
     <ContentPage.Content>
         <Grid>
@@ -9,15 +9,15 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0"
+            <StackLayout Grid.Row="0" 
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" >
                 <Label Text="Masukkan Nama Anda"/>
-                <Entry x:Name="Nama" />
+                <Entry x:Name="Nama" TextColor="White" />
             </StackLayout>
-            <StackLayout Orientation="Horizontal" Grid.Row="1">
-                <Button Text="OK" x:Name="okButton" Clicked="okButton_Clicked"/>
-                <Button Text="Batal" x:Name="cancelButton" Clicked="cancelButton_Clicked"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Row="1">
+                <Button BackgroundColor="Transparent" TextColor="White" Text="Batal" x:Name="cancelButton" Clicked="cancelButton_Clicked"/>
+                <Button BackgroundColor="Transparent" TextColor="White" Text="Lanjut" x:Name="okButton" Clicked="okButton_Clicked"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

@@ -9,8 +9,8 @@ namespace AppWebApi.Models
     [TableName("topik")]
     public class topik : BaseNotifyProperty
     {
-        [PrimaryKey("Id")]
-        [DbColumn("Id")]
+        [PrimaryKey("IdTopik")]
+        [DbColumn("IdTopik")]
         public int Id
         {
             get { return _id; }
@@ -21,7 +21,7 @@ namespace AppWebApi.Models
             }
         }
 
-        [DbColumn("Judul")]
+        [DbColumn("JudulTopik")]
         public string Judul
         {
             get { return _judul; }
@@ -54,7 +54,7 @@ namespace AppWebApi.Models
             }
         }
 
-        [DbColumn("SubMateriId")]
+        [DbColumn("IdSubMateri")]
         public int SubMateriId
         {
             get { return _submateriid; }

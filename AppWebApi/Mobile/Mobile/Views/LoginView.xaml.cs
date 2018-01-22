@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Mobile.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Mobile.Helpers;
 
 namespace Mobile.Views
 {
@@ -22,12 +23,22 @@ namespace Mobile.Views
 
         private async void okButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new KuisView(subitem));
+            if(string.IsNullOrEmpty(Nama.Text))
+            {
+                MessagingCenter.Send(new MessagingCenterAlert
+                {
+                    Title = "Error",
+                    Message = "Input Nama Anda",
+                    Cancel = "OK"
+                }, "message");
+            }
+            else
+            await Navigation.PushAsync(new KuisView(subitem,Nama.Text));
         }
 
         private async void cancelButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopModalAsync();
+            await Navigation.PopAsync();
         }
     }
 }

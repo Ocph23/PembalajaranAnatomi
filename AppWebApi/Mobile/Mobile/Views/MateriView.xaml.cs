@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mobile.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Mobile.Views
         public MateriView()
         {
             InitializeComponent();
+
             BindingContext = new ViewModels.MateriViewModel(Navigation);
         }
 
@@ -23,11 +25,15 @@ namespace Mobile.Views
             var item = e.SelectedItem as Models.materi;
             if (item == null)
                 return;
-            await Navigation.PushModalAsync(new Views.SubMateriView(item));
+            await Navigation.PushAsync(new Views.SubMateriView(item));
 
             // Manually deselect item
             ItemsListView.SelectedItem = null;
         }
-        
+
+        private void keluar_Activated(object sender, EventArgs e)
+        {
+            DependencyService.Get<IAndroidHelper>().Quit();
+        }
     }
 }

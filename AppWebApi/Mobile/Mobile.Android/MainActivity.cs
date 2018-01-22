@@ -3,46 +3,34 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Plugin.MediaManager.Forms.Android;
-using Xamarin.Forms;
 using Plugin.DownloadManager;
 using Plugin.DownloadManager.Abstractions;
 using System.IO;
 using System.Linq;
-using Plugin.MediaManager;
-using DLToolkit.Forms.Controls.Helpers.TagEntryView;
 
 namespace Mobile.Droid
 {
-    using Plugin.MediaManager.MediaSession;
-    using Plugin.MediaManager.Abstractions.Enums;
-    using Plugin.MediaManager.Abstractions;
-    using DLToolkit.Forms.Controls;
+    using AsNum.XFControls.Droid;
 
     [Activity(Label = "Mobile.Android", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-
-        private NotificationClickedBroadcastReceiver _receiverNotificationClicked;
-        
-
-
+     //   private NotificationClickedBroadcastReceiver _receiverNotificationClicked;
         protected override void OnResume()
         {
             base.OnResume();
-            _receiverNotificationClicked = new NotificationClickedBroadcastReceiver();
-            RegisterReceiver(
-                _receiverNotificationClicked,
-                new IntentFilter(DownloadManager.ActionNotificationClicked)
-            );
+        //    _receiverNotificationClicked = new NotificationClickedBroadcastReceiver();
+           // RegisterReceiver(
+              //  _receiverNotificationClicked,
+             //   new IntentFilter(DownloadManager.ActionNotificationClicked)
+           // );
         }
-
-      
 
         protected override void OnPause()
         {
             base.OnPause();
 
-            UnregisterReceiver(_receiverNotificationClicked);
+     //       UnregisterReceiver(_receiverNotificationClicked);
         }
         protected override void OnCreate(Bundle bundle)
         {
@@ -73,6 +61,7 @@ namespace Mobile.Droid
            
             VideoViewRenderer.Init();
             TagEntryRenderer.Init();
+            AsNumAssemblyHelper.HoldAssembly();
             LoadApplication(new App());
         }
 

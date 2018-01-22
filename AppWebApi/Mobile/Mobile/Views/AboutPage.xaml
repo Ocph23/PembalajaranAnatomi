@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mobile.AboutPage"
              xmlns:vm="clr-namespace:Mobile;"
+                 BackgroundImage="HumanAnatomy.jpg"
              Title="{Binding Title}">
 	<ContentPage.BindingContext>
 		<vm:AboutViewModel />
@@ -11,54 +12,24 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
+            <RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		<StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+		<StackLayout  VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
 			<StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-				<ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-					<Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
+				<ContentView Padding="0,40,0,40" VerticalOptions="Center">
+                    <Image x:Name="logo" Source="USTJLOGO.png" VerticalOptions="Center" HeightRequest="64" />
 				</ContentView>
 			</StackLayout>
 		</StackLayout>
-		<ScrollView Grid.Row="1">
-			<StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
-				<Label FontSize="22">
-					<Label.FormattedText>
-						<FormattedString>
-							<FormattedString.Spans>
-								<Span Text="AppName" FontAttributes="Bold" FontSize="22" />
-								<Span Text=" " />
-								<Span Text="1.0" ForegroundColor="{StaticResource LightTextColor}" />
-							</FormattedString.Spans>
-						</FormattedString>
-					</Label.FormattedText>
-				</Label>
-				<Label>
-					<Label.FormattedText>
-						<FormattedString>
-							<FormattedString.Spans>
-								<Span Text="This app is written in C# and native APIs using the" />
-								<Span Text=" " />
-								<Span Text="Xamarin Platform" FontAttributes="Bold" />
-								<Span Text="." />
-							</FormattedString.Spans>
-						</FormattedString>
-					</Label.FormattedText>
-				</Label>
-				<Label>
-					<Label.FormattedText>
-						<FormattedString>
-							<FormattedString.Spans>
-								<Span Text="It shares code with its" />
-								<Span Text=" " />
-								<Span Text="iOS, Android, and Windows" FontAttributes="Bold" />
-								<Span Text=" " />
-								<Span Text="versions." />
-							</FormattedString.Spans>
-						</FormattedString>
-					</Label.FormattedText>
-				</Label>
-				<Button Margin="0,10,0,0" Text="Learn more" Command="{Binding OpenWebCommand}" BackgroundColor="{StaticResource Primary}" TextColor="White" />
-			</StackLayout>
-		</ScrollView>
+        <StackLayout Grid.Row="1" >
+            <Label HorizontalOptions="Center" TextColor="White"  Text="MANTO RISALDI PONGLU" FontSize="20" FontAttributes="Bold" ></Label>
+            <Label HorizontalOptions="Center" TextColor="White"  Text="14 411 023" FontSize="18" FontAttributes="Bold"></Label>
+        </StackLayout>
+        <StackLayout VerticalOptions="End" Grid.Row="2">
+            <Label HorizontalOptions="Center" TextColor="White" Text="PROGRAM STUDI TEKNIK INFORMATIKA" FontSize="14" FontAttributes="Bold"></Label>
+            <Label HorizontalOptions="Center" TextColor="White" Text="FAKULTAS ILMU KOMPUTER DAN MANAJEMEN" FontSize="14" FontAttributes="Bold"></Label>
+            <Label HorizontalOptions="Center" TextColor="White" Text="UNIVERSITAS SAINS DAN TEKNOLOGI" FontSize="16" FontAttributes="Bold"></Label>
+            <Label HorizontalOptions="Center" TextColor="White" Text="JAYAPURA" FontSize="16" FontAttributes="Bold"></Label>
+        </StackLayout>
 	</Grid>
 </ContentPage>

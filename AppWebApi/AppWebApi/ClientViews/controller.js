@@ -8,10 +8,27 @@
             });
         }
 
-        $scope.AddNewItem = function (item) {
-            MateriService.AddItem(item).then(function (response) {
+        $scope.SelectedItem = function (item)
+        {
+            $scope.model = item;
+        }
 
-            })
+
+        $scope.AddNewItem = function (item) {
+            if (item.Id != undefined && item.Id>0)
+            {
+                MateriService.UpdateItem(item).then(function (response) {
+                    $scope.model = {};
+                    alert('Data Berhasil Diubah');
+                })
+            } else
+            {
+                MateriService.AddItem(item).then(function (response) {
+                    $scope.model = {};
+                    alert('Data Berhasil Ditambah');
+                })
+            }
+           
         }
     })
 
@@ -23,12 +40,6 @@
                 $scope.Materi = data;
                 SubMateriService.source($routeParams.id).then(function (response) {
                     $scope.Items = response;
-
-
-
-
-
-
                 });
             })
         }
@@ -42,11 +53,14 @@
             });
         }
 
+      
+
 
        
     })
 
-    .controller("DetailController", function ($scope, MateriService, SubMateriService, $routeParams, $location,$http) {
+    .controller("DetailController", function ($scope, MateriService, SubMateriService, $routeParams, $location, $http,$sce) {
+      
         $scope.Item = {};
         $scope.Materi = {};
         $scope.Soals = [];
@@ -55,17 +69,22 @@
                 $scope.Materi = data;
                 SubMateriService.GetItem($routeParams.submateri).then(function (response) {
                     $scope.Item = response;
-                    $http({
-                        method: 'Get',
-                        url: "/api/"+ response.Id+"/soal"
-                    }).then(function (response) {
-                        $scope.Soals = response.data;
-                        model = {};
-                    }, function (error) {
-                        alert(error.Message);
-                        // deferred.reject(error);
-                    });
+                    CKEDITOR.instances.editor1.setData(response.Penjelasan);
+                   
                 });
+            })
+        }
+
+
+
+        $scope.SavePenjelasan = function(item)
+        {
+            var res = CKEDITOR.instances.editor1.getData();
+            var data = { "Id": item.Id, "JudulSubMateri": item.JudulSubMateri, "Penjelasan": res };
+           
+            SubMateriService.UpdateItem(data).then(function(response){
+                alert("Penjelasan Tersimpan");
+
             })
         }
 
@@ -89,10 +108,10 @@
                 }
 
                 $.ajax(settings).done(function (response, data) {
-                    alert("Foto Berhasil Diubah");
                     var d = JSON.parse(response);
                     $scope.Item.DataGambar = d.DataGambar;
                     $scope.Item.Gambar = d.Gambar;
+                    alert("Gambar Tersimpan");
                 }).error(function (response) {
                     alert(response.responseText);
                 })
@@ -102,6 +121,8 @@
                 alert("Anda Belum Memilih File Foto");
             }
         }
+
+
 
         $scope.UploadSound = function (file) {
             if (file !== undefined) {
@@ -156,7 +177,7 @@
                 }
 
                 $.ajax(settings).done(function (response, data) {
-                    alert("Foto Berhasil Diubah");
+                    alert("Video Animasi Berhasil Diubah");
                     var d = JSON.parse(response);
                     $scope.Item.DataAnimasi = d.DataAnimasi;
                     $scope.Item.Animasi = d.Animasi;
@@ -170,6 +191,11 @@
             }
         }
 
+        $scope.UpdateSubMateri = function (item) {
+            SubMateriService.UpdateItem(item).then(function (response) {
+                alert("Infomrasi Sub Materi Berhasil Diubah")
+            });
+        }
 
         $scope.CreateNewSoal = function ()
         {
@@ -182,7 +208,10 @@
                 $scope.NewSoal.Choices.push(Option);
             }
         }
-
+        $scope.EditTopik = function(item)
+        {
+            $scope.Topik = item;
+        }
         $scope.ChangeSelectAnswer = function (Choices, item)
         {
             if (item.IsTrueAnswer == true)
@@ -198,15 +227,53 @@
         }
 
 
-        $scope.SaveNewSoal = function (model)
+        $scope.SaveNewTopik = function(item)
         {
-            model.SubMateriId = $scope.Item.Id;
+            if (item.Id == undefined) {
+                item.SubMateriId = $scope.Item.Id;
+                $http({
+                    method: 'POST',
+                    url: "/api/Topik",
+                    data: item
+                }).then(function (response) {
+                    alert("Topik Tersimpan");
+                    $scope.Item.Topiks.push(response.data);
+                
+                }, function (error) {
+                    alert(error.Message);
+                    // deferred.reject(error);
+                    });
+            } else
+            {
+                $http({
+                    method: 'PUT',
+                    url: "/api/Topik/" + item.Id,
+                    data: item
+                }).then(function (response) {
+                    alert("Topik Tersimpan");
+                 
+                }, function (error) {
+                    alert(error.Message);
+                    // deferred.reject(error);
+                });
+            }
+            $scope.Topik = {};
+        }
+
+
+    })
+
+
+
+    .controller("SoalController", function ($scope,$http, MateriService, SubMateriService, $routeParams, $location) {
+        $scope.Items = [];
+        $scope.Materi = {};
+        $scope.Init = function () {
             $http({
-                method: 'POST',
-                url: "/api/soal",
-                data: model
+                method: 'Get',
+                url: "/api/" + $routeParams.submateri + "/soal"
             }).then(function (response) {
-                $scope.Soals.push(response.data);
+                $scope.Soals = response.data;
                 model = {};
             }, function (error) {
                 alert(error.Message);
@@ -214,10 +281,74 @@
             });
         }
 
+        $scope.SaveNewSoal = function (model) {
+
+            if (model.Id == undefined)
+            {
+                model.SubMateriId = $routeParams.submateri;
+                $http({
+                    method: 'POST',
+                    url: "/api/soal",
+                    data: model
+                }).then(function (response) {
+                    $scope.Soals.push(response.data);
+                    alert("Data Tersimpan");
+                    model = {};
+                }, function (error) {
+                    alert(error.Message);
+                    // deferred.reject(error);
+                    });
+            } else
+            {
+                $http({
+                    method: 'PUT',
+                    url: "/api/soal",
+                    data: model
+                }).then(function (response) {
+                    alert("Soal Berhasil Diubah");
+                    model = {};
+                }, function (error) {
+                    alert(error.Message);
+                    // deferred.reject(error);
+                });
+            }
+
+
+          
+        }
+
+
+        $scope.CreateNewSoal = function () {
+            $scope.NewSoal = {};
+            $scope.NewSoal.Value = "";
+            $scope.NewSoal.Choices = [];
+            for (var i = 0; i < 4; i++) {
+                var Option = { "Value": "", "IsTrueAnswer": false };
+                $scope.NewSoal.Choices.push(Option);
+            }
+        }
+
+        $scope.SelectedItem = function (item)
+        {
+            $scope.NewSoal = item;
+        }
+
+
+        $scope.ChangeSelectAnswer = function (Choices, item) {
+            if (item.IsTrueAnswer == true) {
+                angular.forEach(Choices, function (value, key) {
+
+                    if (value != item)
+                        value.IsTrueAnswer = false;
+
+                })
+            }
+
+        }
+
+
 
     })
-
-
 
 
 

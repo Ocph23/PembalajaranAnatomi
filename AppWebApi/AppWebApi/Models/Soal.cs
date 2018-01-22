@@ -13,8 +13,8 @@ namespace AppWebApi.Models
    public class Soal:DAL.BaseNotifyProperty
     {
         private int id;
-        [PrimaryKey("Id")]
-        [DbColumn("Id")]
+        [PrimaryKey("IdSoal")]
+        [DbColumn("IdSoal")]
         public int Id
         {
             get { return id; }
@@ -24,7 +24,7 @@ namespace AppWebApi.Models
         }
 
         private string _value;
-        [DbColumn("Value")]
+        [DbColumn("IsiSoal")]
         public string Value
         {
             get { return _value; }
@@ -33,7 +33,7 @@ namespace AppWebApi.Models
 
 
         private int subMateriId;
-        [DbColumn("SubMateriId")]
+        [DbColumn("IdSubMateri")]
         public int SubMateriId
         {
             get { return subMateriId; }

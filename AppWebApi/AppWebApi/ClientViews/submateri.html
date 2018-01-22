@@ -20,9 +20,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Kode</th>
+                        <th>Kode Sub Materi</th>
                         <th>Sub Materi</th>
-                        <th></th>
+                        <th style="width:10%; align-content:center" >Kelolah SubMateri</th>
+                        <th style="width:10%; align-content:center">Kelolah Kuis</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,7 +31,8 @@
                         <th scope="row">{{$index+1}}</th>
                         <td>{{item.KodeSubMateri}}</td>
                         <td>{{item.JudulSubMateri}}</td>
-                        <td><a class="btn pull-right" href="#!detail/{{Materi.Id}}/{{item.Id}}" >Detail</a></td>
+                        <td style="align-items:center"><a  href="#!detail/{{Materi.Id}}/{{item.Id}}" ><i class="fa fa-2x fa-edit"></i></a></td>
+                        <td><a  href="#!soal/{{item.Id}}"><i class="fa fa-2x fa-list"></i></a></td>
                     </tr>
 
                 </tbody>

@@ -15,8 +15,8 @@ namespace AppWebApi.Models
         private string _value;
         private int _soalId;
 
-        [PrimaryKey("Id")]
-        [DbColumn("Id")]
+        [PrimaryKey("IdPilihan")]
+        [DbColumn("IdPilihan")]
 
         public int? Id
         {
@@ -25,7 +25,7 @@ namespace AppWebApi.Models
         }
 
        
-        [DbColumn("SoalId")]
+        [DbColumn("IdSoal")]
 
         public int SoalId
         {
@@ -34,7 +34,7 @@ namespace AppWebApi.Models
         }
 
         
-        [DbColumn("Value")]
+        [DbColumn("IsiJawaban")]
         public string Value
         {
             get { return _value; }
@@ -46,7 +46,7 @@ namespace AppWebApi.Models
         private bool _userSelected;
         internal delChangeAnswer delAnswer;
 
-        [DbColumn("IsTrue")]
+        [DbColumn("StatusJawaban")]
         public bool IsTrueAnswer
         {
             get { return _isTrue; }

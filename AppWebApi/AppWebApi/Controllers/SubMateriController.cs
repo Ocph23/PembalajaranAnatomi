@@ -31,16 +31,26 @@ namespace AppWebApi.Controllers
         {
             using (var db = new OcphDbContext())
             {
-               var result = db.SubMateri.Where(O => O.MateriId == materiId);
-                foreach(var item in result)
+                try
                 {
-                    item.Topiks = db.Topics.Where(O => O.SubMateriId == item.Id).ToList();
+                    var result = db.SubMateri.Where(O => O.MateriId == materiId);
+                    foreach (var item in result)
+                    {
+                        item.Topiks = db.Topics.Where(O => O.SubMateriId == item.Id).ToList();
+                    }
+                    return result.ToList();
                 }
-                return result.ToList();
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+             
             }
         }
 
         // GET: api/Materi/5
+        [HttpGet]
         public submateri Get(int id)
         {
             using (var db = new OcphDbContext())
@@ -60,18 +70,7 @@ namespace AppWebApi.Controllers
                     s.Close();
                 }
 
-                if (result != null && !string.IsNullOrEmpty(result.Sound))
-                {
-                    var fi = new FileInfo(uploadPath + result.Sound);
-                    var s = fi.OpenRead();
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        s.CopyTo(ms);
-                        result.DataSound = ms.ToArray();
-                    }
-                    s.Close();
-                }
-
+             
                 if (result != null && !string.IsNullOrEmpty(result.Animasi))
                 {
                     var fi = new FileInfo(uploadPath + result.Animasi);
@@ -143,56 +142,7 @@ namespace AppWebApi.Controllers
                     }
                 }
         }
-
-        [Route("api/{Id}/sound")]
-        [HttpPost]
-        public async Task<HttpResponseMessage> PostSound(int Id)
-        {
-            string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads");
-            if (!Request.Content.IsMimeMultipartContent())
-                throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable,
-                "This request is not properly formatted"));
-            else
-                using (var db = new OcphDbContext())
-                {
-                    var trans = db.Connection.BeginTransaction();
-                    try
-                    {
-                        var provider = new MultipartFormDataStreamProvider(uploadPath);
-                        await Request.Content.ReadAsMultipartAsync(provider);
-                        var sub = new Models.submateri();
-                        FileInfo fi = null;
-                        foreach (var file in provider.FileData)
-                        {
-                            fi = new FileInfo(file.LocalFileName);
-                            sub.Sound = fi.Name;
-                            var s = fi.OpenRead();
-                            using (MemoryStream ms = new MemoryStream())
-                            {
-                                s.CopyTo(ms);
-                                sub.DataSound = ms.ToArray();
-                            }
-                            s.Close();
-                        }
-
-                        var isUpdated = db.SubMateri.Update(O => new { O.Sound }, sub, O => O.Id == Id);
-                        if (isUpdated)
-                        {
-                            trans.Commit();
-                            return Request.CreateResponse(HttpStatusCode.OK, sub);
-                        }
-                        else
-                            throw new SystemException("Gambar Gagal Disimpan");
-
-                    }
-                    catch (Exception ex)
-                    {
-                        trans.Rollback();
-                        return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, ex.Message);
-                    }
-                }
-        }
-
+        
         [Route("api/{Id}/animation")]
         [HttpPost]
         public async Task<HttpResponseMessage> PostAnimation(int Id)
@@ -330,52 +280,7 @@ namespace AppWebApi.Controllers
         }
 
 
-        [Route("api/media/{Id}/sound")]
-        public HttpResponseMessage GetMedia(int id)
-        {
-            using (var db = new OcphDbContext())
-            {
-                string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                var result = db.SubMateri.Where(O => O.Id == id).FirstOrDefault();
-
-                if (result != null && !string.IsNullOrEmpty(result.Sound))
-                {
-                    var fi = new FileInfo(uploadPath + result.Sound);
-                    var s = fi.OpenRead();
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        s.CopyTo(ms);
-                        result.DataSound = ms.ToArray();
-                    }
-                    s.Close();
-
-                    var respon = new HttpResponseMessage(HttpStatusCode.OK)
-                    {
-                        Content = new ByteArrayContent(result.DataSound)
-                    };
-
-
-                    respon.Content.Headers.ContentDisposition =
-                        new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
-                        {
-                            FileName = result.Sound + ".mp3"
-                        };
-
-                    respon.Content.Headers.ContentType =
-                        new MediaTypeHeaderValue("application/mp3");
-
-                    return respon;
-
-                }
-                else
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Media Not Found");
-                }
-
-
-            }
-        }
-
+   
         public HttpResponseMessage GetMediaVideo(string fileName)
         {
             try

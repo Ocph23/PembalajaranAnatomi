@@ -82,7 +82,7 @@ namespace AppWebApi.Controllers
           
         }
 
-        [Route("api/{soal}/EditSoal")]
+     //   [Route("api/{soal}/EditSoal")]
         [HttpPut]
         public HttpResponseMessage PutSoal([FromBody]Soal value)
         {
@@ -93,7 +93,18 @@ namespace AppWebApi.Controllers
                 {
                     var isSaved = db.Soals.Update(O => new { O.Value }, value, O => O.Id == value.Id);
                     if (isSaved)
+                    {
+                        foreach(var item in value.Choices)
+                        {
+                          if(!db.Options.Update(O => new { O.IsTrueAnswer, O.Value }, item, O => O.Id == item.Id))
+                            {
+                                throw new SystemException("Data tidak tersimpan !");
+                            }
+
+                        }
                         return Request.CreateResponse(HttpStatusCode.OK, isSaved);
+                    }
+                       
                     else
                     {
                         throw new SystemException("Data tidak tersimpan !");

@@ -26,12 +26,50 @@ namespace Mobile.Views
         private submateri subitem;
         private MediaPlayerViewModel vm;
         private Downloader foo;
+        private TagItem tagItem;
 
         public VideoView(submateri subitem)
         {
             InitializeComponent();
+            this.Load(subitem);
+        }
 
-            var playTap =  new TapGestureRecognizer();
+        public VideoView(submateri subitem, TagItem tagItem)
+        {
+            InitializeComponent();
+            this.subitem = subitem;
+            this.tagItem = tagItem;
+          
+            this.Load(subitem);
+            //Task.Factory.StartNew(()=> PlaySeek(tagItem));
+            
+
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (vm.MediaPlayer.Status == MediaPlayerStatus.Playing)
+                await vm.MediaPlayer.Stop();
+            DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);
+
+            if(tagItem!=null)
+                await vm.MediaPlayer.Seek(tagItem.PositionStart);
+        }
+
+        protected override void OnDisappearing()
+        {
+            if (vm.MediaPlayer.Status == MediaPlayerStatus.Playing)
+                vm.MediaPlayer.Stop();
+            base.OnDisappearing();
+        }
+
+      
+
+        private void Load(submateri subitem)
+        {
+           
+            var playTap = new TapGestureRecognizer();
             playTap.Tapped += PlayTap_Tapped;
             play.GestureRecognizers.Add(playTap);
 
@@ -51,7 +89,9 @@ namespace Mobile.Views
             this.vm = new ViewModels.MediaPlayerViewModel(subitem);
             BindingContext = vm;
             vm.MediaPlayer.VolumeManager.VolumeChanged += VolumeManager_VolumeChanged;
+
             vm.MediaPlayer.PlayingChanged += MediaPlayer_PlayingChanged;
+           
             var muted = DependencyService.Get<IVolumeManager>().Mute;
             if (muted)
             {
@@ -62,23 +102,30 @@ namespace Mobile.Views
                 sound.Source = "soundOn";
             }
 
-            if ( DependencyService.Get<IFileService>().FileExists(subitem.Animasi))
+            if (DependencyService.Get<IFileService>().FileExists(subitem.Animasi))
             {
-                DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);
+              //  DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);
 
             }
             else
             {
                 Download(subitem);
             }
-
         }
+
+      
 
         private async void PlayTap_Tapped(object sender, EventArgs e)
         {
-            vm.Position = new TimeSpan(0, 0, 0);
-            await vm.MediaPlayer.Play();
-            await vm.MediaPlayer.VideoPlayer.Seek(vm.Position);
+            var a = vm.PlaybackController;
+            if (tagItem != null)
+            {
+                await a.SeekTo(tagItem.PositionStart.TotalSeconds);
+            }
+
+           else
+                await vm.MediaPlayer.Play();
+
         }
 
         private void VolumeManager_VolumeChanged(object sender, VolumeChangedEventArgs e)
@@ -151,15 +198,26 @@ namespace Mobile.Views
             Device.BeginInvokeOnMainThread(() =>
             {
                 progress.Progress = e.Progress;
+                if(tagItem!=null && vm.Position >= tagItem.PositionStop)
+                {
+                    Task.Factory.StartNew(() => Stoped());
+                }
             });
 
         }
 
+        private async void Stoped()
+        {
+            var a = vm.PlaybackController;
+             await a.Stop();
+            await Navigation.PopModalAsync();
+        }
+
         private async void play_Clicked(object sender, EventArgs e)
         {
-            vm.Position = new TimeSpan(0, 0, 0);
+         
             await vm.MediaPlayer.Play();
-            await vm.MediaPlayer.VideoPlayer.Seek(vm.Position);
+          
         }
 
         private async void pause_Clicked(object sender, EventArgs e)

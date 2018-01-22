@@ -28,7 +28,7 @@ namespace Mobile.Models
             }
         }
 
-        public string IsTrue
+        public bool IsTrueAnswer
         {
             get { return _istrue; }
             set
@@ -50,7 +50,7 @@ namespace Mobile.Models
 
         private int _id;
         private string _value;
-        private string _istrue;
+        private bool _istrue;
         private int _soalid;
     }
 

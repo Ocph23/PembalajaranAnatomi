@@ -30,7 +30,6 @@ namespace Mobile.ViewModels
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ObservableCollection<TagItem> Items { get; }
 
         private  IMediaManager mediaPlayer;
         public IMediaManager MediaPlayer => mediaPlayer;
@@ -106,17 +105,10 @@ namespace Mobile.ViewModels
 
         public IPlaybackController PlaybackController => MediaPlayer.PlaybackController;
 
-        public Command RemoveTagCommand { get; }
 
         public MediaPlayerViewModel(submateri sub)
         {
-            RemoveTagCommand = new Command((arg) => RemoveTag(arg));
-            var tags = new ObservableCollection<TagItem>();
-            foreach(var item in sub.Topiks)
-            {
-                tags.Add(new TagItem { Name = item.Judul, Position = item.PosisiMulai });
-            }
-            Items = tags;
+            
             mediaPlayer = CrossMediaManager.Current;
             //mediaPlayer.RequestProperties = new Dictionary<string, string> { { "Test", "1234" } };
             mediaPlayer.StatusChanged -= OnStatusChanged;
@@ -138,7 +130,7 @@ namespace Mobile.ViewModels
             if (tagItem == null)
                 return;
 
-            PlaybackController.SeekTo(tagItem.Position.TotalSeconds);
+            PlaybackController.SeekTo(tagItem.PositionStart.TotalSeconds);
         }
 
         private void OnQueuePropertyChanged(object sender, PropertyChangedEventArgs e)

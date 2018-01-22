@@ -31,6 +31,7 @@ namespace Mobile.ViewModels
 
         public SubMateriViewModel(INavigation navigation, materi item)
         {
+            Title = "Sub Materi";
             this.navigation = navigation;
             this.item = item;
             this.navigation = navigation;
@@ -68,7 +69,7 @@ namespace Mobile.ViewModels
                 MessagingCenter.Send(new MessagingCenterAlert
                 {
                     Title = "Error",
-                    Message = "Unable to load items.",
+                    Message =ex.Message,
                     Cancel = "OK"
                 }, "message");
             }

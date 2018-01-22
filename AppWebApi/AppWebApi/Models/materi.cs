@@ -10,8 +10,8 @@ using DAL;
      [TableName("materi")] 
      public class materi:BaseNotifyProperty  
    {
-          [PrimaryKey("Id")] 
-          [DbColumn("Id")] 
+          [PrimaryKey("IdMateri")] 
+          [DbColumn("IdMateri")] 
           public int Id 
           { 
                get{return _id;} 
@@ -31,7 +31,7 @@ using DAL;
                      }
           } 
 
-          [DbColumn("Judul")] 
+          [DbColumn("JudulMateri")] 
           public string Judul 
           { 
                get{return _judul;} 
