@@ -21,6 +21,5 @@ namespace Mobile.Droid
         public event VolumeChangedEventHandler VolumeChanged;
 
 
-
     }
 }

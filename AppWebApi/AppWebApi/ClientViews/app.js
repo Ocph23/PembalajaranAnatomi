@@ -1,5 +1,14 @@
 ﻿angular.module("app", ["ngRoute", "app.controller"])
-  
+.directive('myModal', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            scope.dismiss = function () {
+                element.modal('hide');
+            };
+        }
+    }
+})
     .directive('fileModel', ['$parse', function ($parse) {
         return {
             restrict: 'A',

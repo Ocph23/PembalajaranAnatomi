@@ -1,7 +1,7 @@
 ﻿<div class="col-lg-12" ng-init="Init()">
     <div class="card">
         <div class="card-header d-flex align-items-center">
-            <a data-target="#addMateri" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
+            <a data-target="#addMateri" ng-click="ModalTitle='Tambah Materi'" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
             <h2 class="h5 display">DAFTAR MATERI</h2>
         </div>
         <div class="card-block">
@@ -11,7 +11,7 @@
                         <th>#</th>
                         <th>Kode Materi</th>
                         <th>Judul Materi</th>
-                        <th style="width:10%; align-content:center" colspan="2">Action</th>
+                        <th style="width:10%; align-content:center" colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,8 +19,28 @@
                         <th scope="row">{{$index+1}}</th>
                         <td>{{item.KodeMateri}}</td>
                         <td>{{item.Judul}}</td>
-                        <td><a data-target="#addMateri" role="button" data-toggle="modal" ng-click="SelectedItem(item)" >Edit</a></td>
-                        <td><a href="#!submateri/{{item.Id}}">Details</a></td>
+                        <td>
+                            <div class="dropdown">
+                                <a href="!#" class="dropdown-toggle" data-toggle="dropdown">Action<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu" style="padding:10px">
+                                    <li>
+                                        <a href="#!submateri/{{item.Id}}"><i class="fa fa-list">Details</i></a>
+                                    </li>
+                                    <li>
+                                        <a href="" data-target="#addMateri" role="button" data-toggle="modal" ng-click="SelectedItem(item);ModalTitle='Edit Materi'"><i class="fa fa-edit">Edit</i></a>
+                                    </li>
+                                    <li>
+                                        <a href="" role="button" ng-click="DeleteMateri(item)"><i class="fa fa-remove">Hapus</i></a>
+                                    </li>
+                                  
+                                    <li>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
                     </tr>
                    
                 </tbody>
@@ -31,7 +51,7 @@
 
 <div class="container-fluid">
     <div class="col-md-12">
-        <div class="modal fade" id="addMateri" role="dialog" aria-labelledby="addMateri" aria-hidden="true">
+        <div class="modal fade" id="addMateri" role="dialog" my-modal aria-labelledby="addMateri" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form ng-submit="AddNewItem(model)">
@@ -41,7 +61,7 @@
                                 ×
                             </button>
                             <h4 class="modal-title" id="myModalLabel">
-                                Tambah Materi
+                               {{ModalTitle}}
                             </h4>
                         </div>
                         <div class="modal-body">
@@ -53,8 +73,8 @@
                                         <input type="text" required placeholder="Kode Materi" ng-model="model.KodeMateri" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Materi</label>
-                                        <textarea required placeholder="Materi" ng-model="model.Judul" class="form-control"></textarea>
+                                        <label>Judul Materi</label>
+                                        <textarea required placeholder="Judul Materi" ng-model="model.Judul" class="form-control"></textarea>
                                     </div>
 
                                 </div>

@@ -16,24 +16,5 @@ namespace Mobile.Droid
         {
             new TagEntryRenderer();
         }
-
-        public TagEntryRenderer()
-        {
-        }
-
-        public TagEntryRenderer(Context context) : base()
-        {
-        }
-
-        public TagEntryRenderer(Context context, IAttributeSet attrs) : base()
-        {
-        }
-
-        public TagEntryRenderer(Context context, IAttributeSet attrs, int defStyle) : base()
-        {
-        }
-        public TagEntryRenderer(IntPtr a, JniHandleOwnership b) : base()
-        {
-        }
     }
 }

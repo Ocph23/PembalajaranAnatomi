@@ -76,7 +76,7 @@ namespace Mobile.ViewModels
                 IsBusy = true;
                 Soals.Clear();
                 var datas = await SoalDataStore.GetItemsAsync(subitem.Id);
-                if(datas.Count()>=0)
+                if(datas.Count()>0)
                 {
                     var ramdomData = ShuffleList<soal>(datas.ToList());
                     var i = 1;
@@ -103,7 +103,7 @@ namespace Mobile.ViewModels
                     MessagingCenter.Send(new MessagingCenterAlert
                     {
                         Title = "Info",
-                        Message = "Daftar Soal Tidak Ada",
+                        Message = "Daftar Belum Tersedia",
                         Cancel = "OK"
                     }, "message");
                     await navigation.PopAsync();

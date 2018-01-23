@@ -59,7 +59,6 @@ namespace AppWebApi.Models
         public List<Option> Choices { get; set;  }
         //public CollectionView Options { get; set; }
         public int Number { get; internal set; }
-
         public Soal()
         {
             Choices = new List<Option>();

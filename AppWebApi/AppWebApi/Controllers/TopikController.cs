@@ -58,11 +58,20 @@ namespace AppWebApi.Controllers
         {
             using (var db = new OcphDbContext())
             {
-                var isUpdated = db.Topics.Delete( O => O.Id == id);
-                if (isUpdated)
-                    return Request.CreateResponse(HttpStatusCode.OK, "Data Berhasil Dihapus");
-                else
-                    return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Data Tidak Terhapus");
+                try
+                {
+                    var isUpdated = db.Topics.Delete(O => O.Id == id);
+                    if (isUpdated)
+                        return Request.CreateResponse(HttpStatusCode.OK, "Data Berhasil Dihapus");
+                    else
+                        return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Data Tidak Terhapus");
+                }
+                catch (Exception ex)
+                {
+
+                    return Request.CreateErrorResponse(HttpStatusCode.NotModified, "Data Tidak Dapat dihapus");
+                }
+                
             }
         }
     }

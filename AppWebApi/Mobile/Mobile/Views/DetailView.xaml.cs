@@ -7,6 +7,7 @@ using Mobile.Services;
 using Plugin.MediaManager.Abstractions;
 using Plugin.DownloadManager.Abstractions;
 using Xamarin.Forms.Internals;
+using Mobile.Helpers;
 
 namespace Mobile.Views
 {
@@ -103,7 +104,16 @@ namespace Mobile.Views
       
         private async void video_Clicked(object sender, EventArgs e)
         {
-           await Navigation.PushModalAsync(new Views.VideoView(subitem));
+            if(string.IsNullOrEmpty(subitem.Animasi))
+            {
+                MessagingCenter.Send(new MessagingCenterAlert
+                {
+                    Title = "Error",
+                    Message = "File Video Animasi Belum Tersedia",
+                    Cancel = "OK"
+                }, "message");
+            }else
+                await Navigation.PushModalAsync(new Views.VideoView(subitem));
         }
 
         private async void kuis_Clicked(object sender, EventArgs e)

@@ -620,6 +620,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\bootstrap-datepicker.css" />
+    <AndroidResource Include="img\HumanAnatomy.jpg" />
     <Content Include="jquery-timepicker-master\GruntFile.js" />
     <Content Include="jquery-timepicker-master\index.html" />
     <Content Include="jquery-timepicker-master\jquery.timepicker.css" />
@@ -675,6 +676,7 @@
     <Content Include="icons-reference\fonts\dashboard.eot" />
     <Content Include="icons-reference\fonts\dashboard.ttf" />
     <Content Include="icons-reference\fonts\dashboard.woff" />
+    <Content Include="js\demo.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />

@@ -11,8 +11,6 @@ namespace Mobile.ViewModels
     internal class DetailViewModel:BaseViewModel
     {
         private INavigation navigation;
-        private submateri subitem;
-       
 
         public Command LoadItemsCommand { get; private set; }
 

@@ -1,4 +1,5 @@
 ﻿using AppWebApi.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,26 @@ namespace AppWebApi.Controllers
                 return db.SubMateri.Select();
             }
         }
+        [Route("api/{materiId}/submateribyid")]
+        [HttpGet]
+        public submateri SubMateriGetById(int materiId)
+        {
+            using (var db = new OcphDbContext())
+            {
+                try
+                {
+                    var result = db.SubMateri.Where(O => O.Id == materiId).FirstOrDefault();
 
+                    return result;
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+
+            }
+        }
 
         [Route("api/{materiId}/submateri")]
         [HttpGet]
@@ -232,7 +252,7 @@ namespace AppWebApi.Controllers
                 {
                     using (var db = new OcphDbContext())
                     {
-                        var isUpdated = db.SubMateri.Update(O => new { O.JudulSubMateri, O.Penjelasan }, value, O => O.Id == value.Id);
+                        var isUpdated = db.SubMateri.Update(O => new {O.KodeSubMateri, O.JudulSubMateri, O.Penjelasan }, value, O => O.Id == value.Id);
                         if (isUpdated)
                             return Request.CreateResponse(HttpStatusCode.OK, value);
                         else

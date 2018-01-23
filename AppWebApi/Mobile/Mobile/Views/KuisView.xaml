@@ -19,7 +19,6 @@
                   />
             </StackLayout>
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="End">
-                <Button Text="Back"  Command="{Binding BackCommand}"></Button>
                 <Button Text="Next" Command="{Binding NextCommand}"></Button>
             </StackLayout>
         </Grid>

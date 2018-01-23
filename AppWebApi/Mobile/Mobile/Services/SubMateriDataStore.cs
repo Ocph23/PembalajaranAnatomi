@@ -14,7 +14,6 @@ namespace Mobile.Services
 {
     public class SubMateriDataStore : IDataStore<submateri>
     {
-        bool isInitialized;
         List<submateri> items;
         public Task<bool> AddItemAsync(submateri item)
         {
@@ -63,7 +62,7 @@ namespace Mobile.Services
             }
         }
 
-        public async Task<IEnumerable<submateri>> GetItemsAsync(bool forceRefresh = false)
+        public  Task<IEnumerable<submateri>> GetItemsAsync(bool forceRefresh = false)
         {
             throw new NotImplementedException();
         }
@@ -107,10 +106,7 @@ namespace Mobile.Services
                         Cancel = "OK"
                     }, "message");
                 }
-                finally
-                {
-                    isInitialized = true;
-                }
+               
             }
 
 

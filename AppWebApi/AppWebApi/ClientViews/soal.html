@@ -1,114 +1,132 @@
-﻿<section class="forms" ng-init="Init()">
-    <div class="container-fluid">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header d-flex align-items-center">
-                    <a data-target="#addMateri" ng-click="CreateNewSoal()" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
-                    <h2 class="h5 display">SOAL</h2>
+﻿<div class="col-md-12" ng-init="Init()">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex align-items-center">
+                <a data-target="#addMateri" ng-click="CreateNewSoal();ModalTitle='Tambah Soal'" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
+                <h2 class="h5 display">SOAL</h2>
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="col-md-6">
+                            <label>Kode Sub Materi : {{SubMateri.KodeSubMateri}} </label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Judul Sub Materi : {{SubMateri.JudulSubMateri}}</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-block">
-                    <div class="panel-group" id="panel-753119" ng-repeat="item in Soals">
-                        <div style="margin-top:10px" class="panel panel-default card">
-                            <div  class="panel-heading card-header d-flex align-items-center" style="color:brown;max-height:500px">
-                                <table class="table">
+                <div class="panel-group" id="panel-753119" ng-repeat="item in Soals">
+                    <div style="margin-top:10px" class="panel panel-default card">
+                        <div class="panel-heading card-header d-flex align-items-center" style="color:brown;max-height:500px">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td width="10px">{{$index+1}}</td>
+                                        <td>
+                                            <a class="panel-title" data-toggle="collapse" data-parent="#panel-753119" data-target="#{{item.Id}}">{{item.Value}}</a>
+                                        </td>
+                                        <td width="10px">
+                                            <div class="dropdown">
+                                                <a href="!#" class="dropdown-toggle" data-toggle="dropdown">Action<strong class="caret"></strong></a>
+                                                <ul class="dropdown-menu" style="padding:10px">
+                                                    <li>
+                                                        <a href="" role="button" data-target="#addMateri" data-toggle="modal" ng-click="SelectedItem(item);ModalTitle='Edit Soal'"><i class="fa fa-edit">Edit</i></a>
+
+                                                    </li>
+                                                    <li>
+                                                        <a href="" ng-click="DeleteSoal(item)"><i class="fa  fa-remove">Hapus</i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        <div id="{{item.Id}}" class="card-block panel-collapse collapse in">
+                            <div class="panel-body">
+                                <table style="margin-left:30px" class="table">
                                     <tbody>
-                                        <tr>
-                                            <td width="10px">{{$index+1}}</td>
-                                            <td>
-                                                <a class="panel-title" data-toggle="collapse" data-parent="#panel-753119" data-target="#{{item.Id}}">{{item.Value}}</a>
-                                            </td>
-                                           <td width="10px">
-                                               <a role="button" data-target="#addMateri" data-toggle="modal" ng-click="SelectedItem(item)">Edit</a>
-                                           </td>  
+
+                                        <tr ng-repeat="data in item.Choices">
+                                            <td style="width:80%">{{data.Value}}</td>
+                                            <td style="margin-top:10px;width:20%"><input disabled ng-model="data.IsTrueAnswer" type="checkbox" class="form-control" /></td>
                                         </tr>
+
                                     </tbody>
                                 </table>
-                            
-                            
-                            </div>
-                            <div id="{{item.Id}}" class="card-block panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <table style="margin-left:30px" class="table">
-                                        <tbody>
-
-                                            <tr ng-repeat="data in item.Choices">
-                                                <td style="width:80%">{{data.Value}}</td>
-                                                <td style="margin-top:10px;width:20%"><input disabled ng-model="data.IsTrueAnswer" type="checkbox" class="form-control" /></td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="col-md-12">
-                <div class="modal fade" id="addMateri" role="dialog" aria-labelledby="addMateri" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form ng-submit="SaveNewSoal(NewSoal)">
-                                <div class="modal-header">
+    </div>
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="modal fade" id="addMateri" my-modal role="dialog" aria-labelledby="addMateri" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form ng-submit="SaveNewSoal(NewSoal)">
+                            <div class="modal-header">
 
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        ×
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        Tambah Soal
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card">
-                                        <div class="card-block">
-                                            <div class="form-group">
-                                                <label>Soal</label>
-                                                <textarea style="height:100px;width:100%" type="text" required placeholder="Soal" ng-model="NewSoal.Value" class="form-control"></textarea>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-block">
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Pilihan</th>
-                                                                <th>Benar</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="item in NewSoal.Choices">
-                                                                <td><textarea style="height:50px"  type="text" ng-model="item.Value" class="form-control" required></textarea></td>
-                                                                <td style="margin-top:10px"><input style="margin-top:10px" ng-click="ChangeSelectAnswer(NewSoal.Choices,item)" ng-model="item.IsTrueAnswer" type="checkbox" class="form-control" /></td>
-                                                            </tr>
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    {{ModalTitle}}
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card">
+                                    <div class="card-block">
+                                        <div class="form-group">
+                                            <label>Soal</label>
+                                            <textarea style="height:100px;width:100%" type="text" required placeholder="Soal" ng-model="NewSoal.Value" class="form-control"></textarea>
                                         </div>
+                                        <div class="card">
+                                            <div class="card-block">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Pilihan</th>
+                                                            <th>Benar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in NewSoal.Choices">
+                                                            <td><textarea style="height:50px" type="text" ng-model="item.Value" class="form-control" required></textarea></td>
+                                                            <td style="margin-top:10px"><input style="margin-top:10px" ng-click="ChangeSelectAnswer(NewSoal.Choices,item)" ng-model="item.IsTrueAnswer" type="checkbox" class="form-control" /></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                        Keluar
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        Simpan
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    Keluar
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    Simpan
+                                </button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
 
             </div>
-        </div>
 
         </div>
-    </section>
-   
+    </div>
+
+</div>

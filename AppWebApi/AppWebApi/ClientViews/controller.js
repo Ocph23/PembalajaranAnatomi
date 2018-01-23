@@ -1,5 +1,5 @@
 ﻿angular.module("app.controller", [])
-    .controller("MateriController", function ($scope, MateriService) {
+    .controller("MateriController", function ($scope, MateriService, $http) {
         $scope.Items = [];
        
         $scope.Init = function () {
@@ -11,6 +11,7 @@
         $scope.SelectedItem = function (item)
         {
             $scope.model = item;
+            $scope.ModalTitle = "Edit Materi";
         }
 
 
@@ -20,22 +21,41 @@
                 MateriService.UpdateItem(item).then(function (response) {
                     $scope.model = {};
                     alert('Data Berhasil Diubah');
+                    $scope.dismiss();
                 })
             } else
             {
                 MateriService.AddItem(item).then(function (response) {
                     $scope.model = {};
                     alert('Data Berhasil Ditambah');
+                    $scope.dismiss();
                 })
             }
            
         }
+
+        $scope.DeleteMateri = function (item) {
+            $http({
+                method: 'DELETE',
+                url: "/api/Materi/" + item.Id,
+                data: item
+            }).then(function (response) {
+                var index = $scope.Items.indexOf(item);
+                $scope.Items.splice(index, 1);
+                alert("Materi Berhasil Dihapus");
+            }, function (error) {
+                alert("Materi Tidak Dapat Dihapus");
+            });
+        }
+
     })
 
-    .controller("SubMateriController", function ($scope, MateriService, SubMateriService, $routeParams,$location) {
+    .controller("SubMateriController", function ($scope, MateriService, SubMateriService, $http, $routeParams) {
         $scope.Items = [];
         $scope.Materi = {};
+        $scope.ModalTitle = "Tambah Sub Materi";
         $scope.Init = function () {
+           
             MateriService.GetItem($routeParams.id).then(function (data) {
                 $scope.Materi = data;
                 SubMateriService.source($routeParams.id).then(function (response) {
@@ -49,7 +69,23 @@
             item.MateriId = $scope.Materi.Id;
 
             SubMateriService.AddItem(item).then(function (response) {
-                $location.path('/detail/' + response.Id);
+                alert("Sub Materi Berhasil Ditambah");
+                $scope.dismiss();
+            });
+        }
+
+
+        $scope.DeleteSubMateri = function (item) {
+            $http({
+                method: 'DELETE',
+                url: "/api/SubMateri/" + item.Id,
+                data: item
+            }).then(function (response) {
+                var index = $scope.Items.indexOf(item);
+                $scope.Items.splice(index, 1);
+                alert("SubMateri Berhasil Dihapus");
+            }, function (error) {
+                alert("Sub Materi Tidak Dapat Dihapus");
             });
         }
 
@@ -70,12 +106,10 @@
                 SubMateriService.GetItem($routeParams.submateri).then(function (response) {
                     $scope.Item = response;
                     CKEDITOR.instances.editor1.setData(response.Penjelasan);
-                   
+
                 });
-            })
+            });
         }
-
-
 
         $scope.SavePenjelasan = function(item)
         {
@@ -84,6 +118,7 @@
            
             SubMateriService.UpdateItem(data).then(function(response){
                 alert("Penjelasan Tersimpan");
+
 
             })
         }
@@ -121,42 +156,7 @@
                 alert("Anda Belum Memilih File Foto");
             }
         }
-
-
-
-        $scope.UploadSound = function (file) {
-            if (file !== undefined) {
-                var url = "/api/" + $scope.Item.Id + "/sound";
-                var form = new FormData();
-                form.append("file", file);
-                var settings = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": url,
-                    "method": "Post",
-                    "headers": {
-                        "cache-control": "no-cache",
-                    },
-                    "processData": false,
-                    "contentType": false,
-                    "mimeType": "multipart/form-data",
-                    "data": form
-                }
-
-                $.ajax(settings).done(function (response, data) {
-                    alert("Foto Berhasil Diubah");
-                    var d = JSON.parse(response);
-                    $scope.Item.DataSound = d.DataSound;
-                    $scope.Item.Sound = d.Sound;
-                }, function (request, status, error) {
-                    alert(request.responseText);
-                    });
-
-            } else {
-                alert("Anda Belum Memilih File Foto");
-            }
-        }
-
+        
         $scope.UploadVideo = function (file) {
             if (file !== undefined) {
                 var url = "/api/" + $scope.Item.Id + "/animation";
@@ -193,7 +193,7 @@
 
         $scope.UpdateSubMateri = function (item) {
             SubMateriService.UpdateItem(item).then(function (response) {
-                alert("Infomrasi Sub Materi Berhasil Diubah")
+                alert("Informasi Sub Materi Berhasil Diubah")
             });
         }
 
@@ -211,6 +211,7 @@
         $scope.EditTopik = function(item)
         {
             $scope.Topik = item;
+            $scope.ModalTitle = 'Edit Topik';
         }
         $scope.ChangeSelectAnswer = function (Choices, item)
         {
@@ -238,7 +239,7 @@
                 }).then(function (response) {
                     alert("Topik Tersimpan");
                     $scope.Item.Topiks.push(response.data);
-                
+                    $scope.dismiss();
                 }, function (error) {
                     alert(error.Message);
                     // deferred.reject(error);
@@ -251,7 +252,7 @@
                     data: item
                 }).then(function (response) {
                     alert("Topik Tersimpan");
-                 
+                    $scope.dismiss();
                 }, function (error) {
                     alert(error.Message);
                     // deferred.reject(error);
@@ -259,7 +260,20 @@
             }
             $scope.Topik = {};
         }
-
+        $scope.DeleteTopik = function(item)
+        {
+            $http({
+                method: 'DELETE',
+                url: "/api/Topik/" + item.Id,
+                data: item
+            }).then(function (response) {
+                var index = $scope.Item.Topiks.indexOf(item);
+                $scope.Item.Topiks.splice(index, 1);
+                alert("Topik Berhasil Dihapus");
+            }, function (error) {
+                alert(error.Message);
+            });
+        }
 
     })
 
@@ -267,7 +281,7 @@
 
     .controller("SoalController", function ($scope,$http, MateriService, SubMateriService, $routeParams, $location) {
         $scope.Items = [];
-        $scope.Materi = {};
+        $scope.SubMateri = {};
         $scope.Init = function () {
             $http({
                 method: 'Get',
@@ -275,6 +289,20 @@
             }).then(function (response) {
                 $scope.Soals = response.data;
                 model = {};
+                $http({
+                    method: 'Get',
+                    url: "api/" + $routeParams.submateri+"/submateribyid"
+                }).then(function (response) {
+                    $scope.SubMateri = response.data;
+                }, function (error) {
+                    alert(error.Message);
+                    // deferred.reject(error);
+                });
+
+
+
+
+
             }, function (error) {
                 alert(error.Message);
                 // deferred.reject(error);
@@ -294,6 +322,7 @@
                     $scope.Soals.push(response.data);
                     alert("Data Tersimpan");
                     model = {};
+                    $scope.dismiss();
                 }, function (error) {
                     alert(error.Message);
                     // deferred.reject(error);
@@ -307,6 +336,7 @@
                 }).then(function (response) {
                     alert("Soal Berhasil Diubah");
                     model = {};
+                    $scope.dismiss();
                 }, function (error) {
                     alert(error.Message);
                     // deferred.reject(error);
@@ -331,6 +361,7 @@
         $scope.SelectedItem = function (item)
         {
             $scope.NewSoal = item;
+            $scope.ModalTitle = "Edit Soal";
         }
 
 
@@ -346,6 +377,19 @@
 
         }
 
+        $scope.DeleteSoal = function (item) {
+            $http({
+                method: 'DELETE',
+                url: "/api/Soal/" + item.Id,
+                data: item
+            }).then(function (response) {
+                var index = $scope.Soals.indexOf(item);
+                $scope.Soals.splice(index, 1);
+                alert("Soal Berhasil Dihapus");
+            }, function (error) {
+                alert(error.Message);
+            });
+        }
 
 
     })

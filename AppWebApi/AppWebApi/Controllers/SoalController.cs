@@ -39,7 +39,7 @@ namespace AppWebApi.Controllers
         {
             using (var db = new OcphDbContext())
             {
-                var result = db.Soals.Where(O => O.SubMateriId== materiId);
+                var result = db.Soals.Where(O => O.SubMateriId== materiId).ToList();
                 foreach(var item in result)
                 {
                     item.Choices = db.Options.Where(O => O.SoalId == item.Id).ToList();
@@ -150,8 +150,7 @@ namespace AppWebApi.Controllers
 
         // DELETE: api/Soal/5
 
-        [Route("api/{soalId}/DeleteSoal")]
-        [HttpPut]
+        [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
 
@@ -161,7 +160,7 @@ namespace AppWebApi.Controllers
                 try
                 {
                     var OptionDelete = db.Options.Delete(O=>O.SoalId == id);
-                    var soalDelete = db.Options.Delete( O => O.Id == id);
+                    var soalDelete = db.Soals.Delete( O => O.Id == id);
                     if (OptionDelete && soalDelete)
                     {
                         trans.Commit();
