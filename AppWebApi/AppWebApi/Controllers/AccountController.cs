@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AppWebApi.Models;
+using DAL.AspNet.SimpleAuth.Mysql;
+using System.Web.Security;
+using DAL.AspNet.SimpleAuth.Mysql.Models;
 
 namespace AppWebApi.Controllers
 {
@@ -71,24 +74,41 @@ namespace AppWebApi.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
+            }else
+            {
+                var result = await LoginAction(model);
+
+                if (result != null)
+                {
+                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
+                    return RedirectToAction("Index", "Home");
+
+                }
+
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+
             }
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+
+
+
+        }
+
+        public async Task<users> LoginAction(LoginViewModel model)
+        {
+            users result = null;
+            using (var ctx = new AuthContext())
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+
+                result = ctx.Users.Where(O => O.Email == model.Email && O.Password == model.Password).FirstOrDefault();
+             
+
             }
+         return  await Task.FromResult(result);
+
         }
 
         //
@@ -391,7 +411,8 @@ namespace AppWebApi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            FormsAuthentication.SignOut();
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
 

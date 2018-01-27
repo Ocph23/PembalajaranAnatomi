@@ -51,7 +51,11 @@ namespace Mobile.Views
             base.OnAppearing();
             if (vm.MediaPlayer.Status == MediaPlayerStatus.Playing)
                 await vm.MediaPlayer.Stop();
-            DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);
+
+            if (DependencyService.Get<IFileService>().FileExists(subitem.Animasi))
+            {
+                DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);
+            }
 
             if(tagItem!=null)
                 await vm.MediaPlayer.Seek(tagItem.PositionStart);
@@ -102,12 +106,7 @@ namespace Mobile.Views
                 sound.Source = "soundOn";
             }
 
-            if (DependencyService.Get<IFileService>().FileExists(subitem.Animasi))
-            {
-              //  DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);
-
-            }
-            else
+            if (!DependencyService.Get<IFileService>().FileExists(subitem.Animasi))
             {
                 Download(subitem);
             }
@@ -163,15 +162,29 @@ namespace Mobile.Views
                     switch (((IDownloadFile)sender).Status)
                     {
                         case DownloadFileStatus.COMPLETED:
-                            DependencyService.Get<IFileService>().PlayMedia(subitem.Animasi);
+                            MessagingCenter.Send(new MessagingCenterAlert
+                            {
+                                Title = "Info",
+                                Message = "Download Berhasil...",
+                                Cancel = "OK"
+                            }, "message");
+                            DependencyService.Get<IFileService>().PlayMediaVideo(subitem.Animasi);
                             break;
                         case DownloadFileStatus.FAILED:
+                            MessagingCenter.Send(new MessagingCenterAlert
+                            {
+                                Title = "Error",
+                                Message = "Terjadi Kesalahan",
+                                Cancel = "OK"
+                            }, "message");
+                            break;
                         case DownloadFileStatus.CANCELED:
-
-                            // Get the path this file was saved to. When you didn't set a custom path, this will be some temporary directory.
-                            // var nativeDownloadManager = (Plugin.DownloadManager)ApplicationContext.GetSystemService(DownloadService);
-                            // System.Diagnostics.Debug.WriteLine(nativeDownloadManager.GetUriForDownloadedFile(((DownloadFileImplementation)sender).Id));
-
+                            MessagingCenter.Send(new MessagingCenterAlert
+                            {
+                                Title = "Error",
+                                Message = "Download File Dibatalkan",
+                                Cancel = "OK"
+                            }, "message");
                             break;
                     }
                 }

@@ -1,7 +1,7 @@
 ﻿<div class="col-lg-12" ng-init="Init()">
     <div class="card">
         <div class="card-header d-flex align-items-center">
-            <a data-target="#addMateri" ng-click="ModalTitle='Tambah Materi'" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
+            <a data-target="#addMateri" ng-click="ModalTitle='Tambah Materi';IsInsert=true" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
             <h2 class="h5 display">DAFTAR MATERI</h2>
         </div>
         <div class="card-block">
@@ -18,16 +18,16 @@
                     <tr ng-repeat="item in Items">
                         <th scope="row">{{$index+1}}</th>
                         <td>{{item.KodeMateri}}</td>
-                        <td>{{item.Judul}}</td>
+                        <td>{{item.JudulMateri}}</td>
                         <td>
                             <div class="dropdown">
                                 <a href="!#" class="dropdown-toggle" data-toggle="dropdown">Action<strong class="caret"></strong></a>
                                 <ul class="dropdown-menu" style="padding:10px">
                                     <li>
-                                        <a href="#!submateri/{{item.Id}}"><i class="fa fa-list">Details</i></a>
+                                        <a href="#!submateri/{{item.KodeMateri}}"><i class="fa fa-list">Sub Materi</i></a>
                                     </li>
                                     <li>
-                                        <a href="" data-target="#addMateri" role="button" data-toggle="modal" ng-click="SelectedItem(item);ModalTitle='Edit Materi'"><i class="fa fa-edit">Edit</i></a>
+                                        <a href="" data-target="#addMateri" role="button" data-toggle="modal" ng-click="ModalTitle='Edit Materi';IsInsert=false;SelectedItem(item)"><i class="fa fa-edit">Edit</i></a>
                                     </li>
                                     <li>
                                         <a href="" role="button" ng-click="DeleteMateri(item)"><i class="fa fa-remove">Hapus</i></a>
@@ -42,7 +42,6 @@
                         <td></td>
                         <td></td>
                     </tr>
-                   
                 </tbody>
             </table>
         </div>
@@ -54,7 +53,7 @@
         <div class="modal fade" id="addMateri" role="dialog" my-modal aria-labelledby="addMateri" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form ng-submit="AddNewItem(model)">
+                    <form action="" ng-submit="AddNewItem(model,IsInsert)">
                         <div class="modal-header">
 
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -70,11 +69,11 @@
 
                                     <div class="form-group">
                                         <label>Kode Materi</label>
-                                        <input type="text" required placeholder="Kode Materi" ng-model="model.KodeMateri" class="form-control">
+                                        <input  maxlength="2" type="text" ng-disabled="IsInsert==false" required placeholder="Kode Materi" ng-model="model.KodeMateri" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Judul Materi</label>
-                                        <textarea required placeholder="Judul Materi" ng-model="model.Judul" class="form-control"></textarea>
+                                        <textarea maxlength="100" required placeholder="Judul Materi" ng-model="model.JudulMateri" class="form-control"></textarea>
                                     </div>
 
                                 </div>

@@ -11,5 +11,6 @@ namespace Mobile
         Task<T> GetItemAsync(string id);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
         Task<IEnumerable<T>> GetItemsAsync(int Id);
+        Task<IEnumerable<T>> GetItemsAsync(string Id);
     }
 }

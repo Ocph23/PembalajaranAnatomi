@@ -1,34 +1,33 @@
-﻿using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
+using DAL;
 
 namespace AppWebApi.Models
 {
     [TableName("topik")]
     public class topik : BaseNotifyProperty
     {
-        [PrimaryKey("IdTopik")]
-        [DbColumn("IdTopik")]
-        public int Id
+        [PrimaryKey("KodeTopik")]
+        [DbColumn("KodeTopik")]
+        public string KodeTopik
         {
-            get { return _id; }
+            get { return _idtopik; }
             set
             {
-                _id = value;
-                OnPropertyChange("Id");
+                SetProperty(ref _idtopik, value);
             }
         }
 
         [DbColumn("JudulTopik")]
-        public string Judul
+        public string JudulTopik
         {
-            get { return _judul; }
+            get { return _judultopik; }
             set
             {
-                _judul = value;
-                OnPropertyChange("Judul");
+                SetProperty(ref _judultopik, value);
             }
         }
 
@@ -38,8 +37,7 @@ namespace AppWebApi.Models
             get { return _posisimulai; }
             set
             {
-                _posisimulai = value;
-                OnPropertyChange("PosisiMulai");
+                SetProperty(ref _posisimulai, value);
             }
         }
 
@@ -49,27 +47,27 @@ namespace AppWebApi.Models
             get { return _posisiakhir; }
             set
             {
-                _posisiakhir = value;
-                OnPropertyChange("PosisiAkhir");
+                SetProperty(ref _posisiakhir, value);
             }
         }
 
-        [DbColumn("IdSubMateri")]
-        public int SubMateriId
+        [DbColumn("KodeSubMateri")]
+        public string KodeSubMateri
         {
-            get { return _submateriid; }
+            get { return _submateri_kodesubmateri; }
             set
             {
-                _submateriid = value;
-                OnPropertyChange("SubMateriId");
+                SetProperty(ref _submateri_kodesubmateri, value);
             }
         }
 
-        private int _id;
-        private string _judul;
+        private string _idtopik;
+        private string _judultopik;
         private TimeSpan _posisimulai;
         private TimeSpan _posisiakhir;
-        private int _submateriid;
+        private int _idsubmateri;
+        private string _submateri_kodesubmateri;
     }
-
 }
+
+

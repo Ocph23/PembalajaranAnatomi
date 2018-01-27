@@ -1,102 +1,87 @@
-using System; 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
- 
- namespace AppWebApi.Models 
-{ 
-     [TableName("submateri")] 
-     public class submateri:BaseNotifyProperty  
-   {
-          [PrimaryKey("IdSubMateri")] 
-          [DbColumn("IdSubMateri")] 
-          public int Id 
-          { 
-               get{return _id;} 
-               set{ 
-                      _id=value; 
-                     OnPropertyChange("Id");
-                     }
-          } 
 
-          [DbColumn("KodeSubMateri")] 
-          public string KodeSubMateri 
-          { 
-               get{return _kodesubmateri;} 
-               set{ 
-                      _kodesubmateri=value; 
-                     OnPropertyChange("KodeSubMateri");
-                     }
-          } 
+namespace AppWebApi.Models
+{
+    [TableName("submateri")]
+    public class submateri : BaseNotifyProperty
+    {
+        [PrimaryKey("KodeSubMateri")]
+        [DbColumn("KodeSubMateri")]
+        public string KodeSubMateri
+        {
+            get { return _kodesubmateri; }
+            set
+            {
+                SetProperty(ref _kodesubmateri, value);
+            }
+        }
 
-          [DbColumn("JudulSubMateri")] 
-          public string JudulSubMateri 
-          { 
-               get{return _judulsubmateri;} 
-               set{ 
-                      _judulsubmateri=value; 
-                     OnPropertyChange("JudulSubMateri");
-                     }
-          } 
+        [DbColumn("JudulSubMateri")]
+        public string JudulSubMateri
+        {
+            get { return _judulsubmateri; }
+            set
+            {
+                SetProperty(ref _judulsubmateri, value);
+            }
+        }
 
-          [DbColumn("Gambar")] 
-          public string Gambar 
-          { 
-               get{return _gambar;} 
-               set{ 
-                      _gambar=value; 
-                     OnPropertyChange("Gambar");
-                     }
-          } 
+        [DbColumn("Gambar")]
+        public string Gambar
+        {
+            get { return _gambar; }
+            set
+            {
+                SetProperty(ref _gambar, value);
+            }
+        }
 
-         
+        [DbColumn("Animasi")]
+        public string Animasi
+        {
+            get { return _animasi; }
+            set
+            {
+                SetProperty(ref _animasi, value);
+            }
+        }
 
-          [DbColumn("Animasi")] 
-          public string Animasi 
-          { 
-               get{return _animasi;} 
-               set{ 
-                      _animasi=value; 
-                     OnPropertyChange("Animasi");
-                     }
-          } 
+        [DbColumn("Penjelasan")]
+        public string Penjelasan
+        {
+            get { return _penjelasan; }
+            set
+            {
+                SetProperty(ref _penjelasan, value);
+            }
+        }
 
-          [DbColumn("Penjelasan")] 
-          public string Penjelasan 
-          { 
-               get{return _penjelasan;} 
-               set{ 
-                      _penjelasan=value; 
-                     OnPropertyChange("Penjelasan");
-                     }
-          } 
+        [DbColumn("KodeMateri")]
+        public string KodeMateri
+        {
+            get { return _kodemateri; }
+            set
+            {
+                SetProperty(ref _kodemateri, value);
+            }
+        }
 
-          [DbColumn("IdMateri")] 
-          public int MateriId
-        { 
-               get{return _materiId;} 
-               set{ 
-                      _materiId=value; 
-                     OnPropertyChange("MateriId");
-                     }
-          }
+        public List<topik> Topiks { get; set; }
+        public byte[] DataGambar { get; set; }
+        public byte[] DataAnimasi { get; set; }
 
-        public byte[] DataGambar { get; internal set; }
-        public byte[] DataSound { get; internal set; }
-        public byte[] DataAnimasi { get; internal set; }
-        public List<topik> Topiks { get; internal set; }
-
-        private int  _id;
-           private string  _kodesubmateri;
-           private string  _judulsubmateri;
-           private string  _gambar;
-           private string  _sound;
-           private string  _animasi;
-           private string  _penjelasan;
-           private int  _materiId;
-      }
+        private string _kodesubmateri;
+        private string _judulsubmateri;
+        private string _gambar;
+        private string _animasi;
+        private string _penjelasan;
+        private string _kodemateri;
+    }
 }
 
 

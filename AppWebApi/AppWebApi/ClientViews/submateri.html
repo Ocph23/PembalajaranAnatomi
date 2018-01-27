@@ -6,21 +6,36 @@
         </div>
         <div class="card-block">
             <div class="row">
-                <div class="col-10">
+                <div class="col-10" ng-show="!withCombo">
                     <div class="col-md-6">
                         <label>Kode Materi : {{Materi.KodeMateri}} </label>
                     </div>
                     <div class="col-md-6">
-                        <label>Judul Materi : {{Materi.Judul}}</label>
+                        <label>Judul Materi : {{Materi.JudulMateri}}</label>
                     </div>
+                </div>
+                <div class="col-10" ng-show="withCombo">
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Kode Materi :</label>
+                        <div class="col-sm-8">
+                            {{Materi.KodeMateri}}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 form-control-label">Judul Materi :</label>
+                        <div class="col-sm-8">
+                            <select ng-change="OptionSelected()" class="form-control inl" ng-options="item as item.JudulMateri for item in Materis track by item.KodeMateri" ng-model="Materi"></select>
+                        </div>
+                    </div>
+                  
                 </div>
             </div>
             
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Kode Sub Materi</th>
+                        <th style="width:5%">#</th>
+                        <th  style="width:15%">Kode Sub Materi</th>
                         <th>Sub Materi</th>
                         <th style="width:10%; align-content:center"></th>
                     </tr>
@@ -35,10 +50,13 @@
                                 <a href="!#" class="dropdown-toggle" data-toggle="dropdown">Action<strong class="caret"></strong></a>
                                 <ul class="dropdown-menu" style="padding:10px">
                                     <li>
-                                        <a href="#!detail/{{Materi.Id}}/{{item.Id}}" ng-click="ModalTitle='Edit Sub Materi'"><i class="fa fa-edit">Edit</i></a>
+                                        <a href="#!detail/{{Materi.KodeMateri}}/{{item.KodeSubMateri}}"><i class="fa fa-edit">Edit</i></a>
                                     </li>
                                     <li>
-                                        <a href="#!soal/{{item.Id}}"><i class="fa fa-list">Soal</i></a>
+                                        <a href="#!soal/{{item.KodeSubMateri}}"><i class="fa fa-list">Kuis</i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#!topik/{{item.KodeSubMateri}}"><i class="fa fa-clock-o">Topik</i></a>
                                     </li>
                                     <li>
                                         <a href="" ng-click="DeleteSubMateri(item)"><i class="fa  fa-remove">Hapus</i></a>
@@ -76,11 +94,11 @@
 
                                 <div class="form-group">
                                     <label>Kode Sub Materi</label>
-                                    <input type="text" placeholder="Kode Sub Materi" ng-model="model.KodeSubMateri" class="form-control">
+                                    <input maxlength="6" type="text" placeholder="Kode Sub Materi" ng-model="model.KodeSubMateri" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label>Judul Sub Materi</label>
-                                    <textarea placeholder="Judul Sub Materi" ng-model="model.JudulSubMateri" class="form-control"></textarea>
+                                    <textarea maxlength="100" placeholder="Judul Sub Materi" ng-model="model.JudulSubMateri" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>

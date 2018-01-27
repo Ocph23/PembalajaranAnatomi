@@ -13,7 +13,7 @@ namespace Mobile
     {
         public IDataStore<materi> MateriDataStore => DependencyService.Get<IDataStore<materi>>();
         public IDataStore<submateri> SubMateriDataStore => DependencyService.Get<IDataStore<submateri>>();
-        public IDataStore<soal> SoalDataStore => DependencyService.Get<IDataStore<soal>>();
+        public IDataStore<kuis> SoalDataStore => DependencyService.Get<IDataStore<kuis>>();
 
         bool isBusy = false;
         public bool IsBusy

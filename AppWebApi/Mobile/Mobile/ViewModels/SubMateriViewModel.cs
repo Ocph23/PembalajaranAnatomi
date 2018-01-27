@@ -37,16 +37,9 @@ namespace Mobile.ViewModels
             this.navigation = navigation;
             SubMateris = new ObservableCollection<Models.submateri>();
             LoadItemsCommand = new Command((x) => ExecuteLoadItemsCommand(x));
-            ExecuteLoadItemsCommand(null);
+          
            
-
-
-            /*
-            SubMateris.Add(new submateri { Id = 1, KodeSubMateri = "SP001", JudulSubMateri = "Usus Besar" });
-            SubMateris.Add(new submateri { Id = 2, KodeSubMateri = "SP002", JudulSubMateri = "Lambung" });
-            SubMateris.Add(new submateri { Id = 3, KodeSubMateri = "SP003", JudulSubMateri = "Usus Kecil" });
-            SubMateris.Add(new submateri { Id = 4, KodeSubMateri = "SP004", JudulSubMateri = "Teggorokan" });
-            */
+            
         }
 
        
@@ -58,7 +51,7 @@ namespace Mobile.ViewModels
             {
                 IsBusy = true;
                 SubMateris.Clear();
-                var items = await SubMateriDataStore.GetItemsAsync(item.Id);
+                var items = await SubMateriDataStore.GetItemsAsync(item.KodeMateri);
                 foreach (var item in items)
                 {
                     SubMateris.Add(item);

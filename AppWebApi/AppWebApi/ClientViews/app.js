@@ -82,6 +82,11 @@
                 controller: "SoalController"
             })
 
+            .when("/topik/:submateri", {
+                templateUrl: "../ClientViews/topik.html",
+                controller: "TopikController"
+            })
+
 
             ;
     })
@@ -136,7 +141,7 @@
             } else {
                 var data = {};
                 angular.forEach(collection, function (value, key) {
-                    if (value.Id == id)
+                    if (value.KodeMateri == id)
                         data = value;
                 })
                 deferred.resolve(data);
@@ -170,15 +175,14 @@
             deferred = $q.defer();
             $http({
                 method: 'PUT',
-                url:"/api/materi?Id="+item.Id,
+                url: "/api/materi?Id=" + item.KodeMateri,
                 data: item
             }).then(function (response) {
                 var data = response.data;
                 angular.forEach(collection, function (value, key) {
-                    if (value.Id == item.Id)
+                    if (value.KodeMateri == item.KodeMateri)
                     {
-                        value.KodeMateri = data.KodeMateri;
-                        value.Judul = data.Judul;
+                        value.JudulMateri = data.JudulMateri;
                     }
                 });
                 deferred.resolve(response.data);
@@ -214,7 +218,6 @@
         return service;
     })
 
-
     .factory("SubMateriService", function ($http, $q) {
         var service = {};
         var isInstance = false;
@@ -248,7 +251,7 @@
                     url: "/api/submateri/" + id,
                 }).then(function (response) {
                     // With the data succesfully returned, we can resolve promise and we can access it in controller
-
+                    collection = response.data;
                     deferred.resolve(response.data);
 
                 }, function (error) {
@@ -290,16 +293,10 @@
             deferred = $q.defer();
             $http({
                 method: 'PUT',
-                url: "/api/submateri?Id="+item.Id,
+                url: "/api/submateri?Id=" + item.KodeSubMateri,
                 data: item
             }).then(function (response) {
                 var data = response.data;
-                angular.forEach(collection, function (value, key) {
-                    if (value.Id == item.Id) {
-                        value.KodeMateri = data.KodeMateri;
-                        value.Judul = data.Judul;
-                    }
-                });
                 deferred.resolve(response.data);
             }, function (error) {
                 alert(error.Message);

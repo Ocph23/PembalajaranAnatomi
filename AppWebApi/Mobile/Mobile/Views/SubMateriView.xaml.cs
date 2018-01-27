@@ -26,6 +26,15 @@ namespace Mobile.Views
             this.BindingContext = new ViewModels.SubMateriViewModel(Navigation,item);
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var vm = BindingContext as ViewModels.SubMateriViewModel;
+            vm.LoadItemsCommand.Execute(null);
+
+        }
+
         private async void ItemsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var subitem = e.SelectedItem as Models.submateri;

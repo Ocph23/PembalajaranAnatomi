@@ -15,12 +15,12 @@ namespace Mobile.ViewModels
 
         private submateri subitem;
         private INavigation navigation;
-        private soal _soal;
-        public ObservableCollection<soal> Soals { get; set; }
+        private kuis _soal;
+        public ObservableCollection<kuis> Soals { get; set; }
         public Command LoadItemsCommand { get; }
         public Command NextCommand { get; }
 
-        public soal Soal {
+        public kuis Soal {
             get { return _soal; }
             set
             {
@@ -35,7 +35,7 @@ namespace Mobile.ViewModels
             this.Nama = nama;
             this.subitem = subitem;
             this.navigation = navigation;
-            Soals = new ObservableCollection<Models.soal>();
+            Soals = new ObservableCollection<Models.kuis>();
             LoadItemsCommand = new Command((x) => ExecuteLoadItemsCommand(x));
             NextCommand = new Command((x) => NextCommandAction(x));
             ExecuteLoadItemsCommand(null);
@@ -75,15 +75,15 @@ namespace Mobile.ViewModels
             {
                 IsBusy = true;
                 Soals.Clear();
-                var datas = await SoalDataStore.GetItemsAsync(subitem.Id);
+                var datas = await SoalDataStore.GetItemsAsync(subitem.KodeSubMateri);
                 if(datas.Count()>0)
                 {
-                    var ramdomData = ShuffleList<soal>(datas.ToList());
+                    var ramdomData = ShuffleList<kuis>(datas.ToList());
                     var i = 1;
                     foreach (var item in ramdomData)
                     {
                         var aData = item;
-                        aData.Choices = ShuffleList<Option>(item.Choices);
+                     //   aData.Choices = ShuffleList<Option>(item.Choices);
                         item.Number = i;
                         Soals.Add(aData);
                         i++;

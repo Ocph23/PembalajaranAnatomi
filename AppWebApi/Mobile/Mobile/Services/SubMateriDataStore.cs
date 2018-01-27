@@ -27,12 +27,12 @@ namespace Mobile.Services
 
         public async Task<submateri> GetItemAsync(string id)
         {
-            var Id = Convert.ToInt32(id);
+        //    var Id = Convert.ToInt32(id);
             using (var service = new RestClient())
             {
                 try
                 {
-                    var url = string.Format("/api/submateri?id={0}", Id);
+                    var url = string.Format("/api/submateri?id={0}", id);
                     var response = await service.GetAsync(url);
                     if (response.IsSuccessStatusCode)
                     {
@@ -72,7 +72,8 @@ namespace Mobile.Services
             throw new NotImplementedException();
         }
 
-        public async Task InitializeAsync( int Id)
+       
+        public async Task InitializeAsync(string Id)
         {
             items = new List<submateri>();
             using (var service = new RestClient())
@@ -106,17 +107,23 @@ namespace Mobile.Services
                         Cancel = "OK"
                     }, "message");
                 }
-               
+
             }
 
 
         }
 
-        public async Task<IEnumerable<submateri>> GetItemsAsync(int Id)
+       
+
+        public async Task<IEnumerable<submateri>> GetItemsAsync(string Id)
         {
             await InitializeAsync(Id);
             return await Task.FromResult(items);
+        }
 
+        public Task<IEnumerable<submateri>> GetItemsAsync(int Id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

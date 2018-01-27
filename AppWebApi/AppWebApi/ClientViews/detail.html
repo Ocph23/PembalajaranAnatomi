@@ -19,7 +19,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">Judul Materi</label>
                                 <div class="col-sm-10">
-                                    <label class="col-sm-10 form-control-label">{{Materi.Judul}}</label>
+                                    <label class="col-sm-10 form-control-label">{{Materi.JudulMateri}}</label>
                                 </div>
                             </div>
                             <div class="line"></div>
@@ -27,7 +27,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 form-control-label">Kode Sub Materi</label>
                                 <div class="col-sm-10">
-                                    <input type="text" ng-model="Item.KodeSubMateri" class="col-sm-4 form-control-label" />
+                                    <input disabled type="text" ng-model="Item.KodeSubMateri" class="col-sm-4 form-control-label" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -41,15 +41,12 @@
                                 <div class="col-sm-10">
                                     <input type="submit" value="Simpan" class="btn btn-primary">
                                 </div>
-                                
                             </div>
-                            
-
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h2 class="h5 display">Penjelasan</h2>
@@ -65,7 +62,6 @@
                             <div class="form-group">
                                 <input type="submit" value="Simpan" class="btn btn-primary">
                             </div>
-                          
                         </form>
                     </div>
                 </div>
@@ -76,10 +72,9 @@
                         <h2 class="h5 display display">Gambar</h2>
                     </div>
                     <div class="card-block">
-                        <p>Tambha Gambar</p>
                         <form>
-                            <div class="col-md-12 well" style="height:250px" file-canvas>
-                                <img style="height:150px;width:100%" src="data:image/gif;base64,{{Item.DataGambar}}" />
+                            <div class="col-md-12 well" style="height:350px" file-canvas>
+                                <img style="height:100%;width:100%" src="data:image/gif;base64,{{Item.DataGambar}}" />
                               
                                 <input style="visibility:hidden" type="file" file-model="myFile" />
                             </div>
@@ -88,121 +83,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
-                        <h2 class="h5 display">Materi Animasi</h2>
+                        <h2 class="h5 display">Video Animasi</h2>
                     </div>
                     <div class="row card-block">
-                        <div class="col-lg-6">
-                            <p>Lorem ipsum dolor sit amet consectetur.</p>
-                            <form>
-                                <div class="col-md-12 well" style="height:250px" file-canvas>
-                                    <video width="320" height="240" controls src="data:video/mp4;base64,{{Item.DataAnimasi}}"></video>
-                                    <input style="visibility:hidden" type="file" file-model="videoFile" accept="*.mp4" />
-                                </div>
-                                <button class="btn btn-primary" ng-click="UploadVideo(videoFile)">Simpan</button>
-                            </form>
-                        </div>
-                        <div class="col-lg-6">
-                            <a data-target="#addTopik" ng-click="CreateNewSoal();ModalTitle='Tambah Topik'" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
-
-                            Topik Dalam Video
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Topik</th>
-                                        <th>Mulai</th>
-                                        <th>Selesai</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="item in Item.Topiks">
-                                        <td>{{item.Judul}}</td>
-                                        <td style="margin-top:10px">{{item.PosisiMulai}}</td>
-                                        <td style="margin-top:10px">{{item.PosisiAkhir}}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <a href="!#" class="dropdown-toggle" data-toggle="dropdown">Action<strong class="caret"></strong></a>
-                                                <ul class="dropdown-menu" style="padding:10px">
-                                                 
-                                                    <li>
-                                                        <a href="" data-target="#addTopik" ng-click="EditTopik(item);" role="button" data-toggle="modal" class="btn"><i class="fa fa-pencil">Edit</i></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="" class="btn" ng-click="DeleteTopik(item)" role="button"><i class="fa fa-remove">Hapus</i></a>
-                                                    </li>
-                                                    
-                                                </ul>
-                                            </div>
-                                        </td>
-                                       
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                         
-                        </div>
-                </div>
-            </div>
-
-         
-
-        </div>
-
-
-        
-
-        <div class="container-fluid">
-            <div class="col-md-12">
-                <div class="modal fade" id="addTopik" my-modal role="dialog" aria-labelledby="addMateri" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form ng-submit="SaveNewTopik(Topik)">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                        ×
-                                    </button>
-                                    <h4 class="modal-title" id="myModalLabel">
-                                       {{ModalTitle}}
-                                    </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <thead>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="text" ng-model="Topik.Judul" class="form-control" required /></td>
-                                                <td style="margin-top:10px"><input ng-model="Topik.PosisiMulai" value="00:00:00" id="posisiMulai" type="text" class="form-control" required /></td>
-                                                <td style="margin-top:10px"><input ng-model="Topik.PosisiAkhir" value="00:00:00" id="posisiAkhir" type="text" class="form-control" required /></td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                        Keluar
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        Simpan
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <script>
-                            $('#posisiAkhir').timepicker({ 'timeFormat': 'H:i:s' });
-                            $('#posisiMulai').timepicker({ 'timeFormat': 'H:i:s' });
-                        </script>
+                        <form>
+                            <div class="col-md-12 well" style="height:350px" file-canvas>
+                                <video width="320" height="320" controls src="data:video/mp4;base64,{{Item.DataAnimasi}}"></video>
+                                <input style="visibility:hidden" type="file" file-model="videoFile" accept="*.mp4" />
+                            </div>
+                            <button class="btn btn-primary" ng-click="UploadVideo(videoFile)">Simpan</button>
+                        </form>
+                      
                     </div>
-
                 </div>
-
             </div>
         </div>
 

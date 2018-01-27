@@ -21,11 +21,11 @@ namespace AppWebApi.Controllers
         }
 
         // GET: api/Materi/5
-        public materi Get(int id)
+        public materi Get(string id)
         {
             using (var db = new OcphDbContext())
             {
-                return db.Materi.Where(O => O.Id == id).FirstOrDefault();
+                return db.Materi.Where(O => O.KodeMateri == id).FirstOrDefault();
             }
         }
 
@@ -40,8 +40,7 @@ namespace AppWebApi.Controllers
                 {
                     using (var db = new OcphDbContext())
                     {
-                        value.Id=db.Materi.InsertAndGetLastID(value);
-                        if (value.Id > 0)
+                        if (db.Materi.Insert(value))
                             return Request.CreateResponse(HttpStatusCode.OK, value);
                         else
                         {
@@ -57,7 +56,7 @@ namespace AppWebApi.Controllers
         }
 
         // PUT: api/Materi/5
-        public HttpResponseMessage Put(int id, [FromBody]materi value)
+        public HttpResponseMessage Put(string id, [FromBody]materi value)
         {
             try
             {
@@ -67,7 +66,7 @@ namespace AppWebApi.Controllers
                 {
                     using (var db = new OcphDbContext())
                     {
-                        var isUpdated= db.Materi.Update(O=>new {O.KodeMateri,O.Judul },value, O=>O.Id==value.Id);
+                        var isUpdated= db.Materi.Update(O=>new {O.JudulMateri},value, O=>O.KodeMateri==value.KodeMateri);
                         if (isUpdated)
                             return Request.CreateResponse(HttpStatusCode.OK, value);
                         else
@@ -88,7 +87,7 @@ namespace AppWebApi.Controllers
 
 
         // DELETE: api/Materi/5
-        public HttpResponseMessage Delete(int id)
+        public HttpResponseMessage Delete(string id)
         {
             try
             {
@@ -98,7 +97,7 @@ namespace AppWebApi.Controllers
                 {
                     using (var db = new OcphDbContext())
                     {
-                        var isDeleted= db.Materi.Delete( O => O.Id == id);
+                        var isDeleted= db.Materi.Delete( O => O.KodeMateri == id);
                         if (isDeleted)
                             return Request.CreateResponse(HttpStatusCode.OK, id);
                         else

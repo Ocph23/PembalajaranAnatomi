@@ -26,20 +26,15 @@
                   @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
                   @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
               </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
+                <div class="form-group row">
+                    <div class="col-md-2">@Html.CheckBoxFor(m => m.RememberMe)</div>
+                    <div class="col-md-6">@Html.LabelFor(m => m.RememberMe)</div>
                 </div>
               
               <input type="submit" id="login" value="Login" class="btn btn-primary"/>
 
               <!-- This should be submit button but I replaced it with <a> for demo purposes-->
            }
-              <a href="#" class="forgot-pass">Forgot Password?</a><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>
           </div>
           <div class="copyrights text-center">
             <p><a href="" class="external"></a></p>

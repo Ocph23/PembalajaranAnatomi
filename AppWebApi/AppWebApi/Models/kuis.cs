@@ -1,122 +1,113 @@
-using System; 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
- 
- namespace AppWebApi.Models 
-{ 
-     [TableName("kuis")] 
-     public class kuis:BaseNotifyProperty  
-   {
-          [PrimaryKey("Id")] 
-          [DbColumn("Id")] 
-          public int Id 
-          { 
-               get{return _id;} 
-               set{ 
-                      _id=value; 
-                     OnPropertyChange("Id");
-                     }
-          } 
 
-          [DbColumn("Pertanyaan")] 
-          public string Pertanyaan 
-          { 
-               get{return _pertanyaan;} 
-               set{ 
-                      _pertanyaan=value; 
-                     OnPropertyChange("Pertanyaan");
-                     }
-          } 
-
-          [DbColumn("JawabanA")] 
-          public string JawabanA 
-          { 
-               get{return _jawabana;} 
-               set{ 
-                      _jawabana=value; 
-                     OnPropertyChange("JawabanA");
-                     }
-          } 
-
-          [DbColumn("JawabanB")] 
-          public string JawabanB 
-          { 
-               get{return _jawabanb;} 
-               set{ 
-                      _jawabanb=value; 
-                     OnPropertyChange("JawabanB");
-                     }
-          } 
-
-          [DbColumn("JawabanC")] 
-          public string JawabanC 
-          { 
-               get{return _jawabanc;} 
-               set{ 
-                      _jawabanc=value; 
-                     OnPropertyChange("JawabanC");
-                     }
-          } 
-
-          [DbColumn("JawabanD")] 
-          public string JawabanD 
-          { 
-               get{return _jawaband;} 
-               set{ 
-                      _jawaband=value; 
-                     OnPropertyChange("JawabanD");
-                     }
-          } 
-
-          [DbColumn("Jawaban")] 
-          public string Jawaban 
-          { 
-               get{return _jawaban;} 
-               set{ 
-                      _jawaban=value; 
-                     OnPropertyChange("Jawaban");
-                     }
-          }
-
-
-        private string userAnswer;
-
-        public string UserAnswer
+namespace AppWebApi.Models
+{
+    [TableName("kuis")]
+    public class kuis : BaseNotifyProperty
+    {
+        [PrimaryKey("KodeKuis")]
+        [DbColumn("KodeKuis")]
+        public string KodeKuis
         {
-            get { return userAnswer; }
-            set { userAnswer = value; OnPropertyChange("UserAnswer"); }
+            get { return _kodesoal; }
+            set
+            {
+                SetProperty(ref _kodesoal, value);
+            }
         }
 
-        private bool isTrueAnswer;
-
-        public bool IsTrueAnswer
+        private string _noUrut;
+        [DbColumn("NoUrut")]
+        public string NoUrut
         {
-            get { return isTrueAnswer; }
-            set { isTrueAnswer = value; OnPropertyChange("IsTrueAnswer"); }
+            get { return _noUrut; }
+            set { _noUrut = value; }
         }
 
-        [DbColumn("SubMateriId")] 
-          public int SubMateriId 
-          { 
-               get{return _submateriid;} 
-               set{ 
-                      _submateriid=value; 
-                     OnPropertyChange("SubMateriId");
-                     }
-          } 
+        [DbColumn("Pertanyaan")]
+        public string Pertanyaan
+        {
+            get { return _pertanyaan; }
+            set
+            {
+                SetProperty(ref _pertanyaan, value);
+            }
+        }
 
-          private int  _id;
-           private string  _pertanyaan;
-           private string  _jawabana;
-           private string  _jawabanb;
-           private string  _jawabanc;
-           private string  _jawaband;
-           private string  _jawaban;
-           private int  _submateriid;
-      }
+        [DbColumn("KodeSubMateri")]
+        public string KodeSubMateri
+        {
+            get { return _kodesubmateri; }
+            set
+            {
+                SetProperty(ref _kodesubmateri, value);
+            }
+        }
+
+        [DbColumn("JawabanA")]
+        public string JawabanA
+        {
+            get { return _jawabana; }
+            set
+            {
+                SetProperty(ref _jawabana, value);
+            }
+        }
+
+        [DbColumn("JawabanB")]
+        public string JawabanB
+        {
+            get { return _jawabanb; }
+            set
+            {
+                SetProperty(ref _jawabanb, value);
+            }
+        }
+
+        [DbColumn("JawabanC")]
+        public string JawabanC
+        {
+            get { return _jawabanc; }
+            set
+            {
+                SetProperty(ref _jawabanc, value);
+            }
+        }
+
+        [DbColumn("JawabanD")]
+        public string JawabanD
+        {
+            get { return _jawaband; }
+            set
+            {
+                SetProperty(ref _jawaband, value);
+            }
+        }
+
+        [DbColumn("JawabanBenar")]
+        public string JawabanBenar
+        {
+            get { return _jawabanbenar; }
+            set
+            {
+                SetProperty(ref _jawabanbenar, value);
+            }
+        }
+
+        private string _kodesoal;
+        private string _pertanyaan;
+        private string _kodesubmateri;
+        private string _jawabana;
+        private string _jawabanb;
+        private string _jawabanc;
+        private string _jawaband;
+        private string _jawabanbenar;
+    }
 }
 
 

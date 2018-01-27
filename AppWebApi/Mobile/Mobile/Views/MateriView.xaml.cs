@@ -18,6 +18,14 @@ namespace Mobile.Views
             InitializeComponent();
 
             BindingContext = new ViewModels.MateriViewModel(Navigation);
+            
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var vm = BindingContext as ViewModels.MateriViewModel;
+            vm.LoadItemsCommand.Execute(null);
         }
 
         private async void ItemsListView_ItemSelectedAsync(object sender, SelectedItemChangedEventArgs e)

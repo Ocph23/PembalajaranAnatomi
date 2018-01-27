@@ -11,7 +11,7 @@
                 <RowDefinition Height="10*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackLayout Margin="5,10">
-                <Label HorizontalOptions="Center" TextColor="White" FontSize="Medium" HorizontalTextAlignment="Center" Text="{Binding Soal.Value}"></Label>
+                <Label HorizontalOptions="Center" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center" Text="{Binding Soal.Pertanyaan}"></Label>
                 <ctrls:RadioGroup  Margin="10"  Orientation="Vertical" 
                   ItemsSource="{Binding Soal.Choices}"
                               SelectedItem="{Binding Soal.OptionSelected}"

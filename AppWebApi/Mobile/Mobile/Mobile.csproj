@@ -46,7 +46,6 @@
     <Compile Include="Models\kuis.cs" />
     <Compile Include="Models\materi.cs" />
     <Compile Include="Models\Option.cs" />
-    <Compile Include="Models\Soal.cs" />
     <Compile Include="Models\submateri.cs" />
     <Compile Include="Models\TagItem.cs" />
     <Compile Include="Models\topik.cs" />

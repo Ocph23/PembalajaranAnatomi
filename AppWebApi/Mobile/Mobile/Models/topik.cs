@@ -1,30 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace Mobile.Models
 {
-   public class topik : NotifyBase
+    public class topik :NotifyBase
     {
-        public int Id
+        public string KodeTopik
         {
-            get { return _id; }
+            get { return _idtopik; }
             set
             {
-                _id = value;
-                SetProperty(ref _id, value);
+                SetProperty(ref _idtopik, value);
             }
         }
 
-        public string Judul
+        public string JudulTopik
         {
-            get { return _judul; }
+            get { return _judultopik; }
             set
             {
-                _judul = value;
-                SetProperty(ref _judul, value);
+                SetProperty(ref _judultopik, value);
             }
         }
 
@@ -33,8 +27,7 @@ namespace Mobile.Models
             get { return _posisimulai; }
             set
             {
-                _posisimulai = value;
-                SetProperty(ref _posisiakhir, value);
+                SetProperty(ref _posisimulai, value);
             }
         }
 
@@ -43,25 +36,26 @@ namespace Mobile.Models
             get { return _posisiakhir; }
             set
             {
-                _posisiakhir = value;
                 SetProperty(ref _posisiakhir, value);
             }
         }
 
-        public int SubMateriId
+        public string KodeSubMateri
         {
-            get { return _submateriid; }
+            get { return _submateri_kodesubmateri; }
             set
             {
-                _submateriid = value;
-                SetProperty(ref _submateriid, value);
+                SetProperty(ref _submateri_kodesubmateri, value);
             }
         }
 
-        private int _id;
-        private string _judul;
+        private string _idtopik;
+        private string _judultopik;
         private TimeSpan _posisimulai;
         private TimeSpan _posisiakhir;
-        private int _submateriid;
+        private int _idsubmateri;
+        private string _submateri_kodesubmateri;
     }
 }
+
+

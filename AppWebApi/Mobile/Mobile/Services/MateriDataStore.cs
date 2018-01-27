@@ -45,6 +45,11 @@ namespace Mobile.Services
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<materi>> GetItemsAsync(string Id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task InitializeAsync()
         {
             if (isInitialized)

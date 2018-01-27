@@ -11,7 +11,7 @@ namespace AppWebApi.Controllers
     public class SoalController : ApiController
     {
         // GET: api/Soal
-        public IEnumerable<Soal> Get()
+        public IEnumerable<kuis> Get()
         {
 
             using (var db = new OcphDbContext())
@@ -21,29 +21,22 @@ namespace AppWebApi.Controllers
         }
 
         // GET: api/Soal/5
-        public IEnumerable<Soal> Get(int id)
+        public IEnumerable<kuis> Get(string id)
         {
             using (var db = new OcphDbContext())
             {
-                var result = from a in db.Soals.Where(O => O.Id == id)
-                             join b in db.Options.Select() on a.Id equals b.SoalId into ba
-                             from b in ba.DefaultIfEmpty()
-                             select new Soal { Id = a.Id, Value = a.Value, Choices = ba.ToList() };
+                var result =db.Soals.Where(O => O.KodeKuis == id).ToList();
                 return result.ToList();
             }
         }
 
         [Route("api/{materiId}/soal")]
         [HttpGet]
-        public IEnumerable<Soal> GetBySubMateri(int materiId)
+        public IEnumerable<kuis> GetBySubMateri(string materiId)
         {
             using (var db = new OcphDbContext())
             {
-                var result = db.Soals.Where(O => O.SubMateriId== materiId).ToList();
-                foreach(var item in result)
-                {
-                    item.Choices = db.Options.Where(O => O.SoalId == item.Id).ToList();
-                }
+                var result = db.Soals.Where(O => O.KodeSubMateri== materiId).ToList();
                 return result.ToList();
 
             }
@@ -51,22 +44,14 @@ namespace AppWebApi.Controllers
 
         // POST: api/Soal
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]Soal value)
+        public HttpResponseMessage Post([FromBody]kuis value)
         {
             using (var db = new OcphDbContext())
             {
-                var trans = db.Connection.BeginTransaction();
                 try
                 {
-                    value.Id = db.Soals.InsertAndGetLastID(value);
-                    if(value.Id>0)
+                    if(db.Soals.Insert(value))
                     {
-                        foreach(var item in value.Choices)
-                        {
-                            item.SoalId = value.Id;
-                            item.Id = db.Options.InsertAndGetLastID(item);
-                        }
-                        trans.Commit();
                         return Request.CreateResponse(HttpStatusCode.OK, value);
                     }else
                     {
@@ -75,7 +60,6 @@ namespace AppWebApi.Controllers
                 }
                 catch (Exception ex)
                 {
-                    trans.Rollback();
                    return Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);
                 }
             }
@@ -84,24 +68,16 @@ namespace AppWebApi.Controllers
 
      //   [Route("api/{soal}/EditSoal")]
         [HttpPut]
-        public HttpResponseMessage PutSoal([FromBody]Soal value)
+        public HttpResponseMessage PutSoal([FromBody]kuis value)
         {
 
             using (var db = new OcphDbContext())
             {
                 try
                 {
-                    var isSaved = db.Soals.Update(O => new { O.Value }, value, O => O.Id == value.Id);
+                    var isSaved = db.Soals.Update(O => new { O.JawabanA,O.JawabanB,O.JawabanC,O.JawabanBenar,O.JawabanD ,O.Pertanyaan}, value, O => O.KodeKuis== value.KodeKuis);
                     if (isSaved)
                     {
-                        foreach(var item in value.Choices)
-                        {
-                          if(!db.Options.Update(O => new { O.IsTrueAnswer, O.Value }, item, O => O.Id == item.Id))
-                            {
-                                throw new SystemException("Data tidak tersimpan !");
-                            }
-
-                        }
                         return Request.CreateResponse(HttpStatusCode.OK, isSaved);
                     }
                        
@@ -117,77 +93,19 @@ namespace AppWebApi.Controllers
             }
         }
 
-        [Route("api/{soal}/EditOption")]
-        [HttpPut]
-        public HttpResponseMessage PutOption([FromBody]Option value)
-        {
-
-            using (var db = new OcphDbContext())
-            {
-                var trans = db.Connection.BeginTransaction();
-                try
-                {
-                    var updated = db.Options.Update(O => new { O.IsTrueAnswer }, new Option { IsTrueAnswer = false }, O => O.SoalId == value.SoalId);
-                    var isSaved = db.Options.Update(O => new {O.Value, O.IsTrueAnswer }, value, O => O.Id == value.Id);
-                    if (isSaved && updated)
-                    {
-                        trans.Commit();
-                        return Request.CreateResponse(HttpStatusCode.OK, isSaved);
-                    }
-                    else
-                    {
-                        throw new SystemException("Data tidak tersimpan !");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    trans.Rollback();
-                    return Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);
-                }
-            }
-        }
-
 
         // DELETE: api/Soal/5
 
         [HttpDelete]
-        public HttpResponseMessage Delete(int id)
+        public HttpResponseMessage Delete(string id)
         {
 
             using (var db = new OcphDbContext())
             {
-                var trans = db.Connection.BeginTransaction();
                 try
                 {
-                    var OptionDelete = db.Options.Delete(O=>O.SoalId == id);
-                    var soalDelete = db.Soals.Delete( O => O.Id == id);
-                    if (OptionDelete && soalDelete)
-                    {
-                        trans.Commit();
-                        return Request.CreateResponse(HttpStatusCode.OK, "Data Telah Dihapus");
-                    }
-                    else
-                    {
-                        throw new SystemException("Data Tidak terhapus!");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    trans.Rollback();
-                    return Request.CreateErrorResponse(HttpStatusCode.NotModified, ex.Message);
-                }
-            }
-        }
-
-        [Route("api/{soalId}/DeleteOption")]
-        [HttpPut]
-        public HttpResponseMessage DeleteOption(int id)
-        {
-            using (var db = new OcphDbContext())
-            {
-                try
-                {
-                    var soalDelete = db.Options.Delete(O => O.Id == id);
+                   
+                    var soalDelete = db.Soals.Delete( O => O.KodeKuis == id);
                     if (soalDelete)
                     {
                         return Request.CreateResponse(HttpStatusCode.OK, "Data Telah Dihapus");
@@ -203,5 +121,6 @@ namespace AppWebApi.Controllers
                 }
             }
         }
+
     }
 }

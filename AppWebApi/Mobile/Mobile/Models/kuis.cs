@@ -1,20 +1,24 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mobile.Models
 {
     public class kuis : NotifyBase
     {
-        public int Id
+        public string KodeKuis
         {
-            get { return _id; }
+            get { return _kodesoal; }
             set
             {
-                SetProperty(ref _id, value);
+                SetProperty(ref _kodesoal, value);
             }
+        }
+
+        private string _noUrut;
+        public string NoUrut
+        {
+            get { return _noUrut; }
+            set { _noUrut = value; }
         }
 
         public string Pertanyaan
@@ -23,6 +27,15 @@ namespace Mobile.Models
             set
             {
                 SetProperty(ref _pertanyaan, value);
+            }
+        }
+
+        public string KodeSubMateri
+        {
+            get { return _kodesubmateri; }
+            set
+            {
+                SetProperty(ref _kodesubmateri, value);
             }
         }
 
@@ -62,32 +75,27 @@ namespace Mobile.Models
             }
         }
 
-        public string Jawaban
+        public string JawabanBenar
         {
-            get { return _jawaban; }
+            get { return _jawabanbenar; }
             set
             {
-                SetProperty(ref _jawaban, value);
+                SetProperty(ref _jawabanbenar, value);
             }
         }
 
-        public int SubMateriId
-        {
-            get { return _submateriid; }
-            set
-            {
-                SetProperty(ref _submateriid, value);
-            }
-        }
+        public Option OptionSelected { get;  set; }
+        public int Number { get; set; }
+        public List<Option> Choices { get; set; }
 
-        private int _id;
+        private string _kodesoal;
         private string _pertanyaan;
+        private string _kodesubmateri;
         private string _jawabana;
         private string _jawabanb;
         private string _jawabanc;
         private string _jawaband;
-        private string _jawaban;
-        private int _submateriid;
+        private string _jawabanbenar;
     }
 }
 

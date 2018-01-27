@@ -23,7 +23,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10">
-                                <Label TextColor="White" Text="{Binding Judul}"  LineBreakMode="WordWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                                <Label TextColor="White" Text="{Binding JudulMateri}"  LineBreakMode="WordWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

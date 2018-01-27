@@ -8,7 +8,7 @@ namespace Mobile.Helpers
 {
     public static class Main
     {
-        private static string _server = "http://192.168.1.13/";
+        private static string _server = "http://192.168.1.8/";
 
         public static async Task<MainPage> GetMainPageAsync()
         {

@@ -26,13 +26,13 @@ namespace AppWebApi.Controllers
         }
         [Route("api/{materiId}/submateribyid")]
         [HttpGet]
-        public submateri SubMateriGetById(int materiId)
+        public submateri SubMateriGetById(string materiId)
         {
             using (var db = new OcphDbContext())
             {
                 try
                 {
-                    var result = db.SubMateri.Where(O => O.Id == materiId).FirstOrDefault();
+                    var result = db.SubMateri.Where(O => O.KodeSubMateri== materiId).FirstOrDefault();
 
                     return result;
                 }
@@ -47,23 +47,23 @@ namespace AppWebApi.Controllers
 
         [Route("api/{materiId}/submateri")]
         [HttpGet]
-        public IEnumerable<submateri> GetById(int materiId)
+        public IEnumerable<submateri> GetById(string materiId)
         {
             using (var db = new OcphDbContext())
             {
                 try
                 {
-                    var result = db.SubMateri.Where(O => O.MateriId == materiId);
+                    var result = db.SubMateri.Where(O => O.KodeMateri == materiId);
                     foreach (var item in result)
                     {
-                        item.Topiks = db.Topics.Where(O => O.SubMateriId == item.Id).ToList();
+                        item.Topiks = db.Topics.Where(O => O.KodeSubMateri == item.KodeSubMateri).ToList();
                     }
                     return result.ToList();
                 }
                 catch (Exception ex)
                 {
 
-                    throw;
+                    throw new SystemException(ex.Message);
                 }
              
             }
@@ -71,13 +71,13 @@ namespace AppWebApi.Controllers
 
         // GET: api/Materi/5
         [HttpGet]
-        public submateri Get(int id)
+        public submateri Get(string id)
         {
             using (var db = new OcphDbContext())
             {
                 string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                var result = db.SubMateri.Where(O => O.Id == id).FirstOrDefault();
-                result.Topiks = db.Topics.Where(O => O.SubMateriId == result.Id).ToList();
+                var result = db.SubMateri.Where(O => O.KodeSubMateri == id).FirstOrDefault();
+                result.Topiks = db.Topics.Where(O => O.KodeSubMateri == result.KodeSubMateri).ToList();
                 if (result != null && !string.IsNullOrEmpty(result.Gambar))
                 {
                     var fi = new FileInfo(uploadPath + result.Gambar);
@@ -116,7 +116,7 @@ namespace AppWebApi.Controllers
 
         [Route("api/{Id}/image")]
         [HttpPost]
-        public async Task<HttpResponseMessage> Post(int Id)
+        public async Task<HttpResponseMessage> Post(string Id)
         {
             string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads");
             if (!Request.Content.IsMimeMultipartContent())
@@ -145,7 +145,7 @@ namespace AppWebApi.Controllers
                             s.Close();
                         }
 
-                        var isUpdated = db.SubMateri.Update(O => new { O.Gambar }, sub, O => O.Id == Id);
+                        var isUpdated = db.SubMateri.Update(O => new { O.Gambar }, sub, O => O.KodeSubMateri == Id);
                         if (isUpdated)
                         {
                             trans.Commit();
@@ -165,7 +165,7 @@ namespace AppWebApi.Controllers
         
         [Route("api/{Id}/animation")]
         [HttpPost]
-        public async Task<HttpResponseMessage> PostAnimation(int Id)
+        public async Task<HttpResponseMessage> PostAnimation(string Id)
         {
             string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads");
             if (!Request.Content.IsMimeMultipartContent())
@@ -194,7 +194,7 @@ namespace AppWebApi.Controllers
                             s.Close();
                         }
 
-                        var isUpdated = db.SubMateri.Update(O => new { O.Animasi }, sub, O => O.Id == Id);
+                        var isUpdated = db.SubMateri.Update(O => new { O.Animasi }, sub, O => O.KodeSubMateri == Id);
                         if (isUpdated)
                         {
                             trans.Commit();
@@ -225,8 +225,7 @@ namespace AppWebApi.Controllers
                 {
                     using (var db = new OcphDbContext())
                     {
-                        value.Id = db.SubMateri.InsertAndGetLastID(value);
-                        if (value.Id > 0)
+                        if (db.SubMateri.Insert(value))
                             return Request.CreateResponse(HttpStatusCode.OK, value);
                         else
                         {
@@ -242,23 +241,19 @@ namespace AppWebApi.Controllers
         }
 
         // PUT: api/Materi/5
-        public HttpResponseMessage Put(int id, [FromBody]submateri value)
+        [HttpPut]
+        public HttpResponseMessage Put(string id, [FromBody]submateri value)
         {
             try
             {
-                if (!ModelState.IsValid)
-                    throw new SystemException("Lengkapi Data Anda");
-                else
+                using (var db = new OcphDbContext())
                 {
-                    using (var db = new OcphDbContext())
+                    var isUpdated = db.SubMateri.Update(O => new { O.JudulSubMateri, O.Penjelasan }, value, O => O.KodeSubMateri == value.KodeSubMateri);
+                    if (isUpdated)
+                        return Request.CreateResponse(HttpStatusCode.OK, value);
+                    else
                     {
-                        var isUpdated = db.SubMateri.Update(O => new {O.KodeSubMateri, O.JudulSubMateri, O.Penjelasan }, value, O => O.Id == value.Id);
-                        if (isUpdated)
-                            return Request.CreateResponse(HttpStatusCode.OK, value);
-                        else
-                        {
-                            throw new SystemException("Data Tidak Berhasil Diubah");
-                        }
+                        throw new SystemException("Data Tidak Berhasil Diubah");
                     }
                 }
             }
@@ -273,7 +268,7 @@ namespace AppWebApi.Controllers
 
 
         // DELETE: api/Materi/5
-        public HttpResponseMessage Delete(int id)
+        public HttpResponseMessage Delete(string id)
         {
             try
             {
@@ -283,7 +278,7 @@ namespace AppWebApi.Controllers
                 {
                     using (var db = new OcphDbContext())
                     {
-                        var isDeleted = db.SubMateri.Delete(O => O.Id == id);
+                        var isDeleted = db.SubMateri.Delete(O => O.KodeSubMateri == id);
                         if (isDeleted)
                             return Request.CreateResponse(HttpStatusCode.OK, id);
                         else
@@ -343,12 +338,12 @@ namespace AppWebApi.Controllers
 
 
         [Route("api/media/{Id}/video1")]
-        public IHttpActionResult GetLiveVideo(int id)
+        public IHttpActionResult GetLiveVideo(string id)
         {
             using (var db = new OcphDbContext())
             {
                 string uploadPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                var result = db.SubMateri.Where(O => O.Id == id).FirstOrDefault();
+                var result = db.SubMateri.Where(O => O.KodeSubMateri == id).FirstOrDefault();
 
                 return new VideoFileActionResult(uploadPath+result.Animasi);
 

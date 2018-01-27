@@ -37,11 +37,15 @@ namespace Mobile.ViewModels
 
             RemoveTagCommand = new Command((arg) => RemoveTag(arg));
             var tags = new ObservableCollection<TagItem>();
-            foreach (var data in subitem.Topiks)
+            if(subitem.Topiks!=null)
             {
-                tags.Add(new TagItem { Name = data.Judul, PositionStart = data.PosisiMulai,PositionStop=data.PosisiAkhir });
+                foreach (var data in subitem.Topiks)
+                {
+                    tags.Add(new TagItem { Name = data.JudulTopik, PositionStart = data.PosisiMulai, PositionStop = data.PosisiAkhir });
+                }
+                Items = tags;
             }
-            Items = tags;
+        
 
         }
 
@@ -53,14 +57,14 @@ namespace Mobile.ViewModels
             await navigation.PushAsync(new Views.VideoView(Item,tagItem));
         }
 
-        private void ExecuteLoadItemsCommand(object x)
+        private async void ExecuteLoadItemsCommand(object x)
         {
             if (IsBusy)
                 return;
             try
             {
                 IsBusy = true;
-              //  Item = await SubMateriDataStore.GetItemAsync(subitem.Id.ToString());
+               Item= await SubMateriDataStore.GetItemAsync(Item.KodeSubMateri);
                 
             }
             catch (Exception ex)

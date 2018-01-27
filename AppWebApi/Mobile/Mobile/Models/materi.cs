@@ -1,22 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mobile.Models
 {
     public class materi : NotifyBase
     {
-        public int Id
-        {
-            get { return _id; }
-            set
-            {
-                SetProperty(ref _id, value);
-            }
-        }
-
         public string KodeMateri
         {
             get { return _kodemateri; }
@@ -26,18 +13,17 @@ namespace Mobile.Models
             }
         }
 
-        public string Judul
+        public string JudulMateri
         {
-            get { return _judul; }
+            get { return _judulmateri; }
             set
             {
-                SetProperty(ref _judul, value);
+                SetProperty(ref _judulmateri, value);
             }
         }
 
-        private int _id;
         private string _kodemateri;
-        private string _judul;
+        private string _judulmateri;
     }
 }
 

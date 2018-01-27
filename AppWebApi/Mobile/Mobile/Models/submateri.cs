@@ -1,23 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mobile.Models;
 
 namespace Mobile.Models
 {
-    public class submateri : NotifyBase
+    public class submateri :NotifyBase
     {
-        public int Id
-        {
-            get { return _id; }
-            set
-            {
-                SetProperty(ref _id, value);
-            }
-        }
-
         public string KodeSubMateri
         {
             get { return _kodesubmateri; }
@@ -45,15 +32,6 @@ namespace Mobile.Models
             }
         }
 
-        public string Sound
-        {
-            get { return _sound; }
-            set
-            {
-                SetProperty(ref _sound, value);
-            }
-        }
-
         public string Animasi
         {
             get { return _animasi; }
@@ -72,28 +50,25 @@ namespace Mobile.Models
             }
         }
 
-        public int MateriId
+        public string KodeMateri
         {
-            get { return _materiId; }
+            get { return _kodemateri; }
             set
             {
-                SetProperty(ref _materiId, value);
+                SetProperty(ref _kodemateri, value);
             }
         }
 
-        public byte[] DataGambar { get; internal set; }
-        public byte[] DataSound { get; internal set; }
-        public byte[] DataAnimasi { get; internal set; }
-        public List<topik> Topiks { get;  set; }
+        public List<topik> Topiks { get; set; }
+        public byte[] DataGambar { get; set; }
+        public byte[] DataAnimasi { get; set; }
 
-        private int _id;
         private string _kodesubmateri;
         private string _judulsubmateri;
         private string _gambar;
-        private string _sound;
         private string _animasi;
         private string _penjelasan;
-        private int _materiId;
+        private string _kodemateri;
     }
 }
 

@@ -30,7 +30,7 @@ namespace Mobile.ViewModels
             this.navigation = navigation;
             Materis = new ObservableCollection<Models.materi>();
             LoadItemsCommand = new Command((x) => ExecuteLoadItemsCommand(x));
-            ExecuteLoadItemsCommand(null);
+           // ExecuteLoadItemsCommand(null);
           
         }
 

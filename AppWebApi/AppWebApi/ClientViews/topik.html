@@ -1,0 +1,123 @@
+﻿<link href="../jquery-timepicker-master/jquery.timepicker.css" rel="stylesheet" />
+<script src="../jquery-timepicker-master/jquery.timepicker.js"></script>
+<section class="forms" ng-init="Init()">
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <h2 class="h5 display">Materi Animasi</h2>
+                </div>
+                <div class="row card-block">
+                    <div class="col-lg-12">
+                        <a data-target="#addTopik" ng-click="ModalTitle='Tambah Topik';IsInsert=true;Topik={}" role="button" data-toggle="modal" style="color:green" class="btn"><i class="fa fa-plus-circle fa-2x"></i></a>
+                        Topik Dalam Video
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>KodeTopik</th>
+                                    <th>Judul Topik</th>
+                                    <th>Mulai</th>
+                                    <th>Selesai</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in Item.Topiks">
+                                    <td>{{item.KodeTopik}}</td>
+                                    <td>{{item.JudulTopik}}</td>
+                                    <td style="margin-top:10px">{{item.PosisiMulai}}</td>
+                                    <td style="margin-top:10px">{{item.PosisiAkhir}}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a href="!#" class="dropdown-toggle" data-toggle="dropdown">Action<strong class="caret"></strong></a>
+                                            <ul class="dropdown-menu" style="padding:10px">
+
+                                                <li>
+                                                    <a href="" data-target="#addTopik" ng-click="EditTopik(item);" role="button" data-toggle="modal" class="btn"><i class="fa fa-pencil">Edit</i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="" class="btn" ng-click="DeleteTopik(item)" role="button"><i class="fa fa-remove">Hapus</i></a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="modal fade" id="addTopik" my-modal role="dialog" aria-labelledby="addMateri" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <form ng-submit="SaveNewTopik(Topik,IsInsert)">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            {{ModalTitle}}
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th style="width:20%">
+                                                        Kode Topik
+                                                    </th>
+                                                    <th style="width:40%">
+                                                        Judul Topik
+                                                    </th>
+                                                    <th style="width:20%">
+                                                        Posisi Mulai
+                                                    </th>
+                                                    <th style="width:20%">
+                                                        Posisi Akhir
+                                                    </th>
+
+                                                </tr>
+                                                <tr>
+                                                    <td><input maxlength="7" ng-disabled="!IsInsert" type="text" ng-model="Topik.KodeTopik" class="form-control" required /></td>
+                                                    <td><input maxlength="20" type="text" ng-model="Topik.JudulTopik" class="form-control" required /></td>
+                                                    <td style="margin-top:10px"><input ng-model="Topik.PosisiMulai" value="00:00:00" id="posisiMulai" type="text" class="form-control" required /></td>
+                                                    <td style="margin-top:10px"><input ng-model="Topik.PosisiAkhir" value="00:00:00" id="posisiAkhir" type="text" class="form-control" required /></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            Keluar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            Simpan
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <script>
+                                    $('#posisiAkhir').timepicker({ 'timeFormat': 'H:i:s' });
+                                    $('#posisiMulai').timepicker({ 'timeFormat': 'H:i:s' });
+                            </script>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
